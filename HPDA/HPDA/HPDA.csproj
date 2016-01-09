@@ -1,0 +1,349 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{498C85D3-3E55-44AC-9DDA-4FA2203E8CA9}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HPDA</RootNamespace>
+    <AssemblyName>HPDA</AssemblyName>
+    <ProjectTypeGuids>{4D628B5B-2FBC-4AA6-8C16-197242AEB884};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <PlatformFamilyName>WindowsCE</PlatformFamilyName>
+    <PlatformID>E2BECB1F-8C8C-41ba-B736-9BE7D946A398</PlatformID>
+    <OSVersion>5.0</OSVersion>
+    <DeployDirSuffix>HPDA</DeployDirSuffix>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <NativePlatformName>Windows CE</NativePlatformName>
+    <FormFactorID>
+    </FormFactorID>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;$(PlatformFamilyName)</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <FileAlignment>512</FileAlignment>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;$(PlatformFamilyName)</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <FileAlignment>512</FileAlignment>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Symbol.Barcode.Design, Version=2.6.0.3, Culture=neutral, PublicKeyToken=68ec8db391f150ca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Symbol.Barcode.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SqlClient, Version=3.0.3600.0, Culture=neutral, PublicKeyToken=3be235df1c8d2ad3, processorArchitecture=MSIL" />
+    <Reference Include="System.Data.SQLite, Version=1.0.84.0, Culture=neutral, PublicKeyToken=1fdb50b1b62b4c84, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMainPro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMainPro.Designer.cs">
+      <DependentUpon>FrmMainPro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMainRm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMainRm.Designer.cs">
+      <DependentUpon>FrmMainRm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSetting.Designer.cs">
+      <DependentUpon>frmSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PDAFunction.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMainPro.resx">
+      <DependentUpon>FrmMainPro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMainRm.resx">
+      <DependentUpon>FrmMainRm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSetting.resx">
+      <DependentUpon>frmSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RmPoDownload.resx">
+      <DependentUpon>RmPoDownload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RmPoSelect.resx">
+      <DependentUpon>RmPoSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RmPoStore.resx">
+      <DependentUpon>RmPoStore.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RmPoStoreDetail.resx">
+      <DependentUpon>RmPoStoreDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RmProduceDownload.resx">
+      <DependentUpon>RmProduceDownload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RmProduceSelect.resx">
+      <DependentUpon>RmProduceSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RmProduce.resx">
+      <DependentUpon>RmProduce.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RmProduceDetail.resx">
+      <DependentUpon>RmProduceDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductStore.resx">
+      <DependentUpon>ProductStore.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProDeliveryDownload.resx">
+      <DependentUpon>ProDeliveryDownload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProDeliverySelect.resx">
+      <DependentUpon>ProDeliverySelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProDelivery.resx">
+      <DependentUpon>ProDelivery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProDeliveryDetail.resx">
+      <DependentUpon>ProDeliveryDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProTransfer.resx">
+      <DependentUpon>ProTransfer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProTransferDetail.resx">
+      <DependentUpon>ProTransferDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProTransferDownload.resx">
+      <DependentUpon>ProTransferDownload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProTransferSelect.resx">
+      <DependentUpon>ProTransferSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProCheck.resx">
+      <DependentUpon>ProCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProCheckDetail.resx">
+      <DependentUpon>ProCheckDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProCheckDownload.resx">
+      <DependentUpon>ProCheckDownload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProCheckSelect.resx">
+      <DependentUpon>ProCheckSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RmPoDownload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RmPoDownload.Designer.cs">
+      <DependentUpon>RmPoDownload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RmPoSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RmPoSelect.Designer.cs">
+      <DependentUpon>RmPoSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RmPoStore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RmPoStore.Designer.cs">
+      <DependentUpon>RmPoStore.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RmPoStoreDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RmPoStoreDetail.Designer.cs">
+      <DependentUpon>RmPoStoreDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RmProduceDownload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RmProduceDownload.Designer.cs">
+      <DependentUpon>RmProduceDownload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RmProduceSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RmProduceSelect.Designer.cs">
+      <DependentUpon>RmProduceSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RmProduce.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RmProduce.Designer.cs">
+      <DependentUpon>RmProduce.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RmProduceDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RmProduceDetail.Designer.cs">
+      <DependentUpon>RmProduceDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProductStore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductStore.Designer.cs">
+      <DependentUpon>ProductStore.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProDeliveryDownload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProDeliveryDownload.Designer.cs">
+      <DependentUpon>ProDeliveryDownload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProDeliverySelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProDeliverySelect.Designer.cs">
+      <DependentUpon>ProDeliverySelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProDelivery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProDelivery.Designer.cs">
+      <DependentUpon>ProDelivery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProDeliveryDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProDeliveryDetail.Designer.cs">
+      <DependentUpon>ProDeliveryDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProTransfer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProTransfer.Designer.cs">
+      <DependentUpon>ProTransfer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProTransferDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProTransferDetail.Designer.cs">
+      <DependentUpon>ProTransferDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProTransferDownload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProTransferDownload.Designer.cs">
+      <DependentUpon>ProTransferDownload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProTransferSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProTransferSelect.Designer.cs">
+      <DependentUpon>ProTransferSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProCheck.Designer.cs">
+      <DependentUpon>ProCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProCheckDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProCheckDetail.Designer.cs">
+      <DependentUpon>ProCheckDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProCheckDownload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProCheckDownload.Designer.cs">
+      <DependentUpon>ProCheckDownload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProCheckSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProCheckSelect.Designer.cs">
+      <DependentUpon>ProCheckSelect.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="dbnetlib.dll" />
+    <Content Include="SQLite.Interop.084.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}">
+        <HostingProcess disable="1" />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
