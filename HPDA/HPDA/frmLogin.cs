@@ -7,7 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using Symbol.Barcode;
+using Symbol.Barcode2;
 using System.Data.SqlClient;
 
 namespace HPDA

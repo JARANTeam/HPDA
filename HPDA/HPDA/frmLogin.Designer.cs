@@ -60,7 +60,7 @@
             this.label1.Location = new System.Drawing.Point(39, 46);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(232, 26);
-            this.label1.Text = "华翔WMS管理PDA端";
+            this.label1.Text = "华翔MES管理PDA端";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // btnLogin

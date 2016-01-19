@@ -18,6 +18,7 @@
     <NativePlatformName>Windows CE</NativePlatformName>
     <FormFactorID>
     </FormFactorID>
+    <ApplicationIcon>scan32.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -48,10 +49,7 @@
     <Reference Include="mscorlib">
       <Private>True</Private>
     </Reference>
-    <Reference Include="Symbol.Barcode.Design, Version=2.6.0.3, Culture=neutral, PublicKeyToken=68ec8db391f150ca, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Symbol.Barcode.Design.dll</HintPath>
-    </Reference>
+    <Reference Include="Symbol.Barcode2.Design, Version=2.6.0.6, Culture=neutral, PublicKeyToken=68ec8db391f150ca, processorArchitecture=MSIL" />
     <Reference Include="System">
       <Private>True</Private>
     </Reference>
@@ -59,7 +57,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Data.SqlClient, Version=3.0.3600.0, Culture=neutral, PublicKeyToken=3be235df1c8d2ad3, processorArchitecture=MSIL" />
-    <Reference Include="System.Data.SQLite, Version=1.0.84.0, Culture=neutral, PublicKeyToken=1fdb50b1b62b4c84, processorArchitecture=MSIL" />
+    <Reference Include="System.Data.SQLite, Version=1.0.84.0, Culture=neutral, PublicKeyToken=1fdb50b1b62b4c84, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq">
       <Private>True</Private>
     </Reference>
@@ -111,6 +112,12 @@
       <DependentUpon>frmSetting.cs</DependentUpon>
     </Compile>
     <Compile Include="PDAFunction.cs" />
+    <Compile Include="ProductQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductQuery.Designer.cs">
+      <DependentUpon>ProductQuery.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmLogin.resx">
@@ -128,10 +135,16 @@
     <EmbeddedResource Include="frmSetting.resx">
       <DependentUpon>frmSetting.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ProductQuery.resx">
+      <DependentUpon>ProductQuery.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RawMaterial.resx">
+      <DependentUpon>RawMaterial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RmPoDownload.resx">
       <DependentUpon>RmPoDownload.cs</DependentUpon>
@@ -145,17 +158,8 @@
     <EmbeddedResource Include="RmPoStoreDetail.resx">
       <DependentUpon>RmPoStoreDetail.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="RmProduceDownload.resx">
-      <DependentUpon>RmProduceDownload.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="RmProduceSelect.resx">
       <DependentUpon>RmProduceSelect.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="RmProduce.resx">
-      <DependentUpon>RmProduce.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="RmProduceDetail.resx">
-      <DependentUpon>RmProduceDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProductStore.resx">
       <DependentUpon>ProductStore.cs</DependentUpon>
@@ -200,6 +204,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="RawMaterial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RawMaterial.Designer.cs">
+      <DependentUpon>RawMaterial.cs</DependentUpon>
+    </Compile>
     <Compile Include="RmPoDownload.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -224,29 +234,11 @@
     <Compile Include="RmPoStoreDetail.Designer.cs">
       <DependentUpon>RmPoStoreDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="RmProduceDownload.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="RmProduceDownload.Designer.cs">
-      <DependentUpon>RmProduceDownload.cs</DependentUpon>
-    </Compile>
     <Compile Include="RmProduceSelect.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="RmProduceSelect.Designer.cs">
       <DependentUpon>RmProduceSelect.cs</DependentUpon>
-    </Compile>
-    <Compile Include="RmProduce.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="RmProduce.Designer.cs">
-      <DependentUpon>RmProduce.cs</DependentUpon>
-    </Compile>
-    <Compile Include="RmProduceDetail.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="RmProduceDetail.Designer.cs">
-      <DependentUpon>RmProduceDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="ProductStore.cs">
       <SubType>Form</SubType>
@@ -328,8 +320,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="dbnetlib.dll" />
-    <Content Include="SQLite.Interop.084.dll" />
+    <Content Include="dbnetlib.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scan32.ico" />
+    <Content Include="SQLite.Interop.084.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
   <ProjectExtensions>

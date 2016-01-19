@@ -43,7 +43,10 @@ namespace HPDA
 
         private void btnSync_Click(object sender, EventArgs e)
         {
-            
+            using (var rm = new RawMaterial())
+            {
+                rm.ShowDialog();
+            }
         }
 
         private void btnCheckOne_Click(object sender, EventArgs e)
@@ -59,6 +62,14 @@ namespace HPDA
         private void frmMain_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnProduct_Click(object sender, EventArgs e)
+        {
+            using (var pq = new ProductQuery())
+            {
+                pq.ShowDialog();
+            }
         }
 
         

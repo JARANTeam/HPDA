@@ -38,7 +38,7 @@
             this.txtPwd = new System.Windows.Forms.TextBox();
             this.bntLogin = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtU8Account = new System.Windows.Forms.TextBox();
+            this.txtKisAccount = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -132,12 +132,12 @@
             this.label5.Size = new System.Drawing.Size(87, 20);
             this.label5.Text = "服务器配置";
             // 
-            // txtU8Account
+            // txtKisAccount
             // 
-            this.txtU8Account.Location = new System.Drawing.Point(88, 183);
-            this.txtU8Account.Name = "txtU8Account";
-            this.txtU8Account.Size = new System.Drawing.Size(191, 23);
-            this.txtU8Account.TabIndex = 17;
+            this.txtKisAccount.Location = new System.Drawing.Point(88, 183);
+            this.txtKisAccount.Name = "txtKisAccount";
+            this.txtKisAccount.Size = new System.Drawing.Size(191, 23);
+            this.txtKisAccount.TabIndex = 17;
             // 
             // label6
             // 
@@ -156,7 +156,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(298, 267);
-            this.Controls.Add(this.txtU8Account);
+            this.Controls.Add(this.txtKisAccount);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.bntLogin);
@@ -187,7 +187,7 @@
         private System.Windows.Forms.TextBox txtPwd;
         private System.Windows.Forms.Button bntLogin;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtU8Account;
+        private System.Windows.Forms.TextBox txtKisAccount;
         private System.Windows.Forms.Label label6;
 
     }

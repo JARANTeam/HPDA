@@ -31,7 +31,7 @@ namespace HPDA
         {
             using (var con = new SQLiteConnection(frmLogin.SqliteCon))
             {
-                using (var cmd = new SQLiteCommand("select cValue from Setting where cName='cServer' or cName='cData' or cName='cUser' or cName='cPwd' or cName='U8Account' order by id", con))
+                using (var cmd = new SQLiteCommand("select cValue from Setting where cName='cServer' or cName='cData' or cName='cUser' or cName='cPwd' or cName='KisAccount' order by id", con))
                 {
                     con.Open();
                     using (var dr = cmd.ExecuteReader())
@@ -46,7 +46,7 @@ namespace HPDA
                         if (dr.Read())
                             txtPwd.Text = dr[0].ToString();
                         if (dr.Read())
-                            txtU8Account.Text = dr[0].ToString();
+                            txtKisAccount.Text = dr[0].ToString();
                     }
                 }
             }
@@ -83,8 +83,8 @@ namespace HPDA
                 PDAFunction.ExecSqlite(cmd);
 
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@cValue", txtU8Account.Text);
-                cmd.Parameters.AddWithValue("@cName", "U8Account");
+                cmd.Parameters.AddWithValue("@cValue", txtKisAccount.Text);
+                cmd.Parameters.AddWithValue("@cName", "KisAccount");
                 PDAFunction.ExecSqlite(cmd);
 
             }
