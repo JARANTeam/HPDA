@@ -6,7 +6,6 @@
         /// 必需的设计器变量。
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.MainMenu mainMenu1;
 
         /// <summary>
         /// 清理所有正在使用的资源。
@@ -29,22 +28,80 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.mainMenu1 = new System.Windows.Forms.MainMenu();
+            this.dGridMain = new System.Windows.Forms.DataGrid();
+            this.panelTop = new System.Windows.Forms.Panel();
+            this.lblOrderNumber = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.panelTop.SuspendLayout();
             this.SuspendLayout();
             // 
-            // RmPoStoreDetail
+            // dGridMain
+            // 
+            this.dGridMain.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.dGridMain.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dGridMain.Location = new System.Drawing.Point(0, 25);
+            this.dGridMain.Name = "dGridMain";
+            this.dGridMain.Size = new System.Drawing.Size(318, 203);
+            this.dGridMain.TabIndex = 3;
+            // 
+            // panelTop
+            // 
+            this.panelTop.BackColor = System.Drawing.Color.White;
+            this.panelTop.Controls.Add(this.lblOrderNumber);
+            this.panelTop.Controls.Add(this.label1);
+            this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelTop.Location = new System.Drawing.Point(0, 0);
+            this.panelTop.Name = "panelTop";
+            this.panelTop.Size = new System.Drawing.Size(318, 25);
+            // 
+            // lblOrderNumber
+            // 
+            this.lblOrderNumber.Location = new System.Drawing.Point(97, 2);
+            this.lblOrderNumber.Name = "lblOrderNumber";
+            this.lblOrderNumber.Size = new System.Drawing.Size(193, 20);
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(9, 3);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(82, 20);
+            this.label1.Text = "出库单号：";
+            // 
+            // btnExit
+            // 
+            this.btnExit.BackColor = System.Drawing.SystemColors.Desktop;
+            this.btnExit.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
+            this.btnExit.ForeColor = System.Drawing.Color.White;
+            this.btnExit.Location = new System.Drawing.Point(233, 239);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(72, 25);
+            this.btnExit.TabIndex = 4;
+            this.btnExit.Text = "关闭";
+            // 
+            // ProCheckDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(318, 269);
-            this.Menu = this.mainMenu1;
-            this.Name = "RmPoStoreDetail";
-            this.Text = "RmPoStoreDetail";
+            this.Controls.Add(this.dGridMain);
+            this.Controls.Add(this.panelTop);
+            this.Controls.Add(this.btnExit);
+            this.Name = "ProCheckDetail";
+            this.Text = "盘点单明细";
+            this.panelTop.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.DataGrid dGridMain;
+        private System.Windows.Forms.Panel panelTop;
+        private System.Windows.Forms.Label lblOrderNumber;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnExit;
     }
 }

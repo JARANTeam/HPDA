@@ -10,7 +10,7 @@ using System.Data.SQLite;
 using System.Data.SqlClient;
 using Symbol.Barcode2;
 
-namespace SPDA
+namespace HPDA
 {
     public partial class RmProduce : Form
     {
@@ -180,7 +180,11 @@ namespace SPDA
             sqLiteCmd.Parameters.AddWithValue("@cInvCode", cInvCode);
             sqLiteCmd.Parameters.AddWithValue("@cInvName", cInvName);
             sqLiteCmd.Parameters.AddWithValue("@iQuantity", iQuantity);
-            sqLiteCmd.Parameters.AddWithValue("@cUser", PdaLogin.lUser);
+
+            sqLiteCmd.Parameters.AddWithValue("@cUser", frmLogin.lUser);
+
+            sqLiteCmd.Parameters.AddWithValue("@cUser", frmLogin.lUser);
+
             PDAFunction.ExecSqLite(sqLiteCmd);
 
             var PlusCmd = new SQLiteCommand("update RmProduce set iScanQuantity=ifnull(iScanQuantity,0)+@iQuantity where cOrderNumber=@cOrderNumber and cInvCode=@cInvCode ");
@@ -220,7 +224,11 @@ namespace SPDA
 
             var bOutAllCmd = new SQLiteCommand("select * from RmProduce where cOrderNumber=@cOrderNumber and ifnull(iScanQuantity,0)<ifnull(iQuantity,0)");
             bOutAllCmd.Parameters.AddWithValue("@cOrderNumber", lblOrderNumber.Text);
-            if (PDAFunction.ExistSqlite(PdaLogin.SqliteCon, bOutAllCmd))
+
+            if (PDAFunction.ExistSqlite(frmLogin.SqliteCon, bOutAllCmd))
+
+            if (PDAFunction.ExistSqlite(frmLogin.SqliteCon, bOutAllCmd))
+
             {
                 lblOutAll.Text = "未完成";
             }
@@ -239,7 +247,8 @@ namespace SPDA
         //{
         //    var bDeliveryCmd = new SQLiteCommand("select * from RmProduceDetail where cSerialNumber=@cSerialNumber");
         //    bDeliveryCmd.Parameters.AddWithValue("@cSerialNumber", cSerialNumber);
-        //    if (PDAFunction.ExistSqlite(PdaLogin.SqliteCon, bDeliveryCmd))
+        //    if (PDAFunction.ExistSqlite(frmLogin.SqliteCon, bDeliveryCmd))
+        //    if (PDAFunction.ExistSqlite(frmLogin.SqliteCon, bDeliveryCmd))
         //    {
         //        MessageBox.Show(@"该产品已经扫描！");
         //        return false;
@@ -281,7 +290,11 @@ namespace SPDA
             var bOutAllCmd = new SQLiteCommand("select * from RmProduce where cInvCode=@cInvCode and iScanQuantity<iQuantity and cOrderNumber=@cOrderNumber");
             bOutAllCmd.Parameters.AddWithValue("@cInvCode", cInvCode);
             bOutAllCmd.Parameters.AddWithValue("@cOrderNumber", lblOrderNumber.Text);
-            if (!PDAFunction.ExistSqlite(PdaLogin.SqliteCon, bOutAllCmd))
+
+            if (!PDAFunction.ExistSqlite(frmLogin.SqliteCon, bOutAllCmd))
+
+            if (!PDAFunction.ExistSqlite(frmLogin.SqliteCon, bOutAllCmd))
+
             {
                 MessageBox.Show(@"该产品已经领料完成");
                 return false;
@@ -378,7 +391,10 @@ namespace SPDA
         /// <param name="cGuid">当前Guid</param>
         private bool UpLoaRmProduceDetail(int iRowId,string cGuid)
         {
-            using (var con = new SqlConnection(PdaLogin.WmsCon))
+
+
+            using (var con = new SqlConnection(frmLogin.WmsCon))
+
             {
                 using (var cmd = con.CreateCommand())
                 {
@@ -452,7 +468,10 @@ namespace SPDA
 
         private bool ExecUpLoad(int i, string cGuid)
         {
-            using (var con = new SqlConnection(PdaLogin.WmsCon))
+
+
+            using (var con = new SqlConnection(frmLogin.WmsCon))
+
             {
                 using (var cmd = con.CreateCommand())
                 {
@@ -466,7 +485,11 @@ namespace SPDA
                     cmd.Parameters.AddWithValue("@iQuantity", rds.RmProduce.Rows[i]["iQuantity"]);
                     cmd.Parameters.AddWithValue("@iScanQuantity", rds.RmProduce.Rows[i]["iScanQuantity"]);
                     cmd.Parameters.AddWithValue("@cMemo", rds.RmProduce.Rows[i]["cMemo"]);
-                    cmd.Parameters.AddWithValue("@cUser", PdaLogin.lUser);
+
+                    cmd.Parameters.AddWithValue("@cUser", frmLogin.lUser);
+
+                    cmd.Parameters.AddWithValue("@cUser", frmLogin.lUser);
+
                     cmd.Parameters.AddWithValue("@cGuid", cGuid);
 
                     try

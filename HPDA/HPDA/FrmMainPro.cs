@@ -16,39 +16,59 @@ namespace HPDA
             InitializeComponent();
         }
 
-        private void btnCheckOne_Click(object sender, EventArgs e)
-        {
+        
 
+        private void pbExit_Click(object sender, EventArgs e)
+        {
+            Close();
         }
 
-        private void btnCheckTwo_Click(object sender, EventArgs e)
+        private void btnLoadDelivery_Click(object sender, EventArgs e)
         {
-
+            using (var pd = new ProDeliveryDownload())
+            {
+                pd.ShowDialog();
+            }
         }
 
-        private void btnSync_Click(object sender, EventArgs e)
+        private void btnDeliverySelect_Click(object sender, EventArgs e)
         {
-
+            using (var pds = new ProDeliverySelect())
+            {
+                pds.ShowDialog();
+            }
         }
 
-        private void btnLoad_Click(object sender, EventArgs e)
+        private void btnTransferDownload_Click(object sender, EventArgs e)
         {
-
+            using (var pds = new ProTransferDownload())
+            {
+                pds.ShowDialog();
+            }
         }
 
-        private void btnExit_Click(object sender, EventArgs e)
+        private void btnTransferSelect_Click(object sender, EventArgs e)
         {
-
+            using (var pds = new ProTransferSelect())
+            {
+                pds.ShowDialog();
+            }
         }
 
-        private void btnProDelivery_Click(object sender, EventArgs e)
+        private void btnCheckDownLoad_Click(object sender, EventArgs e)
         {
-
+            using (var pds = new ProCheckDownload())
+            {
+                pds.ShowDialog();
+            }
         }
 
-        private void btnProStore_Click(object sender, EventArgs e)
+        private void btnCheckSelect_Click(object sender, EventArgs e)
         {
-
+            using (var pds = new ProCheckSelect())
+            {
+                pds.ShowDialog();
+            }
         }
     }
 }

@@ -31,12 +31,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMainPro));
             this.pbExit = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
+            this.btnLoadDelivery = new System.Windows.Forms.Button();
+            this.btnDeliverySelect = new System.Windows.Forms.Button();
+            this.btnTransferSelect = new System.Windows.Forms.Button();
+            this.btnTransferDownload = new System.Windows.Forms.Button();
+            this.btnCheckSelect = new System.Windows.Forms.Button();
+            this.btnCheckDownLoad = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // pbExit
@@ -47,6 +47,7 @@
             this.pbExit.Name = "pbExit";
             this.pbExit.Size = new System.Drawing.Size(49, 49);
             this.pbExit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbExit.Click += new System.EventHandler(this.pbExit_Click);
             // 
             // button1
             // 
@@ -59,84 +60,91 @@
             this.button1.TabIndex = 56;
             this.button1.Text = "完工入库";
             // 
-            // button2
+            // btnLoadDelivery
             // 
-            this.button2.BackColor = System.Drawing.SystemColors.Desktop;
-            this.button2.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(29, 77);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(104, 26);
-            this.button2.TabIndex = 57;
-            this.button2.Text = "下载出库指令";
+            this.btnLoadDelivery.BackColor = System.Drawing.SystemColors.Desktop;
+            this.btnLoadDelivery.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
+            this.btnLoadDelivery.ForeColor = System.Drawing.Color.White;
+            this.btnLoadDelivery.Location = new System.Drawing.Point(29, 77);
+            this.btnLoadDelivery.Name = "btnLoadDelivery";
+            this.btnLoadDelivery.Size = new System.Drawing.Size(104, 26);
+            this.btnLoadDelivery.TabIndex = 57;
+            this.btnLoadDelivery.Text = "下载出库指令";
+            this.btnLoadDelivery.Click += new System.EventHandler(this.btnLoadDelivery_Click);
             // 
-            // button3
+            // btnDeliverySelect
             // 
-            this.button3.BackColor = System.Drawing.SystemColors.Desktop;
-            this.button3.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(157, 77);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(104, 26);
-            this.button3.TabIndex = 58;
-            this.button3.Text = "执行出库";
+            this.btnDeliverySelect.BackColor = System.Drawing.SystemColors.Desktop;
+            this.btnDeliverySelect.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
+            this.btnDeliverySelect.ForeColor = System.Drawing.Color.White;
+            this.btnDeliverySelect.Location = new System.Drawing.Point(157, 77);
+            this.btnDeliverySelect.Name = "btnDeliverySelect";
+            this.btnDeliverySelect.Size = new System.Drawing.Size(104, 26);
+            this.btnDeliverySelect.TabIndex = 58;
+            this.btnDeliverySelect.Text = "执行出库";
+            this.btnDeliverySelect.Click += new System.EventHandler(this.btnDeliverySelect_Click);
             // 
-            // button4
+            // btnTransferSelect
             // 
-            this.button4.BackColor = System.Drawing.SystemColors.Desktop;
-            this.button4.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
-            this.button4.ForeColor = System.Drawing.Color.White;
-            this.button4.Location = new System.Drawing.Point(157, 121);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(104, 26);
-            this.button4.TabIndex = 60;
-            this.button4.Text = "执行调拨";
+            this.btnTransferSelect.BackColor = System.Drawing.SystemColors.Desktop;
+            this.btnTransferSelect.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
+            this.btnTransferSelect.ForeColor = System.Drawing.Color.White;
+            this.btnTransferSelect.Location = new System.Drawing.Point(157, 121);
+            this.btnTransferSelect.Name = "btnTransferSelect";
+            this.btnTransferSelect.Size = new System.Drawing.Size(104, 26);
+            this.btnTransferSelect.TabIndex = 60;
+            this.btnTransferSelect.Text = "执行调拨";
+            this.btnTransferSelect.Click += new System.EventHandler(this.btnTransferSelect_Click);
             // 
-            // button5
+            // btnTransferDownload
             // 
-            this.button5.BackColor = System.Drawing.SystemColors.Desktop;
-            this.button5.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
-            this.button5.ForeColor = System.Drawing.Color.White;
-            this.button5.Location = new System.Drawing.Point(29, 121);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(104, 26);
-            this.button5.TabIndex = 59;
-            this.button5.Text = "下载调拨单";
+            this.btnTransferDownload.BackColor = System.Drawing.SystemColors.Desktop;
+            this.btnTransferDownload.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
+            this.btnTransferDownload.ForeColor = System.Drawing.Color.White;
+            this.btnTransferDownload.Location = new System.Drawing.Point(29, 121);
+            this.btnTransferDownload.Name = "btnTransferDownload";
+            this.btnTransferDownload.Size = new System.Drawing.Size(104, 26);
+            this.btnTransferDownload.TabIndex = 59;
+            this.btnTransferDownload.Text = "下载调拨单";
+            this.btnTransferDownload.Click += new System.EventHandler(this.btnTransferDownload_Click);
             // 
-            // button6
+            // btnCheckSelect
             // 
-            this.button6.BackColor = System.Drawing.SystemColors.Desktop;
-            this.button6.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
-            this.button6.ForeColor = System.Drawing.Color.White;
-            this.button6.Location = new System.Drawing.Point(157, 166);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(104, 26);
-            this.button6.TabIndex = 62;
-            this.button6.Text = "执行盘点";
+            this.btnCheckSelect.BackColor = System.Drawing.SystemColors.Desktop;
+            this.btnCheckSelect.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
+            this.btnCheckSelect.ForeColor = System.Drawing.Color.White;
+            this.btnCheckSelect.Location = new System.Drawing.Point(157, 166);
+            this.btnCheckSelect.Name = "btnCheckSelect";
+            this.btnCheckSelect.Size = new System.Drawing.Size(104, 26);
+            this.btnCheckSelect.TabIndex = 62;
+            this.btnCheckSelect.Text = "执行盘点";
+            this.btnCheckSelect.Click += new System.EventHandler(this.btnCheckSelect_Click);
             // 
-            // button7
+            // btnCheckDownLoad
             // 
-            this.button7.BackColor = System.Drawing.SystemColors.Desktop;
-            this.button7.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
-            this.button7.ForeColor = System.Drawing.Color.White;
-            this.button7.Location = new System.Drawing.Point(29, 166);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(104, 26);
-            this.button7.TabIndex = 61;
-            this.button7.Text = "下载盘点单";
+            this.btnCheckDownLoad.BackColor = System.Drawing.SystemColors.Desktop;
+            this.btnCheckDownLoad.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
+            this.btnCheckDownLoad.ForeColor = System.Drawing.Color.White;
+            this.btnCheckDownLoad.Location = new System.Drawing.Point(29, 166);
+            this.btnCheckDownLoad.Name = "btnCheckDownLoad";
+            this.btnCheckDownLoad.Size = new System.Drawing.Size(104, 26);
+            this.btnCheckDownLoad.TabIndex = 61;
+            this.btnCheckDownLoad.Text = "下载盘点单";
+            this.btnCheckDownLoad.Click += new System.EventHandler(this.btnCheckDownLoad_Click);
             // 
             // FrmMainPro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(318, 269);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnCheckSelect);
+            this.Controls.Add(this.btnCheckDownLoad);
+            this.Controls.Add(this.btnTransferSelect);
+            this.Controls.Add(this.btnTransferDownload);
+            this.Controls.Add(this.btnDeliverySelect);
+            this.Controls.Add(this.btnLoadDelivery);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pbExit);
             this.Name = "FrmMainPro";
@@ -149,11 +157,11 @@
 
         private System.Windows.Forms.PictureBox pbExit;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button btnLoadDelivery;
+        private System.Windows.Forms.Button btnDeliverySelect;
+        private System.Windows.Forms.Button btnTransferSelect;
+        private System.Windows.Forms.Button btnTransferDownload;
+        private System.Windows.Forms.Button btnCheckSelect;
+        private System.Windows.Forms.Button btnCheckDownLoad;
     }
 }

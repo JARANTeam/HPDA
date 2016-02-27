@@ -112,6 +112,12 @@
       <DependentUpon>frmSetting.cs</DependentUpon>
     </Compile>
     <Compile Include="PDAFunction.cs" />
+    <Compile Include="PdaGetQuantity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PdaGetQuantity.Designer.cs">
+      <DependentUpon>PdaGetQuantity.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProductQuery.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,6 +141,9 @@
     <EmbeddedResource Include="frmSetting.resx">
       <DependentUpon>frmSetting.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PdaGetQuantity.resx">
+      <DependentUpon>PdaGetQuantity.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ProductQuery.resx">
       <DependentUpon>ProductQuery.cs</DependentUpon>
     </EmbeddedResource>
@@ -157,6 +166,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RmPoStoreDetail.resx">
       <DependentUpon>RmPoStoreDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RmProduce.resx">
+      <DependentUpon>RmProduce.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RmProduceDetail.resx">
+      <DependentUpon>RmProduceDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RmProduceDownload.resx">
+      <DependentUpon>RmProduceDownload.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RmProduceSelect.resx">
       <DependentUpon>RmProduceSelect.cs</DependentUpon>
@@ -210,6 +228,11 @@
     <Compile Include="RawMaterial.Designer.cs">
       <DependentUpon>RawMaterial.cs</DependentUpon>
     </Compile>
+    <Compile Include="RmDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RmDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="RmPoDownload.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -233,6 +256,24 @@
     </Compile>
     <Compile Include="RmPoStoreDetail.Designer.cs">
       <DependentUpon>RmPoStoreDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RmProduce.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RmProduce.Designer.cs">
+      <DependentUpon>RmProduce.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RmProduceDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RmProduceDetail.Designer.cs">
+      <DependentUpon>RmProduceDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RmProduceDownload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RmProduceDownload.Designer.cs">
+      <DependentUpon>RmProduceDownload.cs</DependentUpon>
     </Compile>
     <Compile Include="RmProduceSelect.cs">
       <SubType>Form</SubType>
@@ -327,6 +368,19 @@
     <Content Include="SQLite.Interop.084.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="RmDataSet.xsc">
+      <DependentUpon>RmDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="RmDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>RmDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="RmDataSet.xss">
+      <DependentUpon>RmDataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
   <ProjectExtensions>

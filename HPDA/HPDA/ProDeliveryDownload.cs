@@ -15,5 +15,20 @@ namespace HPDA
         {
             InitializeComponent();
         }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void mBc2_OnScan(Symbol.Barcode2.ScanDataCollection scanDataCollection)
+        {
+
+        }
+
+        private void txtBarCode_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
     }
 }

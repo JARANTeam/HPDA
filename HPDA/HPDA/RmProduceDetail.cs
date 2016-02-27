@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Data.SQLite;
 
-namespace SPDA
+namespace HPDA
 {
     public partial class RmProduceDetail : Form
     {
@@ -163,7 +163,11 @@ namespace SPDA
             sqLiteCmd.Parameters.AddWithValue("@cInvCode", cInvCode);
             sqLiteCmd.Parameters.AddWithValue("@cInvName", cInvName);
             sqLiteCmd.Parameters.AddWithValue("@iQuantity", iQuantity);
-            sqLiteCmd.Parameters.AddWithValue("@cUser", PdaLogin.lUser);
+
+            sqLiteCmd.Parameters.AddWithValue("@cUser", frmLogin.lUser);
+
+            sqLiteCmd.Parameters.AddWithValue("@cUser", frmLogin.lUser);
+
             PDAFunction.ExecSqLite(sqLiteCmd);
 
             var PlusCmd = new SQLiteCommand("update RmProduce set iScanQuantity=ifnull(iScanQuantity,0)+@iQuantity where cOrderNumber=@cOrderNumber and cInvCode=@cInvCode ");

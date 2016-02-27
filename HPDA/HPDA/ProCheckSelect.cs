@@ -15,5 +15,20 @@ namespace HPDA
         {
             InitializeComponent();
         }
+
+        private void btnShowDetail_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dGridMain_DoubleClick(object sender, EventArgs e)
+        {
+
+        }
     }
 }

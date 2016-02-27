@@ -30,10 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMainRm));
             this.pbExit = new System.Windows.Forms.PictureBox();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnProduceSelect = new System.Windows.Forms.Button();
+            this.btnProduceDownload = new System.Windows.Forms.Button();
+            this.btnPoSelect = new System.Windows.Forms.Button();
+            this.btnPoDownload = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // pbExit
@@ -44,50 +44,55 @@
             this.pbExit.Name = "pbExit";
             this.pbExit.Size = new System.Drawing.Size(49, 49);
             this.pbExit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbExit.Click += new System.EventHandler(this.pbExit_Click);
             // 
-            // button6
+            // btnProduceSelect
             // 
-            this.button6.BackColor = System.Drawing.SystemColors.Desktop;
-            this.button6.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
-            this.button6.ForeColor = System.Drawing.Color.White;
-            this.button6.Location = new System.Drawing.Point(169, 129);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(121, 47);
-            this.button6.TabIndex = 69;
-            this.button6.Text = "执行领料";
+            this.btnProduceSelect.BackColor = System.Drawing.SystemColors.Desktop;
+            this.btnProduceSelect.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
+            this.btnProduceSelect.ForeColor = System.Drawing.Color.White;
+            this.btnProduceSelect.Location = new System.Drawing.Point(169, 129);
+            this.btnProduceSelect.Name = "btnProduceSelect";
+            this.btnProduceSelect.Size = new System.Drawing.Size(126, 42);
+            this.btnProduceSelect.TabIndex = 69;
+            this.btnProduceSelect.Text = "执行领料";
+            this.btnProduceSelect.Click += new System.EventHandler(this.btnProduceSelect_Click);
             // 
-            // button7
+            // btnProduceDownload
             // 
-            this.button7.BackColor = System.Drawing.SystemColors.Desktop;
-            this.button7.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
-            this.button7.ForeColor = System.Drawing.Color.White;
-            this.button7.Location = new System.Drawing.Point(19, 129);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(126, 47);
-            this.button7.TabIndex = 68;
-            this.button7.Text = "下载班次领料单";
+            this.btnProduceDownload.BackColor = System.Drawing.SystemColors.Desktop;
+            this.btnProduceDownload.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
+            this.btnProduceDownload.ForeColor = System.Drawing.Color.White;
+            this.btnProduceDownload.Location = new System.Drawing.Point(19, 129);
+            this.btnProduceDownload.Name = "btnProduceDownload";
+            this.btnProduceDownload.Size = new System.Drawing.Size(126, 42);
+            this.btnProduceDownload.TabIndex = 68;
+            this.btnProduceDownload.Text = "下载班次领料单";
+            this.btnProduceDownload.Click += new System.EventHandler(this.btnProduceDownload_Click);
             // 
-            // button3
+            // btnPoSelect
             // 
-            this.button3.BackColor = System.Drawing.SystemColors.Desktop;
-            this.button3.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(169, 45);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(121, 42);
-            this.button3.TabIndex = 65;
-            this.button3.Text = "执行采购入库";
+            this.btnPoSelect.BackColor = System.Drawing.SystemColors.Desktop;
+            this.btnPoSelect.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
+            this.btnPoSelect.ForeColor = System.Drawing.Color.White;
+            this.btnPoSelect.Location = new System.Drawing.Point(169, 45);
+            this.btnPoSelect.Name = "btnPoSelect";
+            this.btnPoSelect.Size = new System.Drawing.Size(126, 42);
+            this.btnPoSelect.TabIndex = 65;
+            this.btnPoSelect.Text = "执行采购入库";
+            this.btnPoSelect.Click += new System.EventHandler(this.btnPoSelect_Click);
             // 
-            // button2
+            // btnPoDownload
             // 
-            this.button2.BackColor = System.Drawing.SystemColors.Desktop;
-            this.button2.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(19, 45);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(126, 42);
-            this.button2.TabIndex = 64;
-            this.button2.Text = "下载采购单";
+            this.btnPoDownload.BackColor = System.Drawing.SystemColors.Desktop;
+            this.btnPoDownload.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
+            this.btnPoDownload.ForeColor = System.Drawing.Color.White;
+            this.btnPoDownload.Location = new System.Drawing.Point(19, 45);
+            this.btnPoDownload.Name = "btnPoDownload";
+            this.btnPoDownload.Size = new System.Drawing.Size(126, 42);
+            this.btnPoDownload.TabIndex = 64;
+            this.btnPoDownload.Text = "下载采购单";
+            this.btnPoDownload.Click += new System.EventHandler(this.btnPoDownload_Click);
             // 
             // FrmMainRm
             // 
@@ -96,10 +101,10 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(318, 269);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnProduceSelect);
+            this.Controls.Add(this.btnProduceDownload);
+            this.Controls.Add(this.btnPoSelect);
+            this.Controls.Add(this.btnPoDownload);
             this.Controls.Add(this.pbExit);
             this.Name = "FrmMainRm";
             this.Text = "原料管理模块";
@@ -110,9 +115,9 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pbExit;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnProduceSelect;
+        private System.Windows.Forms.Button btnProduceDownload;
+        private System.Windows.Forms.Button btnPoSelect;
+        private System.Windows.Forms.Button btnPoDownload;
     }
 }
