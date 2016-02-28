@@ -46,6 +46,7 @@
             this.btnSave.Size = new System.Drawing.Size(207, 26);
             this.btnSave.TabIndex = 10;
             this.btnSave.Text = "保存";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // lblSum
             // 
@@ -61,12 +62,17 @@
             this.label1.Text = "合计：";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // mBc2
+            // 
+            this.mBc2.OnScan += new Symbol.Barcode2.Design.Barcode2.OnScanEventHandler(this.mBc2_OnScan);
+            // 
             // txtBarCode
             // 
             this.txtBarCode.Location = new System.Drawing.Point(4, 210);
             this.txtBarCode.Name = "txtBarCode";
             this.txtBarCode.Size = new System.Drawing.Size(147, 23);
             this.txtBarCode.TabIndex = 9;
+            this.txtBarCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBarCode_KeyDown);
             // 
             // dGridMain
             // 
@@ -91,6 +97,8 @@
             this.Controls.Add(this.dGridMain);
             this.Name = "RmPoDownload";
             this.Text = "采购订单下载";
+            this.Load += new System.EventHandler(this.RmPoDownload_Load);
+            this.Closing += new System.ComponentModel.CancelEventHandler(this.RmPoDownload_Closing);
             this.ResumeLayout(false);
 
         }

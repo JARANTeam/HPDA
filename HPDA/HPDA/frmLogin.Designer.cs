@@ -38,6 +38,7 @@
             this.txtName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.biK3Setting = new System.Windows.Forms.MenuItem();
             this.SuspendLayout();
             // 
             // mMain
@@ -47,11 +48,12 @@
             // miMain
             // 
             this.miMain.MenuItems.Add(this.miSetting);
+            this.miMain.MenuItems.Add(this.biK3Setting);
             this.miMain.Text = "系统";
             // 
             // miSetting
             // 
-            this.miSetting.Text = "连接配置";
+            this.miSetting.Text = "HX连接配置";
             this.miSetting.Click += new System.EventHandler(this.miSetting_Click);
             // 
             // label1
@@ -112,6 +114,12 @@
             this.label2.Size = new System.Drawing.Size(73, 20);
             this.label2.Text = "用户名";
             // 
+            // biK3Setting
+            // 
+            this.biK3Setting.Checked = true;
+            this.biK3Setting.Text = "K3连接配置";
+            this.biK3Setting.Click += new System.EventHandler(this.biK3Setting_Click);
+            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -143,6 +151,7 @@
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.MenuItem biK3Setting;
     }
 }
 

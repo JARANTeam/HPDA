@@ -159,12 +159,13 @@ namespace HPDA
             //进行循环判断是否属于当前库区 
             for (var i = 0; i < dtTemp.Rows.Count; i++)
             {
-                var dr=rds.RmProduce.NewRmProduceRow();
+                var dr=rds.RmPo.NewRmPoRow();
                 dr.cOrderNumber=DecodeText;
                 dr.cInvCode = dtTemp.Rows[i]["cInvCode"].ToString();
                 dr.cInvName = dtTemp.Rows[i]["cInvName"].ToString();
                 dr.iQuantity = dtTemp.Rows[i]["iQuantity"].ToString();
                 dr.cMemo = dtTemp.Rows[i]["cMemo"].ToString();
+                dr.FEntryID = dtTemp.Rows[i]["cMemo"].ToString();
                 rds.RmProduce.Rows.Add(dr);
             }
         }

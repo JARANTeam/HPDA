@@ -16,32 +16,32 @@ namespace HPDA
             InitializeComponent();
         }
 
-        private void btnProStore_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void btnPutBox_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void btnLoad_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void btnProDelivery_Click(object sender, EventArgs e)
-        {
-           
-        }
+        
 
         private void btnExit_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void btnSync_Click(object sender, EventArgs e)
+       
+
+        private void btnProduct_Click(object sender, EventArgs e)
+        {
+            using (var pq = new ProductQuery())
+            {
+                pq.ShowDialog();
+            }
+        }
+
+        private void btnRmMain_Click(object sender, EventArgs e)
+        {
+            using (var rm = new FrmMainRm())
+            {
+                rm.ShowDialog();
+            }
+        }
+
+        private void btnRaw_Click(object sender, EventArgs e)
         {
             using (var rm = new RawMaterial())
             {
@@ -49,26 +49,11 @@ namespace HPDA
             }
         }
 
-        private void btnCheckOne_Click(object sender, EventArgs e)
+        private void btnProMain_Click(object sender, EventArgs e)
         {
-            
-        }
-
-        private void btnCheckTwo_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void frmMain_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnProduct_Click(object sender, EventArgs e)
-        {
-            using (var pq = new ProductQuery())
+            using (var rm = new FrmMainPro())
             {
-                pq.ShowDialog();
+                rm.ShowDialog();
             }
         }
 

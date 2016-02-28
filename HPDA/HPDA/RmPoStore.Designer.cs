@@ -39,6 +39,7 @@
             this.lblOutAll = new System.Windows.Forms.Label();
             this.lblOrderNumber = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.lblStockPlaceID = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,23 +53,25 @@
             this.btnComplete.Size = new System.Drawing.Size(102, 25);
             this.btnComplete.TabIndex = 19;
             this.btnComplete.Text = "完成收货扫描";
+            this.btnComplete.Click += new System.EventHandler(this.btnComplete_Click);
             // 
             // txtBarCode
             // 
-            this.txtBarCode.Location = new System.Drawing.Point(3, 210);
+            this.txtBarCode.Location = new System.Drawing.Point(3, 213);
             this.txtBarCode.Name = "txtBarCode";
             this.txtBarCode.Size = new System.Drawing.Size(310, 23);
             this.txtBarCode.TabIndex = 18;
+            this.txtBarCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBarCode_KeyDown);
             // 
             // lblSum
             // 
-            this.lblSum.Location = new System.Drawing.Point(81, 186);
+            this.lblSum.Location = new System.Drawing.Point(81, 187);
             this.lblSum.Name = "lblSum";
             this.lblSum.Size = new System.Drawing.Size(101, 20);
             // 
             // label4
             // 
-            this.label4.Location = new System.Drawing.Point(3, 186);
+            this.label4.Location = new System.Drawing.Point(3, 187);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(82, 20);
             this.label4.Text = "已扫数量：";
@@ -78,11 +81,16 @@
             this.btnShowDetail.BackColor = System.Drawing.SystemColors.Desktop;
             this.btnShowDetail.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
             this.btnShowDetail.ForeColor = System.Drawing.Color.White;
-            this.btnShowDetail.Location = new System.Drawing.Point(211, 181);
+            this.btnShowDetail.Location = new System.Drawing.Point(211, 185);
             this.btnShowDetail.Name = "btnShowDetail";
             this.btnShowDetail.Size = new System.Drawing.Size(102, 25);
             this.btnShowDetail.TabIndex = 17;
             this.btnShowDetail.Text = "显示收货明细";
+            this.btnShowDetail.Click += new System.EventHandler(this.btnShowDetail_Click);
+            // 
+            // mBc2
+            // 
+            this.mBc2.OnScan += new Symbol.Barcode2.Design.Barcode2.OnScanEventHandler(this.mBc2_OnScan);
             // 
             // dGridMain
             // 
@@ -90,8 +98,9 @@
             this.dGridMain.Dock = System.Windows.Forms.DockStyle.Top;
             this.dGridMain.Location = new System.Drawing.Point(0, 33);
             this.dGridMain.Name = "dGridMain";
-            this.dGridMain.Size = new System.Drawing.Size(318, 136);
+            this.dGridMain.Size = new System.Drawing.Size(318, 146);
             this.dGridMain.TabIndex = 24;
+            this.dGridMain.DoubleClick += new System.EventHandler(this.dGridMain_DoubleClick);
             // 
             // panel1
             // 
@@ -125,6 +134,12 @@
             this.label1.Size = new System.Drawing.Size(82, 20);
             this.label1.Text = "采购单号：";
             // 
+            // lblStockPlaceID
+            // 
+            this.lblStockPlaceID.Location = new System.Drawing.Point(3, 245);
+            this.lblStockPlaceID.Name = "lblStockPlaceID";
+            this.lblStockPlaceID.Size = new System.Drawing.Size(198, 20);
+            // 
             // RmPoStore
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -132,6 +147,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(318, 269);
+            this.Controls.Add(this.lblStockPlaceID);
             this.Controls.Add(this.dGridMain);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnComplete);
@@ -141,6 +157,8 @@
             this.Controls.Add(this.btnShowDetail);
             this.Name = "RmPoStore";
             this.Text = "采购收货扫描";
+            this.Load += new System.EventHandler(this.RmPoStore_Load);
+            this.Closing += new System.ComponentModel.CancelEventHandler(this.RmPoStore_Closing);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -159,5 +177,6 @@
         private System.Windows.Forms.Label lblOutAll;
         private System.Windows.Forms.Label lblOrderNumber;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblStockPlaceID;
     }
 }

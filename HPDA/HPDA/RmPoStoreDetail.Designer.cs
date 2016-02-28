@@ -78,6 +78,7 @@
             this.btnExit.Size = new System.Drawing.Size(72, 25);
             this.btnExit.TabIndex = 4;
             this.btnExit.Text = "关闭";
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // RmPoStoreDetail
             // 
@@ -91,6 +92,7 @@
             this.Controls.Add(this.btnExit);
             this.Name = "RmPoStoreDetail";
             this.Text = "采购订单明细";
+            this.Load += new System.EventHandler(this.RmPoStoreDetail_Load);
             this.panelTop.ResumeLayout(false);
             this.ResumeLayout(false);
 

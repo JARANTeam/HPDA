@@ -96,3 +96,4 @@ C:\GitProject\HPDA\HPDA\HPDA\bin\Release\System.Xml.dll
 C:\GitProject\HPDA\HPDA\HPDA\bin\Release\System.Xml.Linq.dll
 C:\GitProject\HPDA\HPDA\HPDA\bin\Release\Symbol.Barcode2.Design.xml
 C:\GitProject\HPDA\HPDA\HPDA\obj\Release\HPDA.exe
+C:\GitProject\HPDA\HPDA\HPDA\obj\Release\HPDA.frmKisSetting.resources

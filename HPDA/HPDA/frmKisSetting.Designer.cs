@@ -1,6 +1,6 @@
 ﻿namespace HPDA
 {
-    partial class frmSetting
+    partial class frmKisSetting
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -127,10 +127,10 @@
             this.label5.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
             this.label5.Location = new System.Drawing.Point(106, 29);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(112, 20);
-            this.label5.Text = "HX服务器配置";
+            this.label5.Size = new System.Drawing.Size(87, 20);
+            this.label5.Text = "K3服务器配置";
             // 
-            // frmSetting
+            // frmKisSetting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -147,7 +147,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "frmSetting";
+            this.Name = "frmKisSetting";
             this.Text = "配置";
             this.Load += new System.EventHandler(this.frmLogin_Load);
             this.ResumeLayout(false);

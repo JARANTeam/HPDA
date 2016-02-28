@@ -637,6 +637,10 @@ namespace HPDA {
             
             private global::System.Data.DataColumn columncOrderNumber;
             
+            private global::System.Data.DataColumn columnFItemID;
+            
+            private global::System.Data.DataColumn columnFEntryID;
+            
             private global::System.Data.DataColumn columncInvCode;
             
             private global::System.Data.DataColumn columncInvName;
@@ -688,6 +692,20 @@ namespace HPDA {
             public global::System.Data.DataColumn cOrderNumberColumn {
                 get {
                     return this.columncOrderNumber;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn FItemIDColumn {
+                get {
+                    return this.columnFItemID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn FEntryIDColumn {
+                get {
+                    return this.columnFEntryID;
                 }
             }
             
@@ -775,11 +793,13 @@ namespace HPDA {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public RmPoRow AddRmPoRow(string cOrderNumber, string cInvCode, string cInvName, string cUnit, string iQuantity, string iScanQuantity, string cVendor, string cMemo, string dLoadDate) {
+            public RmPoRow AddRmPoRow(string cOrderNumber, string FItemID, string FEntryID, string cInvCode, string cInvName, string cUnit, string iQuantity, string iScanQuantity, string cVendor, string cMemo, string dLoadDate) {
                 RmPoRow rowRmPoRow = ((RmPoRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         cOrderNumber,
+                        FItemID,
+                        FEntryID,
                         cInvCode,
                         cInvName,
                         cUnit,
@@ -809,6 +829,8 @@ namespace HPDA {
             internal void InitVars() {
                 this.columnRowNo = base.Columns["RowNo"];
                 this.columncOrderNumber = base.Columns["cOrderNumber"];
+                this.columnFItemID = base.Columns["FItemID"];
+                this.columnFEntryID = base.Columns["FEntryID"];
                 this.columncInvCode = base.Columns["cInvCode"];
                 this.columncInvName = base.Columns["cInvName"];
                 this.columncUnit = base.Columns["cUnit"];
@@ -825,6 +847,10 @@ namespace HPDA {
                 base.Columns.Add(this.columnRowNo);
                 this.columncOrderNumber = new global::System.Data.DataColumn("cOrderNumber", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncOrderNumber);
+                this.columnFItemID = new global::System.Data.DataColumn("FItemID", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFItemID);
+                this.columnFEntryID = new global::System.Data.DataColumn("FEntryID", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFEntryID);
                 this.columncInvCode = new global::System.Data.DataColumn("cInvCode", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncInvCode);
                 this.columncInvName = new global::System.Data.DataColumn("cInvName", typeof(string), null, global::System.Data.MappingType.Element);
@@ -984,9 +1010,13 @@ namespace HPDA {
             
             private global::System.Data.DataColumn columniQuantity;
             
-            private global::System.Data.DataColumn columndScanTime;
-            
             private global::System.Data.DataColumn columncUser;
+            
+            private global::System.Data.DataColumn columnFEntryID;
+            
+            private global::System.Data.DataColumn columnFitemID;
+            
+            private global::System.Data.DataColumn columnFSPNumber;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public RmStoreDetailDataTable() {
@@ -1069,16 +1099,30 @@ namespace HPDA {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn dScanTimeColumn {
+            public global::System.Data.DataColumn cUserColumn {
                 get {
-                    return this.columndScanTime;
+                    return this.columncUser;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn cUserColumn {
+            public global::System.Data.DataColumn FEntryIDColumn {
                 get {
-                    return this.columncUser;
+                    return this.columnFEntryID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn FitemIDColumn {
+                get {
+                    return this.columnFitemID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn FSPNumberColumn {
+                get {
+                    return this.columnFSPNumber;
                 }
             }
             
@@ -1110,7 +1154,7 @@ namespace HPDA {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public RmStoreDetailRow AddRmStoreDetailRow(string cSerialNumber, string cLotNo, string cOrderNumber, string cInvCode, string cInvName, string cUnit, string iQuantity, string dScanTime, string cUser) {
+            public RmStoreDetailRow AddRmStoreDetailRow(string cSerialNumber, string cLotNo, string cOrderNumber, string cInvCode, string cInvName, string cUnit, string iQuantity, string cUser, short FEntryID, short FitemID, string FSPNumber) {
                 RmStoreDetailRow rowRmStoreDetailRow = ((RmStoreDetailRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1121,8 +1165,10 @@ namespace HPDA {
                         cInvName,
                         cUnit,
                         iQuantity,
-                        dScanTime,
-                        cUser};
+                        cUser,
+                        FEntryID,
+                        FitemID,
+                        FSPNumber};
                 rowRmStoreDetailRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowRmStoreDetailRow);
                 return rowRmStoreDetailRow;
@@ -1150,8 +1196,10 @@ namespace HPDA {
                 this.columncInvName = base.Columns["cInvName"];
                 this.columncUnit = base.Columns["cUnit"];
                 this.columniQuantity = base.Columns["iQuantity"];
-                this.columndScanTime = base.Columns["dScanTime"];
                 this.columncUser = base.Columns["cUser"];
+                this.columnFEntryID = base.Columns["FEntryID"];
+                this.columnFitemID = base.Columns["FitemID"];
+                this.columnFSPNumber = base.Columns["FSPNumber"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1172,10 +1220,14 @@ namespace HPDA {
                 base.Columns.Add(this.columncUnit);
                 this.columniQuantity = new global::System.Data.DataColumn("iQuantity", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columniQuantity);
-                this.columndScanTime = new global::System.Data.DataColumn("dScanTime", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columndScanTime);
                 this.columncUser = new global::System.Data.DataColumn("cUser", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncUser);
+                this.columnFEntryID = new global::System.Data.DataColumn("FEntryID", typeof(short), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFEntryID);
+                this.columnFitemID = new global::System.Data.DataColumn("FitemID", typeof(short), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFitemID);
+                this.columnFSPNumber = new global::System.Data.DataColumn("FSPNumber", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFSPNumber);
                 this.columnRowNo.AutoIncrement = true;
                 this.columnRowNo.AutoIncrementSeed = 1;
             }
@@ -1936,6 +1988,36 @@ namespace HPDA {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string FItemID {
+                get {
+                    try {
+                        return ((string)(this[this.tableRmPo.FItemIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“RmPo”中列“FItemID”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableRmPo.FItemIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string FEntryID {
+                get {
+                    try {
+                        return ((string)(this[this.tableRmPo.FEntryIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“RmPo”中列“FEntryID”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableRmPo.FEntryIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string cInvCode {
                 get {
                     try {
@@ -2073,6 +2155,26 @@ namespace HPDA {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetcOrderNumberNull() {
                 this[this.tableRmPo.cOrderNumberColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsFItemIDNull() {
+                return this.IsNull(this.tableRmPo.FItemIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetFItemIDNull() {
+                this[this.tableRmPo.FItemIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsFEntryIDNull() {
+                return this.IsNull(this.tableRmPo.FEntryIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetFEntryIDNull() {
+                this[this.tableRmPo.FEntryIDColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2290,21 +2392,6 @@ namespace HPDA {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string dScanTime {
-                get {
-                    try {
-                        return ((string)(this[this.tableRmStoreDetail.dScanTimeColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("表“RmStoreDetail”中列“dScanTime”的值为 DBNull。", e);
-                    }
-                }
-                set {
-                    this[this.tableRmStoreDetail.dScanTimeColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string cUser {
                 get {
                     try {
@@ -2316,6 +2403,51 @@ namespace HPDA {
                 }
                 set {
                     this[this.tableRmStoreDetail.cUserColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public short FEntryID {
+                get {
+                    try {
+                        return ((short)(this[this.tableRmStoreDetail.FEntryIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“RmStoreDetail”中列“FEntryID”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableRmStoreDetail.FEntryIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public short FitemID {
+                get {
+                    try {
+                        return ((short)(this[this.tableRmStoreDetail.FitemIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“RmStoreDetail”中列“FitemID”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableRmStoreDetail.FitemIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string FSPNumber {
+                get {
+                    try {
+                        return ((string)(this[this.tableRmStoreDetail.FSPNumberColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“RmStoreDetail”中列“FSPNumber”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableRmStoreDetail.FSPNumberColumn] = value;
                 }
             }
             
@@ -2400,16 +2532,6 @@ namespace HPDA {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsdScanTimeNull() {
-                return this.IsNull(this.tableRmStoreDetail.dScanTimeColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetdScanTimeNull() {
-                this[this.tableRmStoreDetail.dScanTimeColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IscUserNull() {
                 return this.IsNull(this.tableRmStoreDetail.cUserColumn);
             }
@@ -2417,6 +2539,36 @@ namespace HPDA {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetcUserNull() {
                 this[this.tableRmStoreDetail.cUserColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsFEntryIDNull() {
+                return this.IsNull(this.tableRmStoreDetail.FEntryIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetFEntryIDNull() {
+                this[this.tableRmStoreDetail.FEntryIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsFitemIDNull() {
+                return this.IsNull(this.tableRmStoreDetail.FitemIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetFitemIDNull() {
+                this[this.tableRmStoreDetail.FitemIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsFSPNumberNull() {
+                return this.IsNull(this.tableRmStoreDetail.FSPNumberColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetFSPNumberNull() {
+                this[this.tableRmStoreDetail.FSPNumberColumn] = global::System.Convert.DBNull;
             }
         }
         

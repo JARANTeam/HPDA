@@ -137,6 +137,37 @@ namespace HPDA
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="con"></param>
+        /// <param name="cmd"></param>
+        /// <param name="dt"></param>
+        public static DataTable GetSqlTable( SqlCommand cmd)
+        {
+            DataTable dt = new DataTable("Temp");
+            using (SqlConnection con = new SqlConnection(frmLogin.WmsCon))
+            {
+                using (cmd)
+                {
+                    
+                    cmd.Connection = con;
+                    using (var da = new SqlDataAdapter(cmd))
+                    {
+                        try
+                        {
+                            da.Fill(dt);
+                            return dt;
+                        }
+                        catch (Exception ex)
+                        {
+                            throw;
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// 判断SQL数据库中是否存在符合条件的数据 
         /// </summary>
         /// <param name="con"></param>
@@ -145,6 +176,25 @@ namespace HPDA
         public static bool ExistSql(SqlConnection con, SqlCommand cmd)
         {
             using (con)
+            {
+                using (cmd)
+                {
+                    cmd.Connection = con;
+                    con.Open();
+                    return cmd.ExecuteReader().Read();
+                }
+            }
+        }
+
+        /// <summary>
+        /// 判断SQL数据库中是否存在符合条件的数据 
+        /// </summary>
+        /// <param name="con"></param>
+        /// <param name="cmd"></param>
+        /// <returns></returns>
+        public static bool ExistSql(SqlCommand cmd)
+        {
+            using (var con=new SqlConnection(frmLogin.KisCon))
             {
                 using (cmd)
                 {
@@ -275,9 +325,9 @@ namespace HPDA
         /// 获取服务器连接配置
         /// </summary>
         /// <returns></returns>
-        public static string GetWmsConstring(out string u8Constring)
+        public static string GetWmsConstring()
         {
-            string cServer = "", cData = "", cUser = "", cPwd = "",cU8Account="";
+            string cServer = "", cData = "", cUser = "", cPwd = "";
             using (var con = new SQLiteConnection(frmLogin.SqliteCon))
             {
                 using (var cmd = new SQLiteCommand("select cValue from Setting where cName='cServer' or cName='cData' or cName='cUser' or cName='cPwd'  or cName='U8Account' order by id", con))
@@ -294,13 +344,36 @@ namespace HPDA
                             cUser = dr[0].ToString();
                         if (dr.Read())
                             cPwd = dr[0].ToString();
-                        if (dr.Read())
-                            cU8Account = dr[0].ToString();
                     }
                 }
             }
-            u8Constring="Data Source=" + cServer
-                                + ";Initial Catalog=" + cU8Account + ";User ID=" + cUser + ";Password=" + cPwd;
+            return "Data Source=" + cServer
+                                + ";Initial Catalog=" + cData + ";User ID=" + cUser + ";Password=" + cPwd;
+
+        }
+
+        public static string GetKisConstring()
+        {
+            string cServer = "", cData = "", cUser = "", cPwd = "";
+            using (var con = new SQLiteConnection(frmLogin.SqliteCon))
+            {
+                using (var cmd = new SQLiteCommand("select cValue from Setting where cName='cK3Server' or cName='cK3Data' or cName='cK3User' or cName='cK3Pwd'  or cName='U8Account' order by id", con))
+                {
+                    con.Open();
+                    using (var dr = cmd.ExecuteReader())
+                    {
+
+                        if (dr.Read())
+                            cServer = dr[0].ToString();
+                        if (dr.Read())
+                            cData = dr[0].ToString();
+                        if (dr.Read())
+                            cUser = dr[0].ToString();
+                        if (dr.Read())
+                            cPwd = dr[0].ToString();
+                    }
+                }
+            }
             return "Data Source=" + cServer
                                 + ";Initial Catalog=" + cData + ";User ID=" + cUser + ";Password=" + cPwd;
 

@@ -15,7 +15,7 @@ namespace HPDA
     public partial class frmLogin : Form
     {
         public static string WmsCon;
-        public static string U8Con;
+        public static string KisCon;
         public static string lUser;
         public static string PDASN;
 
@@ -68,7 +68,8 @@ namespace HPDA
             }
 
             
-            WmsCon = PDAFunction.GetWmsConstring(out U8Con);
+            WmsCon = PDAFunction.GetWmsConstring();
+            KisCon = PDAFunction.GetKisConstring();
             lUser = txtName.Text;
 
             if (!PDAFunction.IsCanCon())
@@ -125,6 +126,14 @@ namespace HPDA
             }
 
             
+        }
+
+        private void biK3Setting_Click(object sender, EventArgs e)
+        {
+            using (var fs = new frmKisSetting())
+            {
+                fs.ShowDialog();
+            }
         }
 
     }

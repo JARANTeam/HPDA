@@ -218,6 +218,9 @@
     <EmbeddedResource Include="ProCheckSelect.resx">
       <DependentUpon>ProCheckSelect.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmKisSetting.resx">
+      <DependentUpon>frmKisSetting.cs</DependentUpon>
+    </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
@@ -358,6 +361,12 @@
     </Compile>
     <Compile Include="ProCheckSelect.Designer.cs">
       <DependentUpon>ProCheckSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmKisSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmKisSetting.Designer.cs">
+      <DependentUpon>frmKisSetting.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

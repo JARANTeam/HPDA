@@ -12,14 +12,14 @@ using System.Data.SQLite;
 
 namespace HPDA
 {
-    public partial class frmSetting : Form
+    public partial class frmKisSetting : Form
     {
 
       
 
        // private NLSScanner scanTest = new NLSScanner();
 
-        public frmSetting()
+        public frmKisSetting()
         {
             InitializeComponent();
             //scanTest.OnDecodeEvent += new DecodeEventHandler(scan_OnDecodeEvent);
@@ -31,7 +31,7 @@ namespace HPDA
         {
             using (var con = new SQLiteConnection(frmLogin.SqliteCon))
             {
-                using (var cmd = new SQLiteCommand("select cValue from Setting where cName='cServer' or cName='cData' or cName='cUser' or cName='cPwd'  order by id", con))
+                using (var cmd = new SQLiteCommand("select cValue from Setting where cName='cK3Server' or cName='cK3Data' or cName='cK3User' or cName='cK3Pwd'   order by id", con))
                 {
                     con.Open();
                     using (var dr = cmd.ExecuteReader())
@@ -54,29 +54,31 @@ namespace HPDA
 
         private void bntLogin_Click(object sender, EventArgs e)
         {
-            frmLogin.WmsCon = "Data Source=" + txtServer.Text
+
+
+            frmLogin.KisCon= "Data Source=" + txtServer.Text
                                 + ";Initial Catalog=" + txtData.Text + ";User ID=" + txtUser.Text + ";Password=" + txtPwd.Text;
 
             using (var cmd = new SQLiteCommand("update Setting set cValue=@cValue where cName=@cName"))
             {
                 //更新服务器
                 cmd.Parameters.AddWithValue("@cValue", txtServer.Text);
-                cmd.Parameters.AddWithValue("@cName", "cServer");
+                cmd.Parameters.AddWithValue("@cName", "cK3Server");
                 PDAFunction.ExecSqlite(cmd);
 
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@cValue", txtData.Text);
-                cmd.Parameters.AddWithValue("@cName", "cData");
+                cmd.Parameters.AddWithValue("@cName", "cK3Data");
                 PDAFunction.ExecSqlite(cmd);
 
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@cValue", txtUser.Text);
-                cmd.Parameters.AddWithValue("@cName", "cUser");
+                cmd.Parameters.AddWithValue("@cName", "cK3User");
                 PDAFunction.ExecSqlite(cmd);
 
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@cValue", txtPwd.Text);
-                cmd.Parameters.AddWithValue("@cName", "cPwd");
+                cmd.Parameters.AddWithValue("@cName", "cK3Pwd");
                 PDAFunction.ExecSqlite(cmd);
 
 
