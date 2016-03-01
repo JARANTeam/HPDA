@@ -65,6 +65,7 @@
             this.dGridMain.Name = "dGridMain";
             this.dGridMain.Size = new System.Drawing.Size(318, 217);
             this.dGridMain.TabIndex = 4;
+            this.dGridMain.DoubleClick += new System.EventHandler(this.dGridMain_DoubleClick);
             // 
             // ProDeliverySelect
             // 

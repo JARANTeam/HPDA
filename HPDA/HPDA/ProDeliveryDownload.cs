@@ -44,7 +44,7 @@ namespace HPDA
 
             DataGridColumnStyle dgccOrderNumber = new DataGridTextBoxColumn();
             dgccOrderNumber.Width = 120;
-            dgccOrderNumber.MappingName = "cOrderNumber";
+            dgccOrderNumber.MappingName = "cCode";
             dgccOrderNumber.HeaderText = "单号";
             dgts.GridColumnStyles.Add(dgccOrderNumber);
 
@@ -196,7 +196,7 @@ namespace HPDA
             for (var i = 0; i < dtTemp.Rows.Count; i++)
             {
                 var dr = prods.ProDelivery.NewProDeliveryRow();
-                dr.cOrderNumber = cOrderNumber;
+                dr.cCode = cOrderNumber;
                 dr.AutoID = dtTemp.Rows[i]["AutoID"].ToString();
                 dr.cCusCode = dtTemp.Rows[i]["cCusCode"].ToString();
                 dr.cCusName = dtTemp.Rows[i]["cCusName"].ToString();
@@ -210,6 +210,43 @@ namespace HPDA
                 dr.dVeriDate = dtTemp.Rows[i]["dVeriDate"].ToString();
                 prods.ProDelivery.Rows.Add(dr);
             }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (prods.ProDelivery.Rows.Count <= 0)
+                return;
+            if (!PDAFunction.IsCanCon())
+            {
+                MessageBox.Show(@"无法连接到服务器", @"Warning");
+                return;
+            }
+            for (var i = 0; i <= prods.ProDelivery.Rows.Count - 1; i++)
+            {
+                var cmd = new SQLiteCommand
+                {
+                    CommandText = "insert into ProDelivery(AutoID,cCode,cCusCode,cCusName,cMaker,dMaketime,cDepCode,cDepName,cMemo,cVerifyState,dVeriDate) values(@AutoID,@cCode,@cCusCode,@cCusName,@cMaker,@dMaketime,@cDepCode,@cDepName,@cMemo,@cVerifyState,@dVeriDate)"
+                };
+                cmd.Parameters.AddWithValue("@AutoID", prods.ProDelivery.Rows[i]["AutoID"]);
+                cmd.Parameters.AddWithValue("@cCode", prods.ProDelivery.Rows[i]["cCode"]);
+                cmd.Parameters.AddWithValue("@cCusCode", prods.ProDelivery.Rows[i]["cCusCode"]);
+                cmd.Parameters.AddWithValue("@cCusName", prods.ProDelivery.Rows[i]["cCusName"]);
+                cmd.Parameters.AddWithValue("@cMaker", prods.ProDelivery.Rows[i]["cMaker"]);
+                cmd.Parameters.AddWithValue("@dMaketime", prods.ProDelivery.Rows[i]["dMaketime"]);
+                cmd.Parameters.AddWithValue("@cDepCode", prods.ProDelivery.Rows[i]["cDepCode"]);
+                cmd.Parameters.AddWithValue("@cDepName", prods.ProDelivery.Rows[i]["cDepName"]);
+                cmd.Parameters.AddWithValue("@cMemo", prods.ProDelivery.Rows[i]["cMemo"]);
+                cmd.Parameters.AddWithValue("@cVerifyState", prods.ProDelivery.Rows[i]["cVerifyState"]);
+                cmd.Parameters.AddWithValue("@dVeriDate", prods.ProDelivery.Rows[i]["dVeriDate"]);
+                PDAFunction.ExecSqLite(cmd);
+            }
+            var ucmd = new SqlCommand("update ProDelivery set cVerifyState='拣货下载' where cCode=@cCode");
+            ucmd.Parameters.AddWithValue("@cCode", prods.ProDelivery.Rows[0]["cCode"]);
+            var ucon = new SqlConnection(frmLogin.WmsCon);
+            PDAFunction.ExecSqL(ucon, ucmd);
+            MessageBox.Show(@"成功保存", @"Success");
+            prods.ProDelivery.Rows.Clear();
+            lblSum.Text = "";
         }
 
     }

@@ -39,6 +39,7 @@
             this.lblOutAll = new System.Windows.Forms.Label();
             this.lblOrderNumber = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.lblStockPlaceID = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,6 +53,7 @@
             this.btnComplete.Size = new System.Drawing.Size(102, 25);
             this.btnComplete.TabIndex = 19;
             this.btnComplete.Text = "完成出库扫描";
+            this.btnComplete.Click += new System.EventHandler(this.btnComplete_Click);
             // 
             // txtBarCode
             // 
@@ -83,6 +85,10 @@
             this.btnShowDetail.Size = new System.Drawing.Size(102, 25);
             this.btnShowDetail.TabIndex = 17;
             this.btnShowDetail.Text = "显示扫描明细";
+            // 
+            // mBc2
+            // 
+            this.mBc2.OnScan += new Symbol.Barcode2.Design.Barcode2.OnScanEventHandler(this.mBc2_OnScan);
             // 
             // dGridMain
             // 
@@ -125,6 +131,12 @@
             this.label1.Size = new System.Drawing.Size(82, 20);
             this.label1.Text = "出库单号";
             // 
+            // lblStockPlaceID
+            // 
+            this.lblStockPlaceID.Location = new System.Drawing.Point(3, 239);
+            this.lblStockPlaceID.Name = "lblStockPlaceID";
+            this.lblStockPlaceID.Size = new System.Drawing.Size(198, 20);
+            // 
             // ProDelivery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -132,6 +144,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(318, 269);
+            this.Controls.Add(this.lblStockPlaceID);
             this.Controls.Add(this.dGridMain);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnComplete);
@@ -141,6 +154,8 @@
             this.Controls.Add(this.btnShowDetail);
             this.Name = "ProDelivery";
             this.Text = "出库扫描";
+            this.Load += new System.EventHandler(this.ProDelivery_Load);
+            this.Closing += new System.ComponentModel.CancelEventHandler(this.ProDelivery_Closing);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -159,5 +174,6 @@
         private System.Windows.Forms.Label lblOutAll;
         private System.Windows.Forms.Label lblOrderNumber;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblStockPlaceID;
     }
 }

@@ -46,6 +46,7 @@
             this.btnSave.Size = new System.Drawing.Size(207, 26);
             this.btnSave.TabIndex = 10;
             this.btnSave.Text = "保存";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // lblSum
             // 

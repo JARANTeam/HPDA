@@ -33,7 +33,7 @@ namespace HPDA
 
             DataGridColumnStyle dgccOrderNumber = new DataGridTextBoxColumn();
             dgccOrderNumber.Width = 120;
-            dgccOrderNumber.MappingName = "cOrderNumber";
+            dgccOrderNumber.MappingName = "cCode";
             dgccOrderNumber.HeaderText = "单号";
             dgts.GridColumnStyles.Add(dgccOrderNumber);
 
@@ -103,11 +103,11 @@ namespace HPDA
             if (MessageBox.Show(@"确定删除当前下载的采购订单?", @"确定删除?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question,
                                 MessageBoxDefaultButton.Button3) != DialogResult.Yes)
                 return;
-            var cmd = new SQLiteCommand("select * from RmStoreDetail where cOrderNumber=@cOrderNumber");
-            cmd.Parameters.AddWithValue("@cOrderNumber", prods.ProDelivery.Rows[dGridMain.CurrentRowIndex]["cOrderNumber"]);
+            var cmd = new SQLiteCommand("select * from ProDeliveryDetail where cCode=@cCode");
+            cmd.Parameters.AddWithValue("@cCode", prods.ProDelivery.Rows[dGridMain.CurrentRowIndex]["cCode"]);
             if (PDAFunction.ExistSqlite(frmLogin.SqliteCon, cmd))
             {
-                MessageBox.Show(@"当前采购订单已经进行过入库,不允许删除!", @"Warning");
+                MessageBox.Show(@"当前出库单已经进行过出库扫描,不允许删除!", @"Warning");
                 return;
             }
 
@@ -116,8 +116,8 @@ namespace HPDA
             //    MessageBox.Show(@"无法连接到服务器", @"Warning");
             //    return;
             //}
-            var dCmd = new SQLiteCommand("Delete from ProDelivery where cOrderNumber=@cOrderNumber");
-            dCmd.Parameters.AddWithValue("@cOrderNumber", prods.ProDelivery.Rows[dGridMain.CurrentRowIndex]["cOrderNumber"]);
+            var dCmd = new SQLiteCommand("Delete from ProDelivery where cCode=@cCode");
+            dCmd.Parameters.AddWithValue("@cCode", prods.ProDelivery.Rows[dGridMain.CurrentRowIndex]["cCode"]);
             PDAFunction.ExecSqLite(dCmd);
 
 
@@ -129,8 +129,29 @@ namespace HPDA
         {
              if (dGridMain.CurrentRowIndex < 0)
                 return;
-            var rpd = new RmPoStoreDetail(rds.RmPo.Rows[dGridMain.CurrentRowIndex]["cOrderNumber"].ToString());
+             var rpd = new ProDeliveryDetail(prods.ProDelivery.Rows[dGridMain.CurrentRowIndex]["cOrderNumber"].ToString());
             rpd.ShowDialog();
+        }
+
+        private void dGridMain_DoubleClick(object sender, EventArgs e)
+        {
+            if (dGridMain.CurrentRowIndex < 0)
+                return;
+
+            int iAutoID;
+            try 
+	        {	        
+		        iAutoID=int.Parse(prods.ProDelivery.Rows[dGridMain.CurrentRowIndex]["AutoID"].ToString());
+	        }
+	        catch (Exception ex)
+	        {
+        		
+		        MessageBox.Show(@"数据异常"+ex.Message, @"Warning");
+                return;
+	        }
+            var outWareHouse = new ProDelivery(prods.ProDelivery.Rows[dGridMain.CurrentRowIndex]["cCode"].ToString(), iAutoID);
+            outWareHouse.ShowDialog();
+            Close();
         }
 
     }

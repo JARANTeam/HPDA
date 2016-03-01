@@ -91,6 +91,7 @@
             this.Controls.Add(this.btnExit);
             this.Name = "ProDeliveryDetail";
             this.Text = "出库单明细";
+            this.Load += new System.EventHandler(this.ProDeliveryDetail_Load);
             this.panelTop.ResumeLayout(false);
             this.ResumeLayout(false);
 

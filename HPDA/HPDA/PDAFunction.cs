@@ -192,7 +192,7 @@ namespace HPDA
         /// <param name="con"></param>
         /// <param name="cmd"></param>
         /// <returns></returns>
-        public static bool ExistSql(SqlCommand cmd)
+        public static bool ExistSqlKis(SqlCommand cmd)
         {
             using (var con=new SqlConnection(frmLogin.KisCon))
             {

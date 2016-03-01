@@ -125,7 +125,7 @@ namespace HPDA
                 var cmd = new SqlCommand("select * from t_StockPlace where FNumber=@FNumber");
                 cmd.Parameters.AddWithValue("@FNumber", cBarCode);
 
-                if (PDAFunction.ExistSql(cmd))
+                if (PDAFunction.ExistSqlKis(cmd))
                 {
                     lblStockPlaceID.Text = cBarCode;
                 }
