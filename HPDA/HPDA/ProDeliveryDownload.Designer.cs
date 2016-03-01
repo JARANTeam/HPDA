@@ -61,6 +61,10 @@
             this.label1.Text = "合计：";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // mBc2
+            // 
+            this.mBc2.OnScan += new Symbol.Barcode2.Design.Barcode2.OnScanEventHandler(this.mBc2_OnScan);
+            // 
             // txtBarCode
             // 
             this.txtBarCode.Location = new System.Drawing.Point(4, 210);
@@ -91,6 +95,8 @@
             this.Controls.Add(this.dGridMain);
             this.Name = "ProDeliveryDownload";
             this.Text = "出库单下载";
+            this.Load += new System.EventHandler(this.ProDeliveryDownload_Load);
+            this.Closing += new System.ComponentModel.CancelEventHandler(this.ProDeliveryDownload_Closing);
             this.ResumeLayout(false);
 
         }

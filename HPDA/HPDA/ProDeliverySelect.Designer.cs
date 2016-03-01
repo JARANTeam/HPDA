@@ -43,6 +43,7 @@
             this.btnShowDetail.Size = new System.Drawing.Size(102, 25);
             this.btnShowDetail.TabIndex = 6;
             this.btnShowDetail.Text = "显示出库明细";
+            this.btnShowDetail.Click += new System.EventHandler(this.btnShowDetail_Click);
             // 
             // btnDelete
             // 
@@ -54,6 +55,7 @@
             this.btnDelete.Size = new System.Drawing.Size(72, 25);
             this.btnDelete.TabIndex = 5;
             this.btnDelete.Text = "删除";
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // dGridMain
             // 
@@ -76,6 +78,7 @@
             this.Controls.Add(this.dGridMain);
             this.Name = "ProDeliverySelect";
             this.Text = "选择出库单";
+            this.Load += new System.EventHandler(this.ProDeliverySelect_Load);
             this.ResumeLayout(false);
 
         }
