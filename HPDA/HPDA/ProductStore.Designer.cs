@@ -37,6 +37,7 @@
             this.dGridMain = new System.Windows.Forms.DataGrid();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblOrderNumber = new System.Windows.Forms.Label();
+            this.lblStockPlaceID = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,6 +51,7 @@
             this.btnComplete.Size = new System.Drawing.Size(102, 25);
             this.btnComplete.TabIndex = 19;
             this.btnComplete.Text = "完成入库扫描";
+            this.btnComplete.Click += new System.EventHandler(this.btnComplete_Click);
             // 
             // txtBarCode
             // 
@@ -82,6 +84,10 @@
             this.btnShowDetail.TabIndex = 17;
             this.btnShowDetail.Text = "显示扫描明细";
             // 
+            // mBc2
+            // 
+            this.mBc2.OnScan += new Symbol.Barcode2.Design.Barcode2.OnScanEventHandler(this.mBc2_OnScan);
+            // 
             // dGridMain
             // 
             this.dGridMain.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
@@ -106,6 +112,12 @@
             this.lblOrderNumber.Name = "lblOrderNumber";
             this.lblOrderNumber.Size = new System.Drawing.Size(153, 20);
             // 
+            // lblStockPlaceID
+            // 
+            this.lblStockPlaceID.Location = new System.Drawing.Point(6, 240);
+            this.lblStockPlaceID.Name = "lblStockPlaceID";
+            this.lblStockPlaceID.Size = new System.Drawing.Size(198, 20);
+            // 
             // ProductStore
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -113,6 +125,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(318, 269);
+            this.Controls.Add(this.lblStockPlaceID);
             this.Controls.Add(this.dGridMain);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnComplete);
@@ -122,6 +135,8 @@
             this.Controls.Add(this.btnShowDetail);
             this.Name = "ProductStore";
             this.Text = "完工入库扫描";
+            this.Load += new System.EventHandler(this.ProductStore_Load);
+            this.Closing += new System.ComponentModel.CancelEventHandler(this.ProductStore_Closing);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -138,5 +153,6 @@
         private System.Windows.Forms.DataGrid dGridMain;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblOrderNumber;
+        private System.Windows.Forms.Label lblStockPlaceID;
     }
 }

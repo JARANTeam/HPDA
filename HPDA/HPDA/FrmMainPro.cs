@@ -70,5 +70,13 @@ namespace HPDA
                 pds.ShowDialog();
             }
         }
+
+        private void btnProStore_Click(object sender, EventArgs e)
+        {
+            using (var pds = new ProductStore())
+            {
+                pds.ShowDialog();
+            }
+        }
     }
 }

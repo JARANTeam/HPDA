@@ -28,6 +28,8 @@ namespace HPDA {
         
         private ProDeliveryDetailDataTable tableProDeliveryDetail;
         
+        private ProStoreDetailDataTable tableProStoreDetail;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -51,6 +53,13 @@ namespace HPDA {
         public ProDeliveryDetailDataTable ProDeliveryDetail {
             get {
                 return this.tableProDeliveryDetail;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public ProStoreDetailDataTable ProStoreDetail {
+            get {
+                return this.tableProStoreDetail;
             }
         }
         
@@ -115,6 +124,9 @@ namespace HPDA {
                 if ((ds.Tables["ProDeliveryDetail"] != null)) {
                     base.Tables.Add(new ProDeliveryDetailDataTable(ds.Tables["ProDeliveryDetail"]));
                 }
+                if ((ds.Tables["ProStoreDetail"] != null)) {
+                    base.Tables.Add(new ProStoreDetailDataTable(ds.Tables["ProStoreDetail"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -157,6 +169,12 @@ namespace HPDA {
                     this.tableProDeliveryDetail.InitVars();
                 }
             }
+            this.tableProStoreDetail = ((ProStoreDetailDataTable)(base.Tables["ProStoreDetail"]));
+            if ((initTable == true)) {
+                if ((this.tableProStoreDetail != null)) {
+                    this.tableProStoreDetail.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -170,6 +188,8 @@ namespace HPDA {
             base.Tables.Add(this.tableProDelivery);
             this.tableProDeliveryDetail = new ProDeliveryDetailDataTable();
             base.Tables.Add(this.tableProDeliveryDetail);
+            this.tableProStoreDetail = new ProStoreDetailDataTable();
+            base.Tables.Add(this.tableProStoreDetail);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -179,6 +199,11 @@ namespace HPDA {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializeProDeliveryDetail() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeProStoreDetail() {
             return false;
         }
         
@@ -238,6 +263,8 @@ namespace HPDA {
         public delegate void ProDeliveryRowChangeEventHandler(object sender, ProDeliveryRowChangeEvent e);
         
         public delegate void ProDeliveryDetailRowChangeEventHandler(object sender, ProDeliveryDetailRowChangeEvent e);
+        
+        public delegate void ProStoreDetailRowChangeEventHandler(object sender, ProStoreDetailRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -990,6 +1017,360 @@ namespace HPDA {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class ProStoreDetailDataTable : global::System.Data.TypedTableBase<ProStoreDetailRow> {
+            
+            private global::System.Data.DataColumn columnRowNo;
+            
+            private global::System.Data.DataColumn columncBarCode;
+            
+            private global::System.Data.DataColumn columncLotNo;
+            
+            private global::System.Data.DataColumn columnFItemID;
+            
+            private global::System.Data.DataColumn columncInvCode;
+            
+            private global::System.Data.DataColumn columncInvName;
+            
+            private global::System.Data.DataColumn columnFSPNumber;
+            
+            private global::System.Data.DataColumn columniQuantity;
+            
+            private global::System.Data.DataColumn columndScanTime;
+            
+            private global::System.Data.DataColumn columncUser;
+            
+            private global::System.Data.DataColumn columnAutoID;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ProStoreDetailDataTable() {
+                this.TableName = "ProStoreDetail";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal ProStoreDetailDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn RowNoColumn {
+                get {
+                    return this.columnRowNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn cBarCodeColumn {
+                get {
+                    return this.columncBarCode;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn cLotNoColumn {
+                get {
+                    return this.columncLotNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn FItemIDColumn {
+                get {
+                    return this.columnFItemID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn cInvCodeColumn {
+                get {
+                    return this.columncInvCode;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn cInvNameColumn {
+                get {
+                    return this.columncInvName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn FSPNumberColumn {
+                get {
+                    return this.columnFSPNumber;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn iQuantityColumn {
+                get {
+                    return this.columniQuantity;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn dScanTimeColumn {
+                get {
+                    return this.columndScanTime;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn cUserColumn {
+                get {
+                    return this.columncUser;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn AutoIDColumn {
+                get {
+                    return this.columnAutoID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ProStoreDetailRow this[int index] {
+                get {
+                    return ((ProStoreDetailRow)(this.Rows[index]));
+                }
+            }
+            
+            public event ProStoreDetailRowChangeEventHandler ProStoreDetailRowChanging;
+            
+            public event ProStoreDetailRowChangeEventHandler ProStoreDetailRowChanged;
+            
+            public event ProStoreDetailRowChangeEventHandler ProStoreDetailRowDeleting;
+            
+            public event ProStoreDetailRowChangeEventHandler ProStoreDetailRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddProStoreDetailRow(ProStoreDetailRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ProStoreDetailRow AddProStoreDetailRow(string cBarCode, string cLotNo, string FItemID, string cInvCode, string cInvName, string FSPNumber, string iQuantity, string dScanTime, string cUser, string AutoID) {
+                ProStoreDetailRow rowProStoreDetailRow = ((ProStoreDetailRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        cBarCode,
+                        cLotNo,
+                        FItemID,
+                        cInvCode,
+                        cInvName,
+                        FSPNumber,
+                        iQuantity,
+                        dScanTime,
+                        cUser,
+                        AutoID};
+                rowProStoreDetailRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowProStoreDetailRow);
+                return rowProStoreDetailRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                ProStoreDetailDataTable cln = ((ProStoreDetailDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new ProStoreDetailDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnRowNo = base.Columns["RowNo"];
+                this.columncBarCode = base.Columns["cBarCode"];
+                this.columncLotNo = base.Columns["cLotNo"];
+                this.columnFItemID = base.Columns["FItemID"];
+                this.columncInvCode = base.Columns["cInvCode"];
+                this.columncInvName = base.Columns["cInvName"];
+                this.columnFSPNumber = base.Columns["FSPNumber"];
+                this.columniQuantity = base.Columns["iQuantity"];
+                this.columndScanTime = base.Columns["dScanTime"];
+                this.columncUser = base.Columns["cUser"];
+                this.columnAutoID = base.Columns["AutoID"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnRowNo = new global::System.Data.DataColumn("RowNo", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRowNo);
+                this.columncBarCode = new global::System.Data.DataColumn("cBarCode", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncBarCode);
+                this.columncLotNo = new global::System.Data.DataColumn("cLotNo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncLotNo);
+                this.columnFItemID = new global::System.Data.DataColumn("FItemID", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFItemID);
+                this.columncInvCode = new global::System.Data.DataColumn("cInvCode", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncInvCode);
+                this.columncInvName = new global::System.Data.DataColumn("cInvName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncInvName);
+                this.columnFSPNumber = new global::System.Data.DataColumn("FSPNumber", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFSPNumber);
+                this.columniQuantity = new global::System.Data.DataColumn("iQuantity", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columniQuantity);
+                this.columndScanTime = new global::System.Data.DataColumn("dScanTime", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndScanTime);
+                this.columncUser = new global::System.Data.DataColumn("cUser", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncUser);
+                this.columnAutoID = new global::System.Data.DataColumn("AutoID", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAutoID);
+                this.columnRowNo.AutoIncrement = true;
+                this.columnRowNo.AutoIncrementSeed = 1;
+                this.columncBarCode.Caption = "cCode";
+                this.columncLotNo.Caption = "FItemID";
+                this.columnFItemID.Caption = "FEntryID";
+                this.columncInvName.Caption = "dMaketime";
+                this.columnFSPNumber.Caption = "cInvName";
+                this.columniQuantity.Caption = "cUnit";
+                this.columndScanTime.Caption = "cCusAddress";
+                this.columncUser.Caption = "cVerifyState";
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ProStoreDetailRow NewProStoreDetailRow() {
+                return ((ProStoreDetailRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new ProStoreDetailRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(ProStoreDetailRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.ProStoreDetailRowChanged != null)) {
+                    this.ProStoreDetailRowChanged(this, new ProStoreDetailRowChangeEvent(((ProStoreDetailRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.ProStoreDetailRowChanging != null)) {
+                    this.ProStoreDetailRowChanging(this, new ProStoreDetailRowChangeEvent(((ProStoreDetailRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.ProStoreDetailRowDeleted != null)) {
+                    this.ProStoreDetailRowDeleted(this, new ProStoreDetailRowChangeEvent(((ProStoreDetailRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.ProStoreDetailRowDeleting != null)) {
+                    this.ProStoreDetailRowDeleting(this, new ProStoreDetailRowChangeEvent(((ProStoreDetailRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveProStoreDetailRow(ProStoreDetailRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                ProDataSet ds = new ProDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "ProStoreDetailDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class ProDeliveryRow : global::System.Data.DataRow {
@@ -1668,6 +2049,295 @@ namespace HPDA {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class ProStoreDetailRow : global::System.Data.DataRow {
+            
+            private ProStoreDetailDataTable tableProStoreDetail;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal ProStoreDetailRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableProStoreDetail = ((ProStoreDetailDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int RowNo {
+                get {
+                    try {
+                        return ((int)(this[this.tableProStoreDetail.RowNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“ProStoreDetail”中列“RowNo”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableProStoreDetail.RowNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string cBarCode {
+                get {
+                    try {
+                        return ((string)(this[this.tableProStoreDetail.cBarCodeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“ProStoreDetail”中列“cBarCode”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableProStoreDetail.cBarCodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string cLotNo {
+                get {
+                    try {
+                        return ((string)(this[this.tableProStoreDetail.cLotNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“ProStoreDetail”中列“cLotNo”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableProStoreDetail.cLotNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string FItemID {
+                get {
+                    try {
+                        return ((string)(this[this.tableProStoreDetail.FItemIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“ProStoreDetail”中列“FItemID”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableProStoreDetail.FItemIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string cInvCode {
+                get {
+                    try {
+                        return ((string)(this[this.tableProStoreDetail.cInvCodeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“ProStoreDetail”中列“cInvCode”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableProStoreDetail.cInvCodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string cInvName {
+                get {
+                    try {
+                        return ((string)(this[this.tableProStoreDetail.cInvNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“ProStoreDetail”中列“cInvName”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableProStoreDetail.cInvNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string FSPNumber {
+                get {
+                    try {
+                        return ((string)(this[this.tableProStoreDetail.FSPNumberColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“ProStoreDetail”中列“FSPNumber”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableProStoreDetail.FSPNumberColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string iQuantity {
+                get {
+                    try {
+                        return ((string)(this[this.tableProStoreDetail.iQuantityColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“ProStoreDetail”中列“iQuantity”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableProStoreDetail.iQuantityColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string dScanTime {
+                get {
+                    try {
+                        return ((string)(this[this.tableProStoreDetail.dScanTimeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“ProStoreDetail”中列“dScanTime”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableProStoreDetail.dScanTimeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string cUser {
+                get {
+                    try {
+                        return ((string)(this[this.tableProStoreDetail.cUserColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“ProStoreDetail”中列“cUser”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableProStoreDetail.cUserColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string AutoID {
+                get {
+                    try {
+                        return ((string)(this[this.tableProStoreDetail.AutoIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“ProStoreDetail”中列“AutoID”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableProStoreDetail.AutoIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsRowNoNull() {
+                return this.IsNull(this.tableProStoreDetail.RowNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetRowNoNull() {
+                this[this.tableProStoreDetail.RowNoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IscBarCodeNull() {
+                return this.IsNull(this.tableProStoreDetail.cBarCodeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetcBarCodeNull() {
+                this[this.tableProStoreDetail.cBarCodeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IscLotNoNull() {
+                return this.IsNull(this.tableProStoreDetail.cLotNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetcLotNoNull() {
+                this[this.tableProStoreDetail.cLotNoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsFItemIDNull() {
+                return this.IsNull(this.tableProStoreDetail.FItemIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetFItemIDNull() {
+                this[this.tableProStoreDetail.FItemIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IscInvCodeNull() {
+                return this.IsNull(this.tableProStoreDetail.cInvCodeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetcInvCodeNull() {
+                this[this.tableProStoreDetail.cInvCodeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IscInvNameNull() {
+                return this.IsNull(this.tableProStoreDetail.cInvNameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetcInvNameNull() {
+                this[this.tableProStoreDetail.cInvNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsFSPNumberNull() {
+                return this.IsNull(this.tableProStoreDetail.FSPNumberColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetFSPNumberNull() {
+                this[this.tableProStoreDetail.FSPNumberColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsiQuantityNull() {
+                return this.IsNull(this.tableProStoreDetail.iQuantityColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetiQuantityNull() {
+                this[this.tableProStoreDetail.iQuantityColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsdScanTimeNull() {
+                return this.IsNull(this.tableProStoreDetail.dScanTimeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetdScanTimeNull() {
+                this[this.tableProStoreDetail.dScanTimeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IscUserNull() {
+                return this.IsNull(this.tableProStoreDetail.cUserColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetcUserNull() {
+                this[this.tableProStoreDetail.cUserColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsAutoIDNull() {
+                return this.IsNull(this.tableProStoreDetail.AutoIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetAutoIDNull() {
+                this[this.tableProStoreDetail.AutoIDColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         public class ProDeliveryRowChangeEvent : global::System.EventArgs {
@@ -1714,6 +2384,36 @@ namespace HPDA {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public ProDeliveryDetailRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        public class ProStoreDetailRowChangeEvent : global::System.EventArgs {
+            
+            private ProStoreDetailRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ProStoreDetailRowChangeEvent(ProStoreDetailRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ProStoreDetailRow Row {
                 get {
                     return this.eventRow;
                 }

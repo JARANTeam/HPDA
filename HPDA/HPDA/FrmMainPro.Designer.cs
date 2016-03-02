@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMainPro));
             this.pbExit = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnProStore = new System.Windows.Forms.Button();
             this.btnLoadDelivery = new System.Windows.Forms.Button();
             this.btnDeliverySelect = new System.Windows.Forms.Button();
             this.btnTransferSelect = new System.Windows.Forms.Button();
@@ -49,16 +49,17 @@
             this.pbExit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pbExit.Click += new System.EventHandler(this.pbExit_Click);
             // 
-            // button1
+            // btnProStore
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.Desktop;
-            this.button1.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(29, 27);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(232, 30);
-            this.button1.TabIndex = 56;
-            this.button1.Text = "完工入库";
+            this.btnProStore.BackColor = System.Drawing.SystemColors.Desktop;
+            this.btnProStore.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
+            this.btnProStore.ForeColor = System.Drawing.Color.White;
+            this.btnProStore.Location = new System.Drawing.Point(29, 27);
+            this.btnProStore.Name = "btnProStore";
+            this.btnProStore.Size = new System.Drawing.Size(232, 30);
+            this.btnProStore.TabIndex = 56;
+            this.btnProStore.Text = "完工入库";
+            this.btnProStore.Click += new System.EventHandler(this.btnProStore_Click);
             // 
             // btnLoadDelivery
             // 
@@ -145,7 +146,7 @@
             this.Controls.Add(this.btnTransferDownload);
             this.Controls.Add(this.btnDeliverySelect);
             this.Controls.Add(this.btnLoadDelivery);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnProStore);
             this.Controls.Add(this.pbExit);
             this.Name = "FrmMainPro";
             this.Text = "产成品管理模块";
@@ -156,7 +157,7 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pbExit;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnProStore;
         private System.Windows.Forms.Button btnLoadDelivery;
         private System.Windows.Forms.Button btnDeliverySelect;
         private System.Windows.Forms.Button btnTransferSelect;
