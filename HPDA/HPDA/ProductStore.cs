@@ -14,7 +14,7 @@ namespace HPDA
 {
     public partial class ProductStore : Form
     {
-        var prods = new ProDataSet();
+        ProDataSet prods = new ProDataSet();
 
         
 
@@ -48,54 +48,47 @@ namespace HPDA
             var dgts = new DataGridTableStyle { MappingName = prods.ProStoreDetail.TableName };
             DataGridColumnStyle dgcsId = new DataGridTextBoxColumn();
             dgcsId.Width = 40;
-            dgcsId.MappingName = prods.ProStoreDetail.Columns["RowNo"].ColumnName;
+            dgcsId.MappingName = prods.ProStoreDetail.RowNoColumn.ColumnName;
             dgcsId.HeaderText = "序号";
             dgts.GridColumnStyles.Add(dgcsId);
 
             DataGridColumnStyle dgcCKbarcode = new DataGridTextBoxColumn();
             dgcCKbarcode.Width = 130;
-            dgcCKbarcode.MappingName = prods.ProStoreDetail.Columns["cBarCode"].ColumnName;
+            dgcCKbarcode.MappingName = prods.ProStoreDetail.cBarCodeColumn.ColumnName;
             dgcCKbarcode.HeaderText = "条形码";
             dgts.GridColumnStyles.Add(dgcCKbarcode);
 
             DataGridColumnStyle dgccLotNo = new DataGridTextBoxColumn();
             dgccLotNo.Width = 60;
-            dgccLotNo.MappingName = prods.ProStoreDetail.Columns["cLotNo"].ColumnName;
+            dgccLotNo.MappingName = prods.ProStoreDetail.cLotNoColumn.ColumnName;
             dgccLotNo.HeaderText = "批号";
             dgts.GridColumnStyles.Add(dgccLotNo);
 
             DataGridColumnStyle dgcCKinvCode = new DataGridTextBoxColumn();
             dgcCKinvCode.Width = 60;
-            dgcCKinvCode.MappingName = prods.ProStoreDetail.Columns["cInvCode"].ColumnName;
+            dgcCKinvCode.MappingName = prods.ProStoreDetail.cInvCodeColumn.ColumnName;
             dgcCKinvCode.HeaderText = "产品编码";
             dgts.GridColumnStyles.Add(dgcCKinvCode);
 
 
             DataGridColumnStyle dgcCKinvName = new DataGridTextBoxColumn();
             dgcCKinvName.Width = 60;
-            dgcCKinvName.MappingName = prods.ProStoreDetail.Columns["cInvName"].ColumnName;
+            dgcCKinvName.MappingName = prods.ProStoreDetail.cInvNameColumn.ColumnName;
             dgcCKinvName.HeaderText = "产品名称";
             dgts.GridColumnStyles.Add(dgcCKinvName);
 
             DataGridColumnStyle dgciQuantity = new DataGridTextBoxColumn();
             dgciQuantity.Width = 60;
-            dgciQuantity.MappingName = prods.ProStoreDetail.Columns["iQuantity"].ColumnName;
+            dgciQuantity.MappingName = prods.ProStoreDetail.iQuantityColumn.ColumnName;
             dgciQuantity.HeaderText = "数量";
             dgts.GridColumnStyles.Add(dgciQuantity);
 
             DataGridColumnStyle dgcCKoperator = new DataGridTextBoxColumn();
             dgcCKoperator.Width = 40;
-            dgcCKoperator.MappingName = prods.ProStoreDetail.Columns["cUser"].ColumnName;
+            dgcCKoperator.MappingName = prods.ProStoreDetail.cUserColumn.ColumnName;
             dgcCKoperator.HeaderText = "用户";
             dgts.GridColumnStyles.Add(dgcCKoperator);
 
-
-
-            DataGridColumnStyle dgcCKdate = new DataGridTextBoxColumn();
-            dgcCKdate.Width = 60;
-            dgcCKdate.MappingName = prods.ProStoreDetail.Columns["dScanTime"].ColumnName;
-            dgcCKdate.HeaderText = "日期";
-            dgts.GridColumnStyles.Add(dgcCKdate);
 
 
 
@@ -103,7 +96,7 @@ namespace HPDA
 
             DataGridColumnStyle dgcCode = new DataGridTextBoxColumn();
             dgcCode.Width = 60;
-            dgcCode.MappingName = prods.ProStoreDetail.Columns["FSPNumber"].ColumnName;
+            dgcCode.MappingName = prods.ProStoreDetail.FSPNumberColumn.ColumnName;
             dgcCode.HeaderText = "库位";
             dgts.GridColumnStyles.Add(dgcCode);
 
@@ -121,7 +114,15 @@ namespace HPDA
             mBc2.EnableScanner = true;
             mBc2.Config.ScanDataSize = 200;
             InitGrid();
-            RefreshGrid();
+            try
+            {
+                RefreshGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         private void ProductStore_Closing(object sender, CancelEventArgs e)
@@ -139,10 +140,10 @@ namespace HPDA
             cAutoID.AutoIncrement = true;
             cAutoID.AutoIncrementSeed = 1;
             cAutoID.AutoIncrementStep = 1;
-            prods.RmStoreDetail.Columns.Add(cAutoID);
+            prods.ProStoreDetail.Columns.Add(cAutoID);
 
 
-            var cmd = new SQLiteCommand("select * from ProStoreDetail");
+            var cmd = new SQLiteCommand("select cBarCode,cLotNo,FItemID,cInvCode,cInvName,iQuantity,cUser,FSPNumber,dScanTime from ProStoreDetail");
             PDAFunction.GetSqLiteTable(cmd, prods.ProStoreDetail);
         }
 
@@ -226,6 +227,8 @@ namespace HPDA
                 iQuantity = decimal.Parse(dtTemp.Rows[0]["iQuantity"].ToString());
                 cLotNo = dtTemp.Rows[0]["FBatchNo"].ToString();
                 FitemID = int.Parse(dtTemp.Rows[0]["cFitemID"].ToString());
+                _cInvCode = dtTemp.Rows[0]["cInvCode"].ToString();
+                cInvName = dtTemp.Rows[0]["cInvName"].ToString();
             }
             catch (Exception ex)
             {
@@ -319,9 +322,7 @@ namespace HPDA
             if (_sumException == 0)
             {
                 MessageBox.Show(@"全部上传成功!", @"Success");
-                var dCmd = new SQLiteCommand("Delete from ProDelivery where cCode=@cCode");
-                dCmd.Parameters.AddWithValue("@cOrderNumber", lblOrderNumber.Text);
-                PDAFunction.ExecSqLite(dCmd);
+              
                 Close();
                 return;
             }
@@ -383,6 +384,23 @@ namespace HPDA
                     }
                 }
             }
+        }
+
+        private void dGridMain_DoubleClick(object sender, EventArgs e)
+        {
+            if (dGridMain.CurrentRowIndex <= -1) return;
+            //if (!PDAFunction.IsCanCon())
+            //{
+            //    MessageBox.Show("无法连接到服务器");
+            //}
+            if (MessageBox.Show(@"确定删除当前行?", @"确定删除?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question,
+                                MessageBoxDefaultButton.Button3) != DialogResult.Yes) return;
+            var sqLiteCmd = new SQLiteCommand("Delete From ProStoreDetail where id=@id");
+            sqLiteCmd.Parameters.AddWithValue("@id", prods.ProStoreDetail.Rows[dGridMain.CurrentRowIndex]["id"]);
+            //执行删除
+            PDAFunction.ExecSqLite(sqLiteCmd);
+
+            RefreshGrid();
         }
         
     }

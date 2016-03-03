@@ -32,13 +32,13 @@
             this.mMain = new System.Windows.Forms.MainMenu();
             this.miMain = new System.Windows.Forms.MenuItem();
             this.miSetting = new System.Windows.Forms.MenuItem();
+            this.biK3Setting = new System.Windows.Forms.MenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.btnLogin = new System.Windows.Forms.Button();
             this.txtPwd = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.biK3Setting = new System.Windows.Forms.MenuItem();
             this.SuspendLayout();
             // 
             // mMain
@@ -55,6 +55,12 @@
             // 
             this.miSetting.Text = "HX连接配置";
             this.miSetting.Click += new System.EventHandler(this.miSetting_Click);
+            // 
+            // biK3Setting
+            // 
+            this.biK3Setting.Checked = true;
+            this.biK3Setting.Text = "K3连接配置";
+            this.biK3Setting.Click += new System.EventHandler(this.biK3Setting_Click);
             // 
             // label1
             // 
@@ -102,7 +108,7 @@
             this.label3.Location = new System.Drawing.Point(39, 178);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(73, 20);
-            this.label3.Text = "密     码";
+            this.label3.Text = "密   码";
             // 
             // label2
             // 
@@ -113,12 +119,6 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(73, 20);
             this.label2.Text = "用户名";
-            // 
-            // biK3Setting
-            // 
-            this.biK3Setting.Checked = true;
-            this.biK3Setting.Text = "K3连接配置";
-            this.biK3Setting.Click += new System.EventHandler(this.biK3Setting_Click);
             // 
             // frmLogin
             // 

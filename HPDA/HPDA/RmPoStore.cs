@@ -247,8 +247,9 @@ namespace HPDA
                 else
                 {
 
-                    var sqLiteCmd = new SQLiteCommand("insert into RmStoreDetail(cSerialNumber,cOrderNumber,cLotNo,cInvCode,cInvName,iQuantity,cUser,FEntryID,FSPNumber) " +
-                                              "values(@cSerialNumber,@cOrderNumber,@cLotNo,@cInvCode,@cInvName,@iQuantity,@cUser,@FEntryID,@FSPNumber)");
+
+                    var sqLiteCmd = new SQLiteCommand("insert into RmStoreDetail(cSerialNumber,cOrderNumber,cLotNo,cInvCode,cInvName,iQuantity,cUser,FEntryID,FitemID,FSPNumber) " +
+                                              "values(@cSerialNumber,@cOrderNumber,@cLotNo,@cInvCode,@cInvName,@iQuantity,@cUser,@FEntryID,@FitemID,@FSPNumber)");
                     sqLiteCmd.Parameters.AddWithValue("@cSerialNumber", cSerialNumber);
                     sqLiteCmd.Parameters.AddWithValue("@cOrderNumber", lblOrderNumber.Text);
                     sqLiteCmd.Parameters.AddWithValue("@cLotNo", cLotNo);

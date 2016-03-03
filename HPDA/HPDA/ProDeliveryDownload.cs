@@ -32,7 +32,7 @@ namespace HPDA
 
             DataGridColumnStyle dgRowNo = new DataGridTextBoxColumn();
             dgRowNo.Width = 40;
-            dgRowNo.MappingName = "RowNo";
+            dgRowNo.MappingName = prods.ProDelivery.RowNoColumn.ColumnName;
             dgRowNo.HeaderText = "序号";
             dgts.GridColumnStyles.Add(dgRowNo);
 
@@ -65,7 +65,7 @@ namespace HPDA
             dgccDepName.Width = 70;
             dgccDepName.MappingName = "cDepName";
             dgccDepName.HeaderText = "部门";
-            dgts.GridColumnStyles.Add(dgccMaker);
+            dgts.GridColumnStyles.Add(dgccDepName);
 
             DataGridColumnStyle dgcMemo = new DataGridTextBoxColumn();
             dgcMemo.Width = 70;
@@ -127,8 +127,8 @@ namespace HPDA
                 MessageBox.Show(@"请先保存上一个采购订单!", @"Warning");
                 return true;
             }
-            var bCmd = new SQLiteCommand("select * from ProDelivery where cOrderNumber=@cOrderNumber");
-            bCmd.Parameters.AddWithValue("@cOrderNumber", txtBarCode.Text.ToUpper());
+            var bCmd = new SQLiteCommand("select * from ProDelivery where cCode=@cCode");
+            bCmd.Parameters.AddWithValue("@cCode", txtBarCode.Text.ToUpper());
             if (PDAFunction.ExistSqlite(frmLogin.SqliteCon, bCmd))
             {
                 MessageBox.Show(@"该采购订单已经下载过!", @"Warning");
@@ -155,7 +155,7 @@ namespace HPDA
 
 
             //下载采购订单
-            var cmd = new SqlCommand(@"select * from ProDelivery where cCode=@cCode  ");
+            var cmd = new SqlCommand(@"select * from ProDelivery where cCode=@cCode");
 
             cmd.Parameters.AddWithValue("@cCode", cOrderNumber);
             var con = new SqlConnection(frmLogin.WmsCon);

@@ -85,6 +85,7 @@
             this.btnShowDetail.Size = new System.Drawing.Size(102, 25);
             this.btnShowDetail.TabIndex = 17;
             this.btnShowDetail.Text = "显示扫描明细";
+            this.btnShowDetail.Click += new System.EventHandler(this.btnShowDetail_Click);
             // 
             // mBc2
             // 
@@ -98,6 +99,7 @@
             this.dGridMain.Name = "dGridMain";
             this.dGridMain.Size = new System.Drawing.Size(318, 136);
             this.dGridMain.TabIndex = 24;
+            this.dGridMain.DoubleClick += new System.EventHandler(this.dGridMain_DoubleClick);
             // 
             // panel1
             // 

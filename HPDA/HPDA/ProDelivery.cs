@@ -15,7 +15,7 @@ namespace HPDA
     public partial class ProDelivery : Form
     {
 
-        var prods = new ProDataSet();
+        ProDataSet prods = new ProDataSet();
 
         int _AutoID;
 
@@ -55,12 +55,6 @@ namespace HPDA
             dgcsId.MappingName = prods.ProDeliveryDetail.Columns["RowNo"].ColumnName;
             dgcsId.HeaderText = "序号";
             dgts.GridColumnStyles.Add(dgcsId);
-
-            DataGridColumnStyle dgcBoxNumber = new DataGridTextBoxColumn();
-            dgcBoxNumber.Width = 80;
-            dgcBoxNumber.MappingName = prods.ProDeliveryDetail.Columns["cBoxNumber"].ColumnName;
-            dgcBoxNumber.HeaderText = "箱号";
-            dgts.GridColumnStyles.Add(dgcBoxNumber);
 
             DataGridColumnStyle dgcCKbarcode = new DataGridTextBoxColumn();
             dgcCKbarcode.Width = 130;
@@ -149,7 +143,7 @@ namespace HPDA
             cAutoID.AutoIncrement = true;
             cAutoID.AutoIncrementSeed = 1;
             cAutoID.AutoIncrementStep = 1;
-            prods.RmStoreDetail.Columns.Add(cAutoID);
+            prods.ProDeliveryDetail.Columns.Add(cAutoID);
 
 
             var cmd = new SQLiteCommand("select * from ProDeliveryDetail where cCode=@cCode");
@@ -238,6 +232,8 @@ namespace HPDA
                 iQuantity = decimal.Parse(dtTemp.Rows[0]["iQuantity"].ToString());
                 cLotNo = dtTemp.Rows[0]["FBatchNo"].ToString();
                 FitemID=int.Parse(dtTemp.Rows[0]["cFitemID"].ToString());
+                _cInvCode = dtTemp.Rows[0]["cInvCode"].ToString();
+                cInvName = dtTemp.Rows[0]["cInvName"].ToString();
             }
             catch (Exception ex)
             {
@@ -279,7 +275,7 @@ namespace HPDA
 
             var sqLiteCmd = new SQLiteCommand("insert into ProDeliveryDetail(AutoID,cCode,cBarCode,cLotNo,FItemID,cInvCode,cInvName,iQuantity,cUser,cBoxNumber,FSPNumber) " +
                                       "values(@AutoID,@cCode,@cBarCode,@cLotNo,@FItemID,@cInvCode,@cInvName,@iQuantity,@cUser,@cBoxNumber,@FSPNumber)");
-            sqLiteCmd.Parameters.AddWithValue("@ID", _AutoID);
+            sqLiteCmd.Parameters.AddWithValue("@AutoID", _AutoID);
             sqLiteCmd.Parameters.AddWithValue("@cCode", lblOrderNumber.Text);
             sqLiteCmd.Parameters.AddWithValue("@cBarCode", cBarCode);
             
@@ -335,7 +331,7 @@ namespace HPDA
             {
                 MessageBox.Show(@"全部上传成功!", @"Success");
                 var dCmd = new SQLiteCommand("Delete from ProDelivery where cCode=@cCode");
-                dCmd.Parameters.AddWithValue("@cOrderNumber", lblOrderNumber.Text);
+                dCmd.Parameters.AddWithValue("@cCode", lblOrderNumber.Text);
                 PDAFunction.ExecSqLite(dCmd);
                 Close();
                 return;
@@ -399,6 +395,31 @@ namespace HPDA
                     }
                 }
             }
+        }
+
+        private void dGridMain_DoubleClick(object sender, EventArgs e)
+        {
+            if (dGridMain.CurrentRowIndex <= -1) return;
+            //if (!PDAFunction.IsCanCon())
+            //{
+            //    MessageBox.Show("无法连接到服务器");
+            //}
+            if (MessageBox.Show(@"确定删除当前行?", @"确定删除?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question,
+                                MessageBoxDefaultButton.Button3) != DialogResult.Yes) return;
+            var sqLiteCmd = new SQLiteCommand("Delete From ProDeliveryDetail where id=@id");
+            sqLiteCmd.Parameters.AddWithValue("@id", prods.ProDeliveryDetail.Rows[dGridMain.CurrentRowIndex]["id"]);
+            //执行删除
+            PDAFunction.ExecSqLite(sqLiteCmd);
+
+            RefreshGrid();
+        }
+
+        private void btnShowDetail_Click(object sender, EventArgs e)
+        {
+            if (dGridMain.CurrentRowIndex < 0)
+                return;
+            var rpd = new ProDeliveryDetail(lblOrderNumber.Text);
+            rpd.ShowDialog();
         }
 
         

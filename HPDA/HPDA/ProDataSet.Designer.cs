@@ -521,12 +521,6 @@ namespace HPDA {
                 base.Columns.Add(this.columnAutoID);
                 this.columnRowNo.AutoIncrement = true;
                 this.columnRowNo.AutoIncrementSeed = 1;
-                this.columncCusCode.Caption = "FItemID";
-                this.columncCusName.Caption = "FEntryID";
-                this.columncMaker.Caption = "cInvCode";
-                this.columncDepCode.Caption = "cInvName";
-                this.columncDepName.Caption = "cUnit";
-                this.columncMemo.Caption = "cCusAddress";
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1022,27 +1016,27 @@ namespace HPDA {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class ProStoreDetailDataTable : global::System.Data.TypedTableBase<ProStoreDetailRow> {
             
-            private global::System.Data.DataColumn columnRowNo;
+            private global::System.Data.DataColumn columnid;
             
             private global::System.Data.DataColumn columncBarCode;
-            
-            private global::System.Data.DataColumn columncLotNo;
-            
-            private global::System.Data.DataColumn columnFItemID;
             
             private global::System.Data.DataColumn columncInvCode;
             
             private global::System.Data.DataColumn columncInvName;
             
-            private global::System.Data.DataColumn columnFSPNumber;
-            
             private global::System.Data.DataColumn columniQuantity;
-            
-            private global::System.Data.DataColumn columndScanTime;
             
             private global::System.Data.DataColumn columncUser;
             
-            private global::System.Data.DataColumn columnAutoID;
+            private global::System.Data.DataColumn columnFSPNumber;
+            
+            private global::System.Data.DataColumn columncLotNo;
+            
+            private global::System.Data.DataColumn columnRowNo;
+            
+            private global::System.Data.DataColumn columnFItemID;
+            
+            private global::System.Data.DataColumn columndScanTime;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public ProStoreDetailDataTable() {
@@ -1069,9 +1063,9 @@ namespace HPDA {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn RowNoColumn {
+            public global::System.Data.DataColumn idColumn {
                 get {
-                    return this.columnRowNo;
+                    return this.columnid;
                 }
             }
             
@@ -1079,20 +1073,6 @@ namespace HPDA {
             public global::System.Data.DataColumn cBarCodeColumn {
                 get {
                     return this.columncBarCode;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn cLotNoColumn {
-                get {
-                    return this.columncLotNo;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn FItemIDColumn {
-                get {
-                    return this.columnFItemID;
                 }
             }
             
@@ -1111,23 +1091,9 @@ namespace HPDA {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn FSPNumberColumn {
-                get {
-                    return this.columnFSPNumber;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn iQuantityColumn {
                 get {
                     return this.columniQuantity;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn dScanTimeColumn {
-                get {
-                    return this.columndScanTime;
                 }
             }
             
@@ -1139,9 +1105,37 @@ namespace HPDA {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn AutoIDColumn {
+            public global::System.Data.DataColumn FSPNumberColumn {
                 get {
-                    return this.columnAutoID;
+                    return this.columnFSPNumber;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn cLotNoColumn {
+                get {
+                    return this.columncLotNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn RowNoColumn {
+                get {
+                    return this.columnRowNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn FItemIDColumn {
+                get {
+                    return this.columnFItemID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn dScanTimeColumn {
+                get {
+                    return this.columndScanTime;
                 }
             }
             
@@ -1173,20 +1167,20 @@ namespace HPDA {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public ProStoreDetailRow AddProStoreDetailRow(string cBarCode, string cLotNo, string FItemID, string cInvCode, string cInvName, string FSPNumber, string iQuantity, string dScanTime, string cUser, string AutoID) {
+            public ProStoreDetailRow AddProStoreDetailRow(string id, string cBarCode, string cInvCode, string cInvName, string iQuantity, string cUser, string FSPNumber, string cLotNo, string FItemID, string dScanTime) {
                 ProStoreDetailRow rowProStoreDetailRow = ((ProStoreDetailRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        null,
+                        id,
                         cBarCode,
-                        cLotNo,
-                        FItemID,
                         cInvCode,
                         cInvName,
-                        FSPNumber,
                         iQuantity,
-                        dScanTime,
                         cUser,
-                        AutoID};
+                        FSPNumber,
+                        cLotNo,
+                        null,
+                        FItemID,
+                        dScanTime};
                 rowProStoreDetailRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowProStoreDetailRow);
                 return rowProStoreDetailRow;
@@ -1206,53 +1200,45 @@ namespace HPDA {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             internal void InitVars() {
-                this.columnRowNo = base.Columns["RowNo"];
+                this.columnid = base.Columns["id"];
                 this.columncBarCode = base.Columns["cBarCode"];
-                this.columncLotNo = base.Columns["cLotNo"];
-                this.columnFItemID = base.Columns["FItemID"];
                 this.columncInvCode = base.Columns["cInvCode"];
                 this.columncInvName = base.Columns["cInvName"];
-                this.columnFSPNumber = base.Columns["FSPNumber"];
                 this.columniQuantity = base.Columns["iQuantity"];
-                this.columndScanTime = base.Columns["dScanTime"];
                 this.columncUser = base.Columns["cUser"];
-                this.columnAutoID = base.Columns["AutoID"];
+                this.columnFSPNumber = base.Columns["FSPNumber"];
+                this.columncLotNo = base.Columns["cLotNo"];
+                this.columnRowNo = base.Columns["RowNo"];
+                this.columnFItemID = base.Columns["FItemID"];
+                this.columndScanTime = base.Columns["dScanTime"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             private void InitClass() {
-                this.columnRowNo = new global::System.Data.DataColumn("RowNo", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnRowNo);
+                this.columnid = new global::System.Data.DataColumn("id", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnid);
                 this.columncBarCode = new global::System.Data.DataColumn("cBarCode", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncBarCode);
-                this.columncLotNo = new global::System.Data.DataColumn("cLotNo", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncLotNo);
-                this.columnFItemID = new global::System.Data.DataColumn("FItemID", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnFItemID);
                 this.columncInvCode = new global::System.Data.DataColumn("cInvCode", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncInvCode);
                 this.columncInvName = new global::System.Data.DataColumn("cInvName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncInvName);
-                this.columnFSPNumber = new global::System.Data.DataColumn("FSPNumber", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnFSPNumber);
                 this.columniQuantity = new global::System.Data.DataColumn("iQuantity", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columniQuantity);
-                this.columndScanTime = new global::System.Data.DataColumn("dScanTime", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columndScanTime);
                 this.columncUser = new global::System.Data.DataColumn("cUser", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncUser);
-                this.columnAutoID = new global::System.Data.DataColumn("AutoID", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnAutoID);
+                this.columnFSPNumber = new global::System.Data.DataColumn("FSPNumber", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFSPNumber);
+                this.columncLotNo = new global::System.Data.DataColumn("cLotNo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncLotNo);
+                this.columnRowNo = new global::System.Data.DataColumn("RowNo", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRowNo);
+                this.columnFItemID = new global::System.Data.DataColumn("FItemID", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFItemID);
+                this.columndScanTime = new global::System.Data.DataColumn("dScanTime", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndScanTime);
                 this.columnRowNo.AutoIncrement = true;
                 this.columnRowNo.AutoIncrementSeed = 1;
-                this.columncBarCode.Caption = "cCode";
-                this.columncLotNo.Caption = "FItemID";
-                this.columnFItemID.Caption = "FEntryID";
-                this.columncInvName.Caption = "dMaketime";
-                this.columnFSPNumber.Caption = "cInvName";
-                this.columniQuantity.Caption = "cUnit";
-                this.columndScanTime.Caption = "cCusAddress";
-                this.columncUser.Caption = "cVerifyState";
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2062,17 +2048,17 @@ namespace HPDA {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int RowNo {
+            public string id {
                 get {
                     try {
-                        return ((int)(this[this.tableProStoreDetail.RowNoColumn]));
+                        return ((string)(this[this.tableProStoreDetail.idColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("表“ProStoreDetail”中列“RowNo”的值为 DBNull。", e);
+                        throw new global::System.Data.StrongTypingException("表“ProStoreDetail”中列“id”的值为 DBNull。", e);
                     }
                 }
                 set {
-                    this[this.tableProStoreDetail.RowNoColumn] = value;
+                    this[this.tableProStoreDetail.idColumn] = value;
                 }
             }
             
@@ -2088,36 +2074,6 @@ namespace HPDA {
                 }
                 set {
                     this[this.tableProStoreDetail.cBarCodeColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string cLotNo {
-                get {
-                    try {
-                        return ((string)(this[this.tableProStoreDetail.cLotNoColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("表“ProStoreDetail”中列“cLotNo”的值为 DBNull。", e);
-                    }
-                }
-                set {
-                    this[this.tableProStoreDetail.cLotNoColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string FItemID {
-                get {
-                    try {
-                        return ((string)(this[this.tableProStoreDetail.FItemIDColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("表“ProStoreDetail”中列“FItemID”的值为 DBNull。", e);
-                    }
-                }
-                set {
-                    this[this.tableProStoreDetail.FItemIDColumn] = value;
                 }
             }
             
@@ -2152,21 +2108,6 @@ namespace HPDA {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string FSPNumber {
-                get {
-                    try {
-                        return ((string)(this[this.tableProStoreDetail.FSPNumberColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("表“ProStoreDetail”中列“FSPNumber”的值为 DBNull。", e);
-                    }
-                }
-                set {
-                    this[this.tableProStoreDetail.FSPNumberColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string iQuantity {
                 get {
                     try {
@@ -2178,21 +2119,6 @@ namespace HPDA {
                 }
                 set {
                     this[this.tableProStoreDetail.iQuantityColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string dScanTime {
-                get {
-                    try {
-                        return ((string)(this[this.tableProStoreDetail.dScanTimeColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("表“ProStoreDetail”中列“dScanTime”的值为 DBNull。", e);
-                    }
-                }
-                set {
-                    this[this.tableProStoreDetail.dScanTimeColumn] = value;
                 }
             }
             
@@ -2212,28 +2138,88 @@ namespace HPDA {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string AutoID {
+            public string FSPNumber {
                 get {
                     try {
-                        return ((string)(this[this.tableProStoreDetail.AutoIDColumn]));
+                        return ((string)(this[this.tableProStoreDetail.FSPNumberColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("表“ProStoreDetail”中列“AutoID”的值为 DBNull。", e);
+                        throw new global::System.Data.StrongTypingException("表“ProStoreDetail”中列“FSPNumber”的值为 DBNull。", e);
                     }
                 }
                 set {
-                    this[this.tableProStoreDetail.AutoIDColumn] = value;
+                    this[this.tableProStoreDetail.FSPNumberColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsRowNoNull() {
-                return this.IsNull(this.tableProStoreDetail.RowNoColumn);
+            public string cLotNo {
+                get {
+                    try {
+                        return ((string)(this[this.tableProStoreDetail.cLotNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“ProStoreDetail”中列“cLotNo”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableProStoreDetail.cLotNoColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetRowNoNull() {
-                this[this.tableProStoreDetail.RowNoColumn] = global::System.Convert.DBNull;
+            public int RowNo {
+                get {
+                    try {
+                        return ((int)(this[this.tableProStoreDetail.RowNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“ProStoreDetail”中列“RowNo”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableProStoreDetail.RowNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string FItemID {
+                get {
+                    try {
+                        return ((string)(this[this.tableProStoreDetail.FItemIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“ProStoreDetail”中列“FItemID”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableProStoreDetail.FItemIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string dScanTime {
+                get {
+                    try {
+                        return ((string)(this[this.tableProStoreDetail.dScanTimeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“ProStoreDetail”中列“dScanTime”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableProStoreDetail.dScanTimeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsidNull() {
+                return this.IsNull(this.tableProStoreDetail.idColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetidNull() {
+                this[this.tableProStoreDetail.idColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2244,26 +2230,6 @@ namespace HPDA {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetcBarCodeNull() {
                 this[this.tableProStoreDetail.cBarCodeColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IscLotNoNull() {
-                return this.IsNull(this.tableProStoreDetail.cLotNoColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetcLotNoNull() {
-                this[this.tableProStoreDetail.cLotNoColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsFItemIDNull() {
-                return this.IsNull(this.tableProStoreDetail.FItemIDColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetFItemIDNull() {
-                this[this.tableProStoreDetail.FItemIDColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2287,16 +2253,6 @@ namespace HPDA {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsFSPNumberNull() {
-                return this.IsNull(this.tableProStoreDetail.FSPNumberColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetFSPNumberNull() {
-                this[this.tableProStoreDetail.FSPNumberColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsiQuantityNull() {
                 return this.IsNull(this.tableProStoreDetail.iQuantityColumn);
             }
@@ -2304,16 +2260,6 @@ namespace HPDA {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetiQuantityNull() {
                 this[this.tableProStoreDetail.iQuantityColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsdScanTimeNull() {
-                return this.IsNull(this.tableProStoreDetail.dScanTimeColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetdScanTimeNull() {
-                this[this.tableProStoreDetail.dScanTimeColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2327,13 +2273,53 @@ namespace HPDA {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsAutoIDNull() {
-                return this.IsNull(this.tableProStoreDetail.AutoIDColumn);
+            public bool IsFSPNumberNull() {
+                return this.IsNull(this.tableProStoreDetail.FSPNumberColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetAutoIDNull() {
-                this[this.tableProStoreDetail.AutoIDColumn] = global::System.Convert.DBNull;
+            public void SetFSPNumberNull() {
+                this[this.tableProStoreDetail.FSPNumberColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IscLotNoNull() {
+                return this.IsNull(this.tableProStoreDetail.cLotNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetcLotNoNull() {
+                this[this.tableProStoreDetail.cLotNoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsRowNoNull() {
+                return this.IsNull(this.tableProStoreDetail.RowNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetRowNoNull() {
+                this[this.tableProStoreDetail.RowNoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsFItemIDNull() {
+                return this.IsNull(this.tableProStoreDetail.FItemIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetFItemIDNull() {
+                this[this.tableProStoreDetail.FItemIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsdScanTimeNull() {
+                return this.IsNull(this.tableProStoreDetail.dScanTimeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetdScanTimeNull() {
+                this[this.tableProStoreDetail.dScanTimeColumn] = global::System.Convert.DBNull;
             }
         }
         

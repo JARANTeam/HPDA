@@ -92,10 +92,11 @@
             // 
             this.dGridMain.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.dGridMain.Dock = System.Windows.Forms.DockStyle.Top;
-            this.dGridMain.Location = new System.Drawing.Point(0, 33);
+            this.dGridMain.Location = new System.Drawing.Point(0, 27);
             this.dGridMain.Name = "dGridMain";
-            this.dGridMain.Size = new System.Drawing.Size(318, 136);
+            this.dGridMain.Size = new System.Drawing.Size(318, 148);
             this.dGridMain.TabIndex = 24;
+            this.dGridMain.DoubleClick += new System.EventHandler(this.dGridMain_DoubleClick);
             // 
             // panel1
             // 
@@ -104,7 +105,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(318, 33);
+            this.panel1.Size = new System.Drawing.Size(318, 27);
             // 
             // lblOrderNumber
             // 

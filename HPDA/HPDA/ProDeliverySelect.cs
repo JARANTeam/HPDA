@@ -54,7 +54,7 @@ namespace HPDA
             dgccDepName.Width = 70;
             dgccDepName.MappingName = "cDepName";
             dgccDepName.HeaderText = "部门";
-            dgts.GridColumnStyles.Add(dgccMaker);
+            dgts.GridColumnStyles.Add(dgccDepName);
 
             DataGridColumnStyle dgcMemo = new DataGridTextBoxColumn();
             dgcMemo.Width = 70;
@@ -85,7 +85,7 @@ namespace HPDA
         /// </summary>
         private void LoaProDelivery()
         {
-            var sqLiteCmd = new SQLiteCommand("select * from ProDelivery ");
+            var sqLiteCmd = new SQLiteCommand("select AutoID,cCode,cCusName,cMaker,cDepName,cMemo,cVerifyState from ProDelivery ");
             prods.ProDelivery.Rows.Clear();
             PDAFunction.GetSqLiteTable(sqLiteCmd, prods.ProDelivery);
         }
@@ -93,7 +93,15 @@ namespace HPDA
         private void ProDeliverySelect_Load(object sender, EventArgs e)
         {
             InitGrid();
-            LoaProDelivery();
+            try
+            {
+                LoaProDelivery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -129,7 +137,7 @@ namespace HPDA
         {
              if (dGridMain.CurrentRowIndex < 0)
                 return;
-             var rpd = new ProDeliveryDetail(prods.ProDelivery.Rows[dGridMain.CurrentRowIndex]["cOrderNumber"].ToString());
+             var rpd = new ProDeliveryDetail(prods.ProDelivery.Rows[dGridMain.CurrentRowIndex]["cCode"].ToString());
             rpd.ShowDialog();
         }
 
