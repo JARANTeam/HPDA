@@ -112,7 +112,6 @@ E:\Git VS2008 Project\HPDA\HPDA\HPDA\bin\Release\System.Drawing.dll
 E:\Git VS2008 Project\HPDA\HPDA\HPDA\bin\Release\System.Windows.Forms.dll
 E:\Git VS2008 Project\HPDA\HPDA\HPDA\bin\Release\System.Xml.dll
 E:\Git VS2008 Project\HPDA\HPDA\HPDA\bin\Release\System.Xml.Linq.dll
-E:\Git VS2008 Project\HPDA\HPDA\HPDA\bin\Release\Symbol.Barcode2.Design.xml
 E:\Git VS2008 Project\HPDA\HPDA\HPDA\obj\Release\ResolveAssemblyReference.cache
 E:\Git VS2008 Project\HPDA\HPDA\HPDA\obj\Release\HPDA.frmLogin.resources
 E:\Git VS2008 Project\HPDA\HPDA\HPDA\obj\Release\HPDA.frmMain.resources
