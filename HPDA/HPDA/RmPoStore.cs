@@ -35,7 +35,7 @@ namespace HPDA
         /// </summary>
         private string _cInvCode;
 
-        
+
 
 
         public RmPoStore(string cOrderNumber)
@@ -146,12 +146,12 @@ namespace HPDA
                 return;
             }
             //物料编码
-            var FitemID = cBarCode.Substring(2, cBarCode.IndexOf("*L*") -2);
+            var FitemID = cBarCode.Substring(2, cBarCode.IndexOf("*L*") - 2);
             //产品序列号
             var cLotNo = cBarCode.Substring(cBarCode.IndexOf("*L*") + 3, cBarCode.IndexOf("*S*") - cBarCode.IndexOf("*L*") - 3);
 
             //产品批号
-            var  cSerialNumber= cBarCode.Substring(cBarCode.IndexOf("*S*") + 3, cBarCode.Length - cBarCode.IndexOf("*S*") - 3);
+            var cSerialNumber = cBarCode.Substring(cBarCode.IndexOf("*S*") + 3, cBarCode.Length - cBarCode.IndexOf("*S*") - 3);
 
             ////判断该产品序列号是否已经被扫描
             //if (!JudgeBarCode(cSerialNumber))
@@ -181,7 +181,7 @@ namespace HPDA
         /// <summary>
         /// 保存出库扫描,并重新进入出库单号的扫描获取
         /// </summary>
-        private void SaveOutWareHouse(string cSerialNumber, string cInvCode, string cInvName, decimal iQuantity, string cLotNo,string FitemID)
+        private void SaveOutWareHouse(string cSerialNumber, string cInvCode, string cInvName, decimal iQuantity, string cLotNo, string FitemID)
         {
             var bInv = new SQLiteCommand("select iScanQuantity,iQuantity,FitemID,FEntryID from RmPo where cInvCode=@cInvCode  and cOrderNumber=@cOrderNumber");
             bInv.Parameters.AddWithValue("@cInvCode", cInvCode);
@@ -193,7 +193,7 @@ namespace HPDA
                 return;
             }
 
-           
+
 
             //var PlusCmd = new SQLiteCommand("update RmPo set iScanQuantity=ifnull(iScanQuantity,0)+@iQuantity where cOrderNumber=@cOrderNumber and cInvCode=@cInvCode ");
             //PlusCmd.Parameters.AddWithValue("@cOrderNumber", lblOrderNumber.Text);
@@ -383,21 +383,19 @@ namespace HPDA
 
             var cGuid = Guid.NewGuid().ToString();
 
-            for (var i = 0; i <= rds.RmStoreDetail.Rows.Count - 1; i++)
+            if (!UpLoaRmStoreDetail(cGuid))
             {
-                dGridMain.CurrentRowIndex = i;
-                //当有一行记录异常后,将跳出
-                if (UpLoaRmStoreDetail(i, cGuid)) continue;
+                MessageBox.Show(@"无法连接到SQL服务器,请重试!", @"Warning");
                 RefreshGrid();
                 btnComplete.Enabled = true;
                 return;
                 //成功后,删除离线出库通知单数据
-
             }
 
             if (_sumException == 0)
             {
                 UpLoadMain(cGuid);
+                
                 MessageBox.Show(@"全部上传成功!", @"Success");
                 var dCmd = new SQLiteCommand("Delete from RmPo where cOrderNumber=@cOrderNumber");
                 dCmd.Parameters.AddWithValue("@cOrderNumber", lblOrderNumber.Text);
@@ -417,51 +415,80 @@ namespace HPDA
         /// </summary>
         /// <param name="iRowId">把当前行行入库</param>
         /// <param name="cGuid">当前Guid</param>
-        private bool UpLoaRmStoreDetail(int iRowId, string cGuid)
+        private bool UpLoaRmStoreDetail(string cGuid)
         {
             using (var con = new SqlConnection(frmLogin.WmsCon))
             {
+                con.Open();
+                var tran = con.BeginTransaction();
                 using (var cmd = con.CreateCommand())
                 {
                     cmd.CommandText = "Upload_RmStoreDetail";
                     cmd.CommandType = CommandType.StoredProcedure;
-
-                    cmd.Parameters.AddWithValue("@cSerialNumber", rds.RmStoreDetail.Rows[iRowId]["cSerialNumber"]);
-                    cmd.Parameters.AddWithValue("@cOrderNumber", rds.RmStoreDetail.Rows[iRowId]["cOrderNumber"]);
-                    cmd.Parameters.AddWithValue("@cLotNo", rds.RmStoreDetail.Rows[iRowId]["cLotNo"]);
-                    cmd.Parameters.AddWithValue("@cInvCode", rds.RmStoreDetail.Rows[iRowId]["cInvCode"]);
-                    cmd.Parameters.AddWithValue("@cInvName", rds.RmStoreDetail.Rows[iRowId]["cInvName"]);
-                    cmd.Parameters.AddWithValue("@cUnit", rds.RmStoreDetail.Rows[iRowId]["cUnit"]);
-                    cmd.Parameters.AddWithValue("@iQuantity", rds.RmStoreDetail.Rows[iRowId]["iQuantity"]);
-                    cmd.Parameters.AddWithValue("@dScanTime", rds.RmStoreDetail.Rows[iRowId]["dScanTime"]);
-                    cmd.Parameters.AddWithValue("@cUser", rds.RmStoreDetail.Rows[iRowId]["cUser"]);
-                    cmd.Parameters.AddWithValue("@cGuid", cGuid);
-                    cmd.Parameters.AddWithValue("@FEntryID", rds.RmStoreDetail.Rows[iRowId]["FEntryID"]);
-                    cmd.Parameters.AddWithValue("@FitemID", rds.RmStoreDetail.Rows[iRowId]["FitemID"]);
-                    cmd.Parameters.AddWithValue("@FSPNumber", rds.RmStoreDetail.Rows[iRowId]["FSPNumber"]);
+                    cmd.Transaction = tran;
 
 
+                    for (var i = 0; i <= rds.RmStoreDetail.Rows.Count - 1; i++)
+                    {
+                        cmd.Parameters.Clear();
+                        dGridMain.CurrentRowIndex = i;
+                        cmd.Parameters.AddWithValue("@cSerialNumber", rds.RmStoreDetail.Rows[i]["cSerialNumber"]);
+                        cmd.Parameters.AddWithValue("@cOrderNumber", rds.RmStoreDetail.Rows[i]["cOrderNumber"]);
+                        cmd.Parameters.AddWithValue("@cLotNo", rds.RmStoreDetail.Rows[i]["cLotNo"]);
+                        cmd.Parameters.AddWithValue("@cInvCode", rds.RmStoreDetail.Rows[i]["cInvCode"]);
+                        cmd.Parameters.AddWithValue("@cInvName", rds.RmStoreDetail.Rows[i]["cInvName"]);
+                        cmd.Parameters.AddWithValue("@cUnit", rds.RmStoreDetail.Rows[i]["cUnit"]);
+                        cmd.Parameters.AddWithValue("@iQuantity", rds.RmStoreDetail.Rows[i]["iQuantity"]);
+                        cmd.Parameters.AddWithValue("@dScanTime", rds.RmStoreDetail.Rows[i]["dScanTime"]);
+                        cmd.Parameters.AddWithValue("@cUser", rds.RmStoreDetail.Rows[i]["cUser"]);
+                        cmd.Parameters.AddWithValue("@cGuid", cGuid);
+                        cmd.Parameters.AddWithValue("@FEntryID", rds.RmStoreDetail.Rows[i]["FEntryID"]);
+                        cmd.Parameters.AddWithValue("@FitemID", rds.RmStoreDetail.Rows[i]["FitemID"]);
+                        cmd.Parameters.AddWithValue("@FSPNumber", rds.RmStoreDetail.Rows[i]["FSPNumber"]);
+
+
+                        try
+                        {
+                            
+                            var iTem = cmd.ExecuteNonQuery();
+
+                          
+                        }
+
+                        catch (Exception ex)
+                        {
+                            _sumException += 1;
+                            tran.Rollback();
+                            MessageBox.Show(@"无法连接到SQL服务器,请重试!
+" + ex.Message, @"Warning");
+                            return false;
+                        }
+                    }
                     try
                     {
-                        con.Open();
-                        var iTem = cmd.ExecuteNonQuery();
-                        if (iTem == 1)
-                        {
-                            var dSqliteCmd = new SQLiteCommand("Delete from RmStoreDetail where id=@id");
-                            //成功后,删除离线出库数据中的表
-                            dSqliteCmd.Parameters.AddWithValue("@id", rds.RmStoreDetail.Rows[iRowId]["id"]);
-                            PDAFunction.ExecSqLite(dSqliteCmd);
-                            return true;
-                        }
-                        _sumException += 1;
-                        return false;
+                        cmd.CommandText = "AddMidOrder";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@cGuid", cGuid);
+                        cmd.Parameters.AddWithValue("@cType", "采购入库");
+                        cmd.Parameters.AddWithValue("@cTable", "RmStoreDetail");
+                        cmd.Parameters.AddWithValue("@cOrderNumber", lblOrderNumber.Text);
+                        cmd.ExecuteNonQuery();
+
+                        tran.Commit();
+                        var dSqliteCmd = new SQLiteCommand("Delete from RmStoreDetail where cOrderNumber=@cOrderNumber");
+                        //成功后,删除离线出库数据中的表
+                        dSqliteCmd.Parameters.AddWithValue("@cOrderNumber", lblOrderNumber.Text);
+                        PDAFunction.ExecSqLite(dSqliteCmd);
+                        return true;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        MessageBox.Show(@"无法连接到SQL服务器,请重试!
-" + ex.Message, @"Warning");
+                        tran.Rollback();
                         return false;
                     }
+
+
+                    
                 }
             }
         }
@@ -586,10 +613,10 @@ namespace HPDA
             }
             catch (Exception ex)
             {
-                
+
                 MessageBox.Show(ex.Message);
             }
-            
+
         }
 
         private void btnShowDetail_Click(object sender, EventArgs e)

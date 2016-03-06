@@ -113,10 +113,12 @@ E:\Git VS2008 Project\HPDA\HPDA\HPDA\bin\Release\System.Windows.Forms.dll
 E:\Git VS2008 Project\HPDA\HPDA\HPDA\bin\Release\System.Xml.dll
 E:\Git VS2008 Project\HPDA\HPDA\HPDA\bin\Release\System.Xml.Linq.dll
 E:\Git VS2008 Project\HPDA\HPDA\HPDA\obj\Release\ResolveAssemblyReference.cache
+E:\Git VS2008 Project\HPDA\HPDA\HPDA\obj\Release\HPDA.Form1.resources
 E:\Git VS2008 Project\HPDA\HPDA\HPDA\obj\Release\HPDA.frmLogin.resources
 E:\Git VS2008 Project\HPDA\HPDA\HPDA\obj\Release\HPDA.frmMain.resources
 E:\Git VS2008 Project\HPDA\HPDA\HPDA\obj\Release\HPDA.FrmMainPro.resources
 E:\Git VS2008 Project\HPDA\HPDA\HPDA\obj\Release\HPDA.FrmMainRm.resources
+E:\Git VS2008 Project\HPDA\HPDA\HPDA\obj\Release\HPDA.FrmScanDetail.resources
 E:\Git VS2008 Project\HPDA\HPDA\HPDA\obj\Release\HPDA.frmSetting.resources
 E:\Git VS2008 Project\HPDA\HPDA\HPDA\obj\Release\HPDA.PdaGetQuantity.resources
 E:\Git VS2008 Project\HPDA\HPDA\HPDA\obj\Release\HPDA.ProductQuery.resources

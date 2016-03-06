@@ -38,7 +38,7 @@ namespace HPDA
             dgts.GridColumnStyles.Add(dgccOrderNumber);
 
             DataGridColumnStyle dgccVendor = new DataGridTextBoxColumn();
-            dgccVendor.Width = 70;
+            dgccVendor.Width = 120;
             dgccVendor.MappingName = "cVendor";
             dgccVendor.HeaderText = "供应商";
             dgts.GridColumnStyles.Add(dgccVendor);

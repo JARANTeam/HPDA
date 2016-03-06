@@ -119,6 +119,7 @@
             this.btnCheckSelect.Size = new System.Drawing.Size(104, 26);
             this.btnCheckSelect.TabIndex = 62;
             this.btnCheckSelect.Text = "执行盘点";
+            this.btnCheckSelect.Visible = false;
             this.btnCheckSelect.Click += new System.EventHandler(this.btnCheckSelect_Click);
             // 
             // btnCheckDownLoad
@@ -131,6 +132,7 @@
             this.btnCheckDownLoad.Size = new System.Drawing.Size(104, 26);
             this.btnCheckDownLoad.TabIndex = 61;
             this.btnCheckDownLoad.Text = "下载盘点单";
+            this.btnCheckDownLoad.Visible = false;
             this.btnCheckDownLoad.Click += new System.EventHandler(this.btnCheckDownLoad_Click);
             // 
             // FrmMainPro

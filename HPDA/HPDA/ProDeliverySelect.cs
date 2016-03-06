@@ -39,7 +39,7 @@ namespace HPDA
 
 
             DataGridColumnStyle dgccCusName = new DataGridTextBoxColumn();
-            dgccCusName.Width = 70;
+            dgccCusName.Width = 120;
             dgccCusName.MappingName = "cCusName";
             dgccCusName.HeaderText = "客户";
             dgts.GridColumnStyles.Add(dgccCusName);

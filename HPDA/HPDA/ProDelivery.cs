@@ -43,7 +43,7 @@ namespace HPDA
             _AutoID = AutoID;
         }
 
-        
+
         /// <summary> 
         /// 初始化表格控件
         /// </summary>
@@ -196,7 +196,13 @@ namespace HPDA
                 return;
             }
 
+            if ((!cBarCode.StartsWith("P*") || !cBarCode.Contains("*L*") || !cBarCode.Contains("*S*")))
+            {
+                MessageBox.Show("无效条码", "Error");
+                return;
+            }
 
+            cBarCode = cBarCode.Substring(cBarCode.IndexOf("*S*") + 3, 16);
             if (!JudgeBarCode(cBarCode))
                 return;
 
@@ -218,9 +224,9 @@ namespace HPDA
             var cmdGetQuantity = new SqlCommand("select * from View_ProductLabel where cBarCode=@cBarCode");
             cmdGetQuantity.Parameters.AddWithValue("@cBarCode", cBarCode);
 
-            decimal iQuantity = 0 ;
-            string cLotNo="";
-            int FitemID=1;
+            decimal iQuantity = 0;
+            string cLotNo = "";
+            int FitemID = 1;
             var dtTemp = PDAFunction.GetSqlTable(cmdGetQuantity);
             if (dtTemp == null || dtTemp.Rows.Count < 1)
             {
@@ -231,19 +237,19 @@ namespace HPDA
             {
                 iQuantity = decimal.Parse(dtTemp.Rows[0]["iQuantity"].ToString());
                 cLotNo = dtTemp.Rows[0]["FBatchNo"].ToString();
-                FitemID=int.Parse(dtTemp.Rows[0]["cFitemID"].ToString());
+                FitemID = int.Parse(dtTemp.Rows[0]["cFitemID"].ToString());
                 _cInvCode = dtTemp.Rows[0]["cInvCode"].ToString();
                 cInvName = dtTemp.Rows[0]["cInvName"].ToString();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("数据异常，"+ex.Message, "Error");
+                MessageBox.Show("数据异常，" + ex.Message, "Error");
                 return;
             }
 
             SaveOutWareHouse(cBarCode, _cInvCode, cInvName, iQuantity, cLotNo, FitemID);
 
-           
+
 
 
         }
@@ -278,7 +284,7 @@ namespace HPDA
             sqLiteCmd.Parameters.AddWithValue("@AutoID", _AutoID);
             sqLiteCmd.Parameters.AddWithValue("@cCode", lblOrderNumber.Text);
             sqLiteCmd.Parameters.AddWithValue("@cBarCode", cBarCode);
-            
+
             sqLiteCmd.Parameters.AddWithValue("@cLotNo", cLotNo);
             sqLiteCmd.Parameters.AddWithValue("@FitemID", FitemID);
             sqLiteCmd.Parameters.AddWithValue("@cInvCode", cInvCode);
@@ -286,11 +292,11 @@ namespace HPDA
             sqLiteCmd.Parameters.AddWithValue("@iQuantity", iQuantity);
             sqLiteCmd.Parameters.AddWithValue("@cUser", frmLogin.lUser);
             sqLiteCmd.Parameters.AddWithValue("@cBoxNumber", "");
-            
+
             sqLiteCmd.Parameters.AddWithValue("@FSPNumber", lblStockPlaceID.Text);
 
             PDAFunction.ExecSqLite(sqLiteCmd);
-            
+
             txtBarCode.Text = "";
             txtBarCode.Focus();
             RefreshGrid();
@@ -315,16 +321,13 @@ namespace HPDA
 
             var cGuid = Guid.NewGuid().ToString();
 
-            for (var i = 0; i <= prods.ProDeliveryDetail.Rows.Count - 1; i++)
+            if (!UpLoadDetail(cGuid))
             {
-                dGridMain.CurrentRowIndex = i;
-                //当有一行记录异常后,将跳出
-                if (UpLoadDetail(i, cGuid)) continue;
+                MessageBox.Show(@"无法连接到SQL服务器,请重试!", @"Warning");
                 RefreshGrid();
                 btnComplete.Enabled = true;
                 return;
                 //成功后,删除离线出库通知单数据
-
             }
 
             if (_sumException == 0)
@@ -349,43 +352,70 @@ namespace HPDA
         /// </summary>
         /// <param name="iRowId">把当前行行入库</param>
         /// <param name="cGuid">当前Guid</param>
-        private bool UpLoadDetail(int iRowId, string cGuid)
+        private bool UpLoadDetail(string cGuid)
         {
             using (var con = new SqlConnection(frmLogin.WmsCon))
             {
+                con.Open();
+                var tran = con.BeginTransaction();
                 using (var cmd = con.CreateCommand())
                 {
                     cmd.CommandText = "Upload_ProDeliveryDetail";
                     cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Transaction = tran;
+                    for (var i = 0; i <= prods.ProDeliveryDetail.Rows.Count - 1; i++)
+                    {
+                        cmd.Parameters.Clear();
+                        dGridMain.CurrentRowIndex = i;
+                        cmd.Parameters.AddWithValue("@cGuid", cGuid);
+                        cmd.Parameters.AddWithValue("@ID", prods.ProDeliveryDetail.Rows[i]["AutoID"]);
+                        cmd.Parameters.AddWithValue("@FItemID", prods.ProDeliveryDetail.Rows[i]["FItemID"]);
+                        cmd.Parameters.AddWithValue("@cBarCode", prods.ProDeliveryDetail.Rows[i]["cBarCode"]);
+                        cmd.Parameters.AddWithValue("@cCode", prods.ProDeliveryDetail.Rows[i]["cCode"]);
+                        cmd.Parameters.AddWithValue("@cLotNo", prods.ProDeliveryDetail.Rows[i]["cLotNo"]);
+                        cmd.Parameters.AddWithValue("@cInvCode", prods.ProDeliveryDetail.Rows[i]["cInvCode"]);
+                        cmd.Parameters.AddWithValue("@cInvName", prods.ProDeliveryDetail.Rows[i]["cInvName"]);
+                        cmd.Parameters.AddWithValue("@iQuantity", prods.ProDeliveryDetail.Rows[i]["iQuantity"]);
+                        cmd.Parameters.AddWithValue("@FSPNumber", prods.ProDeliveryDetail.Rows[i]["FSPNumber"]);
+                        cmd.Parameters.AddWithValue("@dScanTime", prods.ProDeliveryDetail.Rows[i]["dAddTime"]);
+                        cmd.Parameters.AddWithValue("@cBoxNumber", prods.ProDeliveryDetail.Rows[i]["cBoxNumber"]);
+                        cmd.Parameters.AddWithValue("@cOperator", prods.ProDeliveryDetail.Rows[i]["cUser"]);
+                        cmd.Parameters.AddWithValue("@cMemo", "");
 
-                    cmd.Parameters.AddWithValue("@ID", prods.ProDeliveryDetail.Rows[iRowId]["AutoID"]);
-                    cmd.Parameters.AddWithValue("@FItemID", prods.ProDeliveryDetail.Rows[iRowId]["FItemID"]);
-                    cmd.Parameters.AddWithValue("@cBarCode", prods.ProDeliveryDetail.Rows[iRowId]["cBarCode"]);
-                    cmd.Parameters.AddWithValue("@cCode", prods.ProDeliveryDetail.Rows[iRowId]["cCode"]);
-                    cmd.Parameters.AddWithValue("@cLotNo", prods.ProDeliveryDetail.Rows[iRowId]["cLotNo"]);
-                    cmd.Parameters.AddWithValue("@cInvCode", prods.ProDeliveryDetail.Rows[iRowId]["cInvCode"]);
-                    cmd.Parameters.AddWithValue("@cInvName", prods.ProDeliveryDetail.Rows[iRowId]["cInvName"]);
-                    cmd.Parameters.AddWithValue("@iQuantity", prods.ProDeliveryDetail.Rows[iRowId]["iQuantity"]);
-                    cmd.Parameters.AddWithValue("@FSPNumber", prods.ProDeliveryDetail.Rows[iRowId]["FSPNumber"]);
-                    cmd.Parameters.AddWithValue("@dScanTime", prods.ProDeliveryDetail.Rows[iRowId]["dAddTime"]);
-                    cmd.Parameters.AddWithValue("@cBoxNumber", prods.ProDeliveryDetail.Rows[iRowId]["cBoxNumber"]);
-                    cmd.Parameters.AddWithValue("@cOperator", prods.ProDeliveryDetail.Rows[iRowId]["cUser"]);
-                    cmd.Parameters.AddWithValue("@cMemo","");
+                        try
+                        {
 
+                            var iTem = cmd.ExecuteNonQuery();
+
+
+                        }
+
+                        catch (Exception ex)
+                        {
+                            _sumException += 1;
+                            tran.Rollback();
+                            MessageBox.Show(@"无法连接到SQL服务器,请重试!
+" + ex.Message, @"Warning");
+                            return false;
+                        }
+                    }
                     try
                     {
-                        con.Open();
-                        var iTem = cmd.ExecuteNonQuery();
-                        if (iTem == 1)
-                        {
-                            var dSqliteCmd = new SQLiteCommand("Delete from ProDeliveryDetail where id=@id");
-                            //成功后,删除离线出库数据中的表
-                            dSqliteCmd.Parameters.AddWithValue("@id", prods.ProDeliveryDetail.Rows[iRowId]["id"]);
-                            PDAFunction.ExecSqLite(dSqliteCmd);
-                            return true;
-                        }
-                        _sumException += 1;
-                        return false;
+                        cmd.CommandText = "AddMidOrder";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@cGuid", cGuid);
+                        cmd.Parameters.AddWithValue("@cType", "销售出库");
+                        cmd.Parameters.AddWithValue("@cTable", "ProDeliveryDetail");
+                        cmd.Parameters.AddWithValue("@cOrderNumber", lblOrderNumber.Text);
+                        cmd.ExecuteNonQuery();
+
+                        tran.Commit();
+                        
+                        var dSqliteCmd = new SQLiteCommand("Delete from ProDeliveryDetail where cCode=@cCode");
+                        //成功后,删除离线出库数据中的表
+                        dSqliteCmd.Parameters.AddWithValue("@cCode", lblOrderNumber.Text);
+                        PDAFunction.ExecSqLite(dSqliteCmd);
+                        return true;
                     }
                     catch (Exception ex)
                     {
@@ -422,6 +452,6 @@ namespace HPDA
             rpd.ShowDialog();
         }
 
-        
+
     }
 }

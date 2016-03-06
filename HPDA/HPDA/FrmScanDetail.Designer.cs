@@ -1,6 +1,6 @@
 ﻿namespace HPDA
 {
-    partial class RawMaterial
+    partial class FrmScanDetail
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -28,24 +28,64 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.mBc2 = new Symbol.Barcode2.Design.Barcode2();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.lblDate = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.lblCompany = new System.Windows.Forms.Label();
-            this.lblcVendor = new System.Windows.Forms.Label();
+            this.dGridMain = new System.Windows.Forms.DataGrid();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.lblcInvName = new System.Windows.Forms.Label();
-            this.lbldDate = new System.Windows.Forms.Label();
-            this.lblcDefine2 = new System.Windows.Forms.Label();
-            this.lblcLotNo = new System.Windows.Forms.Label();
             this.lblcInvCode = new System.Windows.Forms.Label();
-            this.lblCompanyLot = new System.Windows.Forms.Label();
-            this.lblcDefine1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.mBc2 = new Symbol.Barcode2.Design.Barcode2();
             this.lblQuantity = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // dGridMain
+            // 
+            this.dGridMain.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.dGridMain.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dGridMain.Location = new System.Drawing.Point(0, 59);
+            this.dGridMain.Name = "dGridMain";
+            this.dGridMain.Size = new System.Drawing.Size(318, 173);
+            this.dGridMain.TabIndex = 25;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.lblcInvName);
+            this.panel1.Controls.Add(this.lblcInvCode);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(318, 59);
+            // 
+            // lblcInvName
+            // 
+            this.lblcInvName.Location = new System.Drawing.Point(71, 35);
+            this.lblcInvName.Name = "lblcInvName";
+            this.lblcInvName.Size = new System.Drawing.Size(225, 20);
+            // 
+            // lblcInvCode
+            // 
+            this.lblcInvCode.Location = new System.Drawing.Point(71, 4);
+            this.lblcInvCode.Name = "lblcInvCode";
+            this.lblcInvCode.Size = new System.Drawing.Size(225, 20);
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(23, 35);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(50, 20);
+            this.label3.Text = "名称";
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(23, 4);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(50, 20);
+            this.label1.Text = "编码";
             // 
             // mBc2
             // 
@@ -138,119 +178,21 @@
             this.mBc2.EnableScanner = false;
             this.mBc2.OnScan += new Symbol.Barcode2.Design.Barcode2.OnScanEventHandler(this.mBc2_OnScan);
             // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(23, 5);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 20);
-            this.label1.Text = "编码";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // label2
-            // 
-            this.label2.Location = new System.Drawing.Point(23, 129);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(76, 20);
-            this.label2.Text = "批次号";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // label3
-            // 
-            this.label3.Location = new System.Drawing.Point(23, 36);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(76, 20);
-            this.label3.Text = "名称";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // lblDate
-            // 
-            this.lblDate.Location = new System.Drawing.Point(23, 67);
-            this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(76, 20);
-            this.lblDate.Text = "进货日期";
-            this.lblDate.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // label5
-            // 
-            this.label5.Location = new System.Drawing.Point(23, 98);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(76, 20);
-            this.label5.Text = "生产日期";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // lblCompany
-            // 
-            this.lblCompany.Location = new System.Drawing.Point(23, 160);
-            this.lblCompany.Name = "lblCompany";
-            this.lblCompany.Size = new System.Drawing.Size(76, 20);
-            this.lblCompany.Text = "供应商";
-            this.lblCompany.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // lblcVendor
-            // 
-            this.lblcVendor.Location = new System.Drawing.Point(109, 160);
-            this.lblcVendor.Name = "lblcVendor";
-            this.lblcVendor.Size = new System.Drawing.Size(187, 20);
-            // 
-            // lblcInvName
-            // 
-            this.lblcInvName.Location = new System.Drawing.Point(109, 36);
-            this.lblcInvName.Name = "lblcInvName";
-            this.lblcInvName.Size = new System.Drawing.Size(187, 20);
-            // 
-            // lbldDate
-            // 
-            this.lbldDate.Location = new System.Drawing.Point(109, 67);
-            this.lbldDate.Name = "lbldDate";
-            this.lbldDate.Size = new System.Drawing.Size(187, 20);
-            // 
-            // lblcDefine2
-            // 
-            this.lblcDefine2.Location = new System.Drawing.Point(109, 98);
-            this.lblcDefine2.Name = "lblcDefine2";
-            this.lblcDefine2.Size = new System.Drawing.Size(187, 20);
-            // 
-            // lblcLotNo
-            // 
-            this.lblcLotNo.Location = new System.Drawing.Point(109, 129);
-            this.lblcLotNo.Name = "lblcLotNo";
-            this.lblcLotNo.Size = new System.Drawing.Size(187, 20);
-            // 
-            // lblcInvCode
-            // 
-            this.lblcInvCode.Location = new System.Drawing.Point(109, 5);
-            this.lblcInvCode.Name = "lblcInvCode";
-            this.lblcInvCode.Size = new System.Drawing.Size(187, 20);
-            // 
-            // lblCompanyLot
-            // 
-            this.lblCompanyLot.Location = new System.Drawing.Point(11, 191);
-            this.lblCompanyLot.Name = "lblCompanyLot";
-            this.lblCompanyLot.Size = new System.Drawing.Size(88, 20);
-            this.lblCompanyLot.Text = "供应商批号";
-            this.lblCompanyLot.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // lblcDefine1
-            // 
-            this.lblcDefine1.Location = new System.Drawing.Point(109, 191);
-            this.lblcDefine1.Name = "lblcDefine1";
-            this.lblcDefine1.Size = new System.Drawing.Size(187, 20);
-            // 
             // lblQuantity
             // 
-            this.lblQuantity.Location = new System.Drawing.Point(109, 219);
+            this.lblQuantity.Location = new System.Drawing.Point(98, 235);
             this.lblQuantity.Name = "lblQuantity";
             this.lblQuantity.Size = new System.Drawing.Size(187, 20);
             // 
             // label8
             // 
-            this.label8.Location = new System.Drawing.Point(11, 219);
+            this.label8.Location = new System.Drawing.Point(0, 235);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(88, 20);
             this.label8.Text = "总库存";
             this.label8.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // RawMaterial
+            // FrmScanDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -259,45 +201,26 @@
             this.ClientSize = new System.Drawing.Size(318, 269);
             this.Controls.Add(this.lblQuantity);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.lblcDefine1);
-            this.Controls.Add(this.lblCompanyLot);
-            this.Controls.Add(this.lblcVendor);
-            this.Controls.Add(this.lblcInvName);
-            this.Controls.Add(this.lbldDate);
-            this.Controls.Add(this.lblcDefine2);
-            this.Controls.Add(this.lblcLotNo);
-            this.Controls.Add(this.lblcInvCode);
-            this.Controls.Add(this.lblCompany);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.lblDate);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Name = "RawMaterial";
-            this.Text = "明细及存量";
-            this.Load += new System.EventHandler(this.RawMaterial_Load);
-            this.Closing += new System.ComponentModel.CancelEventHandler(this.RawMaterial_Closing);
+            this.Controls.Add(this.dGridMain);
+            this.Controls.Add(this.panel1);
+            this.Name = "FrmScanDetail";
+            this.Text = "现存量查询";
+            this.Load += new System.EventHandler(this.FrmScanDetail_Load);
+            this.Closing += new System.ComponentModel.CancelEventHandler(this.FrmScanDetail_Closing);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
+        private System.Windows.Forms.DataGrid dGridMain;
+        private System.Windows.Forms.Panel panel1;
         private Symbol.Barcode2.Design.Barcode2 mBc2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label lblDate;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label lblCompany;
-        private System.Windows.Forms.Label lblcVendor;
         private System.Windows.Forms.Label lblcInvName;
-        private System.Windows.Forms.Label lbldDate;
-        private System.Windows.Forms.Label lblcDefine2;
-        private System.Windows.Forms.Label lblcLotNo;
         private System.Windows.Forms.Label lblcInvCode;
-        private System.Windows.Forms.Label lblCompanyLot;
-        private System.Windows.Forms.Label lblcDefine1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblQuantity;
         private System.Windows.Forms.Label label8;
     }

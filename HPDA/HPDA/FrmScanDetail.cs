@@ -11,16 +11,81 @@ using System.Data.SqlClient;
 
 namespace HPDA
 {
-    public partial class RawMaterial : Form
+    public partial class FrmScanDetail : Form
     {
-        string FitemID;
-        public RawMaterial()
+        ProDataSet prods = new ProDataSet();
+
+        string FitemID=string.Empty;
+        public FrmScanDetail()
         {
             InitializeComponent();
         }
 
-        private void RawMaterial_Load(object sender, EventArgs e)
+        /// <summary>
+        /// 初始化表格控件
+        /// </summary>
+        private void InitGrid()
         {
+            var dgts = new DataGridTableStyle { MappingName = prods.StockDetail.TableName };
+
+
+            DataGridColumnStyle dgRowNo = new DataGridTextBoxColumn();
+            dgRowNo.Width = 40;
+            dgRowNo.MappingName = "RowNo";
+            dgRowNo.HeaderText = "序号";
+            dgts.GridColumnStyles.Add(dgRowNo);
+
+            DataGridColumnStyle dgAutoID = new DataGridTextBoxColumn();
+            dgAutoID.Width = 90;
+            dgAutoID.MappingName = "FBatchNo";
+            dgAutoID.HeaderText = "批号";
+            dgts.GridColumnStyles.Add(dgAutoID);
+
+            DataGridColumnStyle dgccOrderNumber = new DataGridTextBoxColumn();
+            dgccOrderNumber.Width = 90;
+            dgccOrderNumber.MappingName = "FQty";
+            dgccOrderNumber.HeaderText = "数量";
+            dgts.GridColumnStyles.Add(dgccOrderNumber);
+
+
+            DataGridColumnStyle dgccInvCode = new DataGridTextBoxColumn();
+            dgccInvCode.Width = 60;
+            dgccInvCode.MappingName = "FStockName";
+            dgccInvCode.HeaderText = "仓库";
+            dgts.GridColumnStyles.Add(dgccInvCode);
+
+            DataGridColumnStyle dgccInvName = new DataGridTextBoxColumn();
+            dgccInvName.Width = 80;
+            dgccInvName.MappingName = "FStockPlaceNumber";
+            dgccInvName.HeaderText = "仓位编码";
+            dgts.GridColumnStyles.Add(dgccInvName);
+
+            //DataGridColumnStyle dgccUnit = new DataGridTextBoxColumn();
+            //dgccUnit.Width = 60;
+            //dgccUnit.MappingName = "cUnit";
+            //dgccUnit.HeaderText = "单位";
+            //dgts.GridColumnStyles.Add(dgccUnit);
+
+            DataGridColumnStyle dgciQuantity = new DataGridTextBoxColumn();
+            dgciQuantity.Width = 70;
+            dgciQuantity.MappingName = "FStockPlaceName";
+            dgciQuantity.HeaderText = "仓位";
+            dgts.GridColumnStyles.Add(dgciQuantity);
+
+
+
+
+            dGridMain.TableStyles.Clear();
+            dGridMain.TableStyles.Add(dgts);
+            dGridMain.DataSource = prods.StockDetail;
+
+        }
+
+
+
+        private void FrmScanDetail_Load(object sender, EventArgs e)
+        {
+            InitGrid();
             mBc2.EnableScanner = true;
             mBc2.Config.ScanDataSize = 255;
 
@@ -53,7 +118,6 @@ namespace HPDA
                 }
                 //产品序列号
                 var cSerialNumber = cBarCode.Substring(cBarCode.IndexOf("*S*") + 3, 16);
-
                 var cmd = new SqlCommand("select * from View_ProductLabel where cBarCode=@cBarCode");
                 cmd.Parameters.AddWithValue("@cBarCode", cSerialNumber);
 
@@ -62,33 +126,20 @@ namespace HPDA
 
                 if (dtRaw != null && dtRaw.Rows.Count > 0)
                 {
-                    lblCompanyLot.Text = "制令单号";
-                    lblcDefine1.Text = dtRaw.Rows[0]["cSerialNumber"].ToString();
-                    lbldDate.Text = dtRaw.Rows[0]["dDate"].ToString();
+                    
                     lblcInvCode.Text = dtRaw.Rows[0]["cInvCode"].ToString();
                     lblcInvName.Text = dtRaw.Rows[0]["cInvName"].ToString();
-                    lblcLotNo.Text = dtRaw.Rows[0]["FBatchNo"].ToString();
-
-                    lblCompany.Text = "客户订单";
-                    lblcVendor.Text = dtRaw.Rows[0]["cOrderNumber"].ToString();
-
-                    lblDate.Text = "存货编码";
-                    lbldDate.Text = dtRaw.Rows[0]["cInvStd"].ToString();
                     FitemID = dtRaw.Rows[0]["cFitemID"].ToString();
 
                 }
                 else
                 {
-                    lblcDefine1.Text = "";
-                    lblcDefine2.Text = "";
+                   
                     lblcInvCode.Text = "";
                     lblcInvName.Text = "";
-                    lblcLotNo.Text = "";
-                    lblcVendor.Text = "";
-                    lbldDate.Text = "";
-
                     lblQuantity.Text = "";
                     FitemID = "";
+
                 }
 
             }
@@ -105,53 +156,65 @@ namespace HPDA
                 if (dtRaw != null && dtRaw.Rows.Count > 0)
                 {
 
-                    lblCompanyLot.Text = "供应商批号";
-                    lblCompany.Text = "供应商";
-                    lblDate.Text = "进货日期";
-
-                    lblcDefine1.Text = dtRaw.Rows[0]["cDefine1"].ToString();
-                    lblcDefine2.Text = dtRaw.Rows[0]["cDefine2"].ToString();
+                   
                     lblcInvCode.Text = dtRaw.Rows[0]["cInvCode"].ToString();
                     lblcInvName.Text = dtRaw.Rows[0]["cInvName"].ToString();
-                    lblcLotNo.Text = dtRaw.Rows[0]["cLotNo"].ToString();
-                    lblcVendor.Text = dtRaw.Rows[0]["cVendor"].ToString();
-                    lbldDate.Text = dtRaw.Rows[0]["dDate"].ToString();
                     FitemID = dtRaw.Rows[0]["FitemID"].ToString();
-
                 }
                 else
                 {
-                    lblcDefine1.Text = "";
-                    lblcDefine2.Text = "";
+                    
                     lblcInvCode.Text = "";
                     lblcInvName.Text = "";
-                    lblcLotNo.Text = "";
-                    lblcVendor.Text = "";
-                    lbldDate.Text = "";
+
                     lblQuantity.Text = "";
                     FitemID = "";
 
                 }
 
             }
+
             if (string.IsNullOrEmpty(FitemID))
                 return;
-
 
             var cmdAll = new SqlCommand("select sum(FQty) from ICInventory where FitemID=@FitemID");
             cmdAll.Parameters.AddWithValue("@FitemID", FitemID);
             var conAll = new SqlConnection(frmLogin.KisCon);
             lblQuantity.Text = PDAFunction.GetSqlSingle(conAll, cmdAll);
-                
 
-            
+
+            var cmdDetail = new SqlCommand(@"select a.FBatchNo,FQty,c.FName FStockName,d.FNumber FStockPlaceNumber,d.FName FStockPlaceName
+from ICInventory a inner join t_ICItem b on a.FItemID=b.FItemID 
+inner join t_Stock c on a.FStockID=c.FItemID inner join t_StockPlace d on a.FStockPlaceID=d.FSPID
+where a.FQty>0 and a.FItemID =@FItemID  order by a.FItemID,a.FBatchNo,a.FStockID,a.FStockPlaceID");
+            cmdDetail.Parameters.AddWithValue("@FitemID", FitemID);
+            var conDetail = new SqlConnection(frmLogin.KisCon);
+            var dtTemp = PDAFunction.GetSqlTable(conDetail, cmdDetail);
+
+            if (dtTemp == null)
+                return;
+
+            prods.StockDetail.Rows.Clear();
+            for (var i = 0; i < dtTemp.Rows.Count; i++)
+            {
+                var dr = prods.StockDetail.NewStockDetailRow();
+                dr.FBatchNo = dtTemp.Rows[i]["FBatchNo"].ToString();
+                dr.FQty = dtTemp.Rows[i]["FQty"].ToString();
+                dr.FStockName = dtTemp.Rows[i]["FStockName"].ToString();
+                dr.FStockPlaceNumber = dtTemp.Rows[i]["FStockPlaceNumber"].ToString();
+                dr.FStockPlaceName = dtTemp.Rows[i]["FStockPlaceName"].ToString();
+                prods.StockDetail.Rows.Add(dr);
+
+            }
+
 
 
         }
 
-        private void RawMaterial_Closing(object sender, CancelEventArgs e)
+        private void FrmScanDetail_Closing(object sender, CancelEventArgs e)
         {
             mBc2.EnableScanner = false;
         }
+
     }
 }

@@ -27,7 +27,7 @@ namespace HPDA
 
         private void btnProduct_Click(object sender, EventArgs e)
         {
-            using (var pq = new ProductQuery())
+            using (var pq = new FrmScanDetail())
             {
                 pq.ShowDialog();
             }
@@ -41,7 +41,7 @@ namespace HPDA
             }
         }
 
-        private void btnRaw_Click(object sender, EventArgs e)
+        private void btnLabelDetail_Click(object sender, EventArgs e)
         {
             using (var rm = new RawMaterial())
             {

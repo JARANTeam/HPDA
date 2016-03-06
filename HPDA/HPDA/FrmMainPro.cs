@@ -41,7 +41,7 @@ namespace HPDA
 
         private void btnTransferDownload_Click(object sender, EventArgs e)
         {
-            using (var pds = new ProTransferDownload())
+            using (var pds = new ProDeliveryDownload())
             {
                 pds.ShowDialog();
             }
@@ -49,7 +49,7 @@ namespace HPDA
 
         private void btnTransferSelect_Click(object sender, EventArgs e)
         {
-            using (var pds = new ProTransferSelect())
+            using (var pds = new ProDeliverySelect())
             {
                 pds.ShowDialog();
             }

@@ -93,6 +93,30 @@ namespace HPDA
             }
         }
 
+
+        /// <summary>
+        /// 执行先SQL命令,写入中间任务表
+        /// </summary>
+        /// <param name="sQlitecmd">执行的命令sQlitecmd</param>
+        public static void AddMidOrder(string cGuid,string cType,string cTable,string cOrderNumber)
+        {
+            using (var sqlCon=new SqlConnection(frmLogin.WmsCon))
+            {
+                using (var sqlCmd=new SqlCommand("AddMidOrder"))
+                {
+                    sqlCmd.CommandType = CommandType.StoredProcedure;
+                    sqlCmd.Connection = sqlCon;
+
+                    sqlCmd.Parameters.AddWithValue("@cGuid",cGuid);
+                    sqlCmd.Parameters.AddWithValue("@cType",cType);
+                    sqlCmd.Parameters.AddWithValue("@cTable",cTable);
+                    sqlCmd.Parameters.AddWithValue("@cOrderNumber", cOrderNumber);
+                    sqlCon.Open();
+                    sqlCmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         public static DataTable GetSqlTable(SqlConnection con,SqlCommand cmd)
         {
             using (con)

@@ -32,7 +32,7 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.btnProMain = new System.Windows.Forms.Button();
             this.pbProDelivery = new System.Windows.Forms.PictureBox();
-            this.btnRaw = new System.Windows.Forms.Button();
+            this.btnLabelDetail = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnRmMain = new System.Windows.Forms.Button();
             this.btnProduct = new System.Windows.Forms.Button();
@@ -69,15 +69,15 @@
             this.pbProDelivery.Size = new System.Drawing.Size(49, 49);
             this.pbProDelivery.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             // 
-            // btnRaw
+            // btnLabelDetail
             // 
-            this.btnRaw.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            this.btnRaw.Location = new System.Drawing.Point(37, 79);
-            this.btnRaw.Name = "btnRaw";
-            this.btnRaw.Size = new System.Drawing.Size(104, 25);
-            this.btnRaw.TabIndex = 27;
-            this.btnRaw.Text = "原料扫描";
-            this.btnRaw.Click += new System.EventHandler(this.btnRaw_Click);
+            this.btnLabelDetail.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.btnLabelDetail.Location = new System.Drawing.Point(37, 79);
+            this.btnLabelDetail.Name = "btnLabelDetail";
+            this.btnLabelDetail.Size = new System.Drawing.Size(104, 25);
+            this.btnLabelDetail.TabIndex = 27;
+            this.btnLabelDetail.Text = "明细及存量";
+            this.btnLabelDetail.Click += new System.EventHandler(this.btnLabelDetail_Click);
             // 
             // pictureBox1
             // 
@@ -105,7 +105,7 @@
             this.btnProduct.Name = "btnProduct";
             this.btnProduct.Size = new System.Drawing.Size(99, 25);
             this.btnProduct.TabIndex = 27;
-            this.btnProduct.Text = "成品扫描";
+            this.btnProduct.Text = "现存量查询";
             this.btnProduct.Click += new System.EventHandler(this.btnProduct_Click);
             // 
             // pictureBox2
@@ -135,7 +135,7 @@
             this.ClientSize = new System.Drawing.Size(318, 269);
             this.Controls.Add(this.btnRmMain);
             this.Controls.Add(this.btnProduct);
-            this.Controls.Add(this.btnRaw);
+            this.Controls.Add(this.btnLabelDetail);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.pictureBox2);
@@ -153,7 +153,7 @@
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnProMain;
         private System.Windows.Forms.PictureBox pbProDelivery;
-        private System.Windows.Forms.Button btnRaw;
+        private System.Windows.Forms.Button btnLabelDetail;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnRmMain;
         private System.Windows.Forms.Button btnProduct;
