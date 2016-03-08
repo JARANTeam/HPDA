@@ -470,7 +470,7 @@ namespace HPDA
                         cmd.Parameters.Clear();
                         cmd.Parameters.AddWithValue("@cGuid", cGuid);
                         cmd.Parameters.AddWithValue("@cType", "采购入库");
-                        cmd.Parameters.AddWithValue("@cTable", "RmStoreDetail");
+                        cmd.Parameters.AddWithValue("@cTable", "Rm_StoreDetail");
                         cmd.Parameters.AddWithValue("@cOrderNumber", lblOrderNumber.Text);
                         cmd.ExecuteNonQuery();
 
