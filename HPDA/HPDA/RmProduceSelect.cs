@@ -36,11 +36,11 @@ namespace HPDA
             dgAutoID.HeaderText = "序号";
             dgts.GridColumnStyles.Add(dgAutoID);
 
-            DataGridColumnStyle dgccOrderNumber = new DataGridTextBoxColumn();
-            dgccOrderNumber.Width = 120;
-            dgccOrderNumber.MappingName = "cOrderNumber";
-            dgccOrderNumber.HeaderText = "生产单号";
-            dgts.GridColumnStyles.Add(dgccOrderNumber);
+            DataGridColumnStyle dgccCode = new DataGridTextBoxColumn();
+            dgccCode.Width = 120;
+            dgccCode.MappingName = "cCode";
+            dgccCode.HeaderText = "生产单号";
+            dgts.GridColumnStyles.Add(dgccCode);
 
 
             DataGridColumnStyle dgcMemo = new DataGridTextBoxColumn();
@@ -87,7 +87,7 @@ namespace HPDA
         /// </summary>
         private void LoaRmProduce()
         {
-            var sqLiteCmd = new SQLiteCommand("select cOrderNumber,max(dLoadDate) dLoadDate,sum(iQuantity) iQuantity,max(cMemo) cMemo from RmProduce group by cOrderNumber");
+            var sqLiteCmd = new SQLiteCommand("select cCode,max(dLoadDate) dLoadDate,sum(iQuantity) iQuantity,max(cMemo) cMemo from RmProduce group by cCode");
             rds.RmProduce.Rows.Clear();
             PDAFunction.GetSqLiteTable(sqLiteCmd, rds.RmProduce);
         }
@@ -99,11 +99,11 @@ namespace HPDA
             if (MessageBox.Show(@"确定删除当前下载的生产订单?", @"确定删除?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question,
                                 MessageBoxDefaultButton.Button3) != DialogResult.Yes)
                 return;
-            var cmd = new SQLiteCommand("select * from RmProduceDetail where cOrderNumber=@cOrderNumber");
-            cmd.Parameters.AddWithValue("@cOrderNumber", rds.RmProduce.Rows[dGridMain.CurrentRowIndex]["cOrderNumber"]);
+            var cmd = new SQLiteCommand("select * from RmProduceDetail where cCode=@cCode");
+            cmd.Parameters.AddWithValue("@cCode", rds.RmProduce.Rows[dGridMain.CurrentRowIndex]["cCode"]);
             if (PDAFunction.ExistSqlite(frmLogin.SqliteCon, cmd))
             {
-                MessageBox.Show(@"当前生产订单已经进行过领料,不允许删除!", @"Warning");
+                MessageBox.Show(@"当前班次制令单已经进行过领料,不允许删除!", @"Warning");
                 return;
             }
 
@@ -112,8 +112,8 @@ namespace HPDA
             //    MessageBox.Show(@"无法连接到服务器", @"Warning");
             //    return;
             //}
-            var dCmd = new SQLiteCommand("Delete from RmProduce where cOrderNumber=@cOrderNumber");
-            dCmd.Parameters.AddWithValue("@cOrderNumber", rds.RmProduce.Rows[dGridMain.CurrentRowIndex]["cOrderNumber"]);
+            var dCmd = new SQLiteCommand("Delete from RmProduce where cCode=@cCode");
+            dCmd.Parameters.AddWithValue("@cCode", rds.RmProduce.Rows[dGridMain.CurrentRowIndex]["cCode"]);
             PDAFunction.ExecSqLite(dCmd);
 
 
@@ -125,7 +125,7 @@ namespace HPDA
         {
             if (dGridMain.CurrentRowIndex < 0)
                 return;
-            var rpd = new RmProduceDetail(rds.RmProduce.Rows[dGridMain.CurrentRowIndex]["cOrderNumber"].ToString());
+            var rpd = new RmProduceDetail(rds.RmProduce.Rows[dGridMain.CurrentRowIndex]["cCode"].ToString());
             rpd.ShowDialog();
         }
 
@@ -133,7 +133,7 @@ namespace HPDA
         {
             if (dGridMain.CurrentRowIndex < 0)
                 return;
-            var rps = new RmProduce(rds.RmProduce.Rows[dGridMain.CurrentRowIndex]["cOrderNumber"].ToString());
+            var rps = new RmProduce(rds.RmProduce.Rows[dGridMain.CurrentRowIndex]["cCode"].ToString());
             rps.ShowDialog();
             Close();
         }

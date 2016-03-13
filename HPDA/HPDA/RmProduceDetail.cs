@@ -17,10 +17,10 @@ namespace HPDA
         /// 销售模块的数据架构集
         /// </summary>
         private RmDataSet rds = new RmDataSet();
-        public RmProduceDetail(string cOrderNumber)
+        public RmProduceDetail(string cCode)
         {
             InitializeComponent();
-            lblOrderNumber.Text = cOrderNumber;
+            lblOrderNumber.Text = cCode;
         }
 
         /// <summary>
@@ -37,11 +37,11 @@ namespace HPDA
             dgAutoID.HeaderText = "序号";
             dgts.GridColumnStyles.Add(dgAutoID);
 
-            DataGridColumnStyle dgccOrderNumber = new DataGridTextBoxColumn();
-            dgccOrderNumber.Width = 120;
-            dgccOrderNumber.MappingName = "cOrderNumber";
-            dgccOrderNumber.HeaderText = "生产单号";
-            dgts.GridColumnStyles.Add(dgccOrderNumber);
+            DataGridColumnStyle dgccCode = new DataGridTextBoxColumn();
+            dgccCode.Width = 120;
+            dgccCode.MappingName = "cCode";
+            dgccCode.HeaderText = "生产单号";
+            dgts.GridColumnStyles.Add(dgccCode);
 
 
             DataGridColumnStyle dgccInvCode = new DataGridTextBoxColumn();
@@ -100,8 +100,8 @@ namespace HPDA
         private void RefreshGrid()
         {
             rds.RmProduce.Clear();
-            var cmd = new SQLiteCommand("select id,cOrderNumber,cInvCode,cInvName,iQuantity,iScanQuantity,cMemo from RmProduce where cOrderNumber=@cOrderNumber");
-            cmd.Parameters.AddWithValue("@cOrderNumber", lblOrderNumber.Text);
+            var cmd = new SQLiteCommand("select id,cCode,cInvCode,cInvName,iQuantity,iScanQuantity,cMemo from RmProduce where cCode=@cCode");
+            cmd.Parameters.AddWithValue("@cCode", lblOrderNumber.Text);
             PDAFunction.GetSqLiteTable(cmd, rds.RmProduce);
         }
 
@@ -110,73 +110,73 @@ namespace HPDA
             Close();
         }
 
-        private void dGridMain_DoubleClick(object sender, EventArgs e)
-        {
-            if (dGridMain.CurrentRowIndex <= -1) return;
+//        private void dGridMain_DoubleClick(object sender, EventArgs e)
+//        {
+////            if (dGridMain.CurrentRowIndex <= -1) return;
 
-            var cInvCode = rds.RmProduce.Rows[dGridMain.CurrentRowIndex]["cInvCode"].ToString();
-            var cInvName = rds.RmProduce.Rows[dGridMain.CurrentRowIndex]["cInvName"].ToString();
-            var ciQuantity = rds.RmProduce.Rows[dGridMain.CurrentRowIndex]["iQuantity"].ToString();
-            var ciScanQuantity = rds.RmProduce.Rows[dGridMain.CurrentRowIndex]["iScanQuantity"].ToString();
-            if (string.IsNullOrEmpty(ciScanQuantity))
-            {
-                ciScanQuantity = "0";
-            }
-            //判断是否能取得正确的数据
-            decimal iQuantity, iScanQuantity;
-            try
-            {
-                iQuantity = decimal.Parse(ciQuantity);
-                iScanQuantity = decimal.Parse(ciScanQuantity);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("无法取得数量");
-                return;
-            }
-            if (iScanQuantity >= iQuantity)
-                return;
-
-
-            if (MessageBox.Show(@"确定完成无批号领料?
-" + cInvName, @"确定?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question,
-                               MessageBoxDefaultButton.Button3) != DialogResult.Yes) return;
+////            var cInvCode = rds.RmProduce.Rows[dGridMain.CurrentRowIndex]["cInvCode"].ToString();
+////            var cInvName = rds.RmProduce.Rows[dGridMain.CurrentRowIndex]["cInvName"].ToString();
+////            var ciQuantity = rds.RmProduce.Rows[dGridMain.CurrentRowIndex]["iQuantity"].ToString();
+////            var ciScanQuantity = rds.RmProduce.Rows[dGridMain.CurrentRowIndex]["iScanQuantity"].ToString();
+////            if (string.IsNullOrEmpty(ciScanQuantity))
+////            {
+////                ciScanQuantity = "0";
+////            }
+////            //判断是否能取得正确的数据
+////            decimal iQuantity, iScanQuantity;
+////            try
+////            {
+////                iQuantity = decimal.Parse(ciQuantity);
+////                iScanQuantity = decimal.Parse(ciScanQuantity);
+////            }
+////            catch (Exception)
+////            {
+////                MessageBox.Show("无法取得数量");
+////                return;
+////            }
+////            if (iScanQuantity >= iQuantity)
+////                return;
 
 
-            using (var pgq = new PdaGetQuantity(cInvCode, cInvName, "无批号", (iQuantity - iScanQuantity).ToString()))
-            {
-                if (pgq.ShowDialog() != DialogResult.Yes)
-                    return;
-                SaveScan("NoLot0000", cInvCode, cInvName, pgq.IQuantity, "");
-            }
+////            if (MessageBox.Show(@"确定完成无批号领料?
+////" + cInvName, @"确定?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question,
+////                               MessageBoxDefaultButton.Button3) != DialogResult.Yes) return;
+
+
+////            using (var pgq = new PdaGetQuantity(cInvCode, cInvName, "无批号", (iQuantity - iScanQuantity).ToString()))
+////            {
+////                if (pgq.ShowDialog() != DialogResult.Yes)
+////                    return;
+////                SaveScan("NoLot0000", cInvCode, cInvName, pgq.IQuantity, "");
+////            }
             
-        }
+//        }
 
 
-        private void SaveScan(string cSerialNumber, string cInvCode, string cInvName, decimal iQuantity, string cLotNo)
-        {
-            var sqLiteCmd = new SQLiteCommand("insert into RmProduceDetail(cSerialNumber,cOrderNumber,cLotNo,cInvCode,cInvName,iQuantity,cUser) " +
-                                              "values(@cSerialNumber,@cOrderNumber,@cLotNo,@cInvCode,@cInvName,@iQuantity,@cUser)");
-            sqLiteCmd.Parameters.AddWithValue("@cSerialNumber", cSerialNumber);
-            sqLiteCmd.Parameters.AddWithValue("@cOrderNumber", lblOrderNumber.Text);
-            sqLiteCmd.Parameters.AddWithValue("@cLotNo", cLotNo);
-            sqLiteCmd.Parameters.AddWithValue("@cInvCode", cInvCode);
-            sqLiteCmd.Parameters.AddWithValue("@cInvName", cInvName);
-            sqLiteCmd.Parameters.AddWithValue("@iQuantity", iQuantity);
+        //private void SaveScan(string cSerialNumber, string cInvCode, string cInvName, decimal iQuantity, string cLotNo)
+        //{
+        //    var sqLiteCmd = new SQLiteCommand("insert into RmProduceDetail(cSerialNumber,cCode,cLotNo,cInvCode,cInvName,iQuantity,cUser) " +
+        //                                      "values(@cSerialNumber,@cCode,@cLotNo,@cInvCode,@cInvName,@iQuantity,@cUser)");
+        //    sqLiteCmd.Parameters.AddWithValue("@cSerialNumber", cSerialNumber);
+        //    sqLiteCmd.Parameters.AddWithValue("@cCode", lblOrderNumber.Text);
+        //    sqLiteCmd.Parameters.AddWithValue("@cLotNo", cLotNo);
+        //    sqLiteCmd.Parameters.AddWithValue("@cInvCode", cInvCode);
+        //    sqLiteCmd.Parameters.AddWithValue("@cInvName", cInvName);
+        //    sqLiteCmd.Parameters.AddWithValue("@iQuantity", iQuantity);
 
-            sqLiteCmd.Parameters.AddWithValue("@cUser", frmLogin.lUser);
+        //    sqLiteCmd.Parameters.AddWithValue("@cUser", frmLogin.lUser);
 
-            sqLiteCmd.Parameters.AddWithValue("@cUser", frmLogin.lUser);
+        //    sqLiteCmd.Parameters.AddWithValue("@cUser", frmLogin.lUser);
 
-            PDAFunction.ExecSqLite(sqLiteCmd);
+        //    PDAFunction.ExecSqLite(sqLiteCmd);
 
-            var PlusCmd = new SQLiteCommand("update RmProduce set iScanQuantity=ifnull(iScanQuantity,0)+@iQuantity where cOrderNumber=@cOrderNumber and cInvCode=@cInvCode ");
-            PlusCmd.Parameters.AddWithValue("@cOrderNumber", lblOrderNumber.Text);
-            PlusCmd.Parameters.AddWithValue("@iQuantity", iQuantity);
-            PlusCmd.Parameters.AddWithValue("@cInvCode", cInvCode);
-            PDAFunction.ExecSqLite(PlusCmd);
-            RefreshGrid();
+        //    var PlusCmd = new SQLiteCommand("update RmProduce set iScanQuantity=ifnull(iScanQuantity,0)+@iQuantity where cCode=@cCode and cInvCode=@cInvCode ");
+        //    PlusCmd.Parameters.AddWithValue("@cCode", lblOrderNumber.Text);
+        //    PlusCmd.Parameters.AddWithValue("@iQuantity", iQuantity);
+        //    PlusCmd.Parameters.AddWithValue("@cInvCode", cInvCode);
+        //    PDAFunction.ExecSqLite(PlusCmd);
+        //    RefreshGrid();
 
-        }
+        //}
     }
 }

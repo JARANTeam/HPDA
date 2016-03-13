@@ -33,10 +33,6 @@
             this.panelTop = new System.Windows.Forms.Panel();
             this.lblOrderNumber = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-
-
-            this.label2 = new System.Windows.Forms.Label();
-
             this.panelTop.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,7 +44,6 @@
             this.dGridMain.Name = "dGridMain";
             this.dGridMain.Size = new System.Drawing.Size(318, 203);
             this.dGridMain.TabIndex = 1;
-            this.dGridMain.DoubleClick += new System.EventHandler(this.dGridMain_DoubleClick);
             // 
             // btnExit
             // 
@@ -83,19 +78,8 @@
             this.label1.Location = new System.Drawing.Point(9, 3);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(82, 20);
-            this.label1.Text = "生产单号：";
+            this.label1.Text = "制令单号：";
             // 
-
-
-            // label2
-            // 
-            this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(18, 239);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(209, 20);
-            this.label2.Text = "无批号领料，可双击点选完成";
-            // 
-
             // RmProduceDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -103,10 +87,6 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(318, 268);
-
-
-            this.Controls.Add(this.label2);
-
             this.Controls.Add(this.dGridMain);
             this.Controls.Add(this.panelTop);
             this.Controls.Add(this.btnExit);
@@ -125,6 +105,5 @@
         private System.Windows.Forms.Panel panelTop;
         private System.Windows.Forms.Label lblOrderNumber;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
     }
 }

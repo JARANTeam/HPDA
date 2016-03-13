@@ -96,7 +96,7 @@
             this.Controls.Add(this.txtBarCode);
             this.Controls.Add(this.dGridMain);
             this.Name = "RmProduceDownLoad";
-            this.Text = "下载生产订单";
+            this.Text = "下载班次制令单";
             this.Load += new System.EventHandler(this.SFDownLoad_Load);
             this.Closing += new System.ComponentModel.CancelEventHandler(this.RmProduceDownLoad_Closing);
             this.ResumeLayout(false);

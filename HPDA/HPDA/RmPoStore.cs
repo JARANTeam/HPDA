@@ -172,7 +172,7 @@ namespace HPDA
                 //通过校验后进
                 SaveOutWareHouse(cSerialNumber, _cInvCode, cInvName, pgq.IQuantity, cLotNo, FitemID);
             }
-
+            lblStockPlaceID.Text = "";
 
 
         }

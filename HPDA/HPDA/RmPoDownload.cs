@@ -165,12 +165,12 @@ namespace HPDA
 
 
             //下载采购订单
-            var cmd = new SqlCommand(@"select POOrder.FBillNo,t_Supplier.FName cVendor,POOrderEntry.FItemID,POOrderEntry.FEntryID,t_ICItem.FShortNumber cInvCode,
+            var cmd = new SqlCommand(@"select POInstock.FBillNo,t_Supplier.FName cVendor,POInstockEntry.FItemID,POInstockEntry.FEntryID,t_ICItem.FShortNumber cInvCode,
 t_ICItem.FNumber,FModel,t_ICItem.FName cInvName,FQty 
-from POOrder inner join POOrderEntry on POOrder.FInterID=POOrderEntry.FInterID  
-inner join t_ICItem on POOrderEntry.FItemID=t_ICItem.FItemID 
-inner join t_Supplier on POOrder.FSupplyID=t_Supplier.FItemID 
-where POOrder.FInterID=@FinterID ");
+from POInstock inner join POInstockEntry on POInstock.FInterID=POInstockEntry.FInterID  
+inner join t_ICItem on POInstockEntry.FItemID=t_ICItem.FItemID 
+inner join t_Supplier on POInstock.FSupplyID=t_Supplier.FItemID  
+where POInstock.FInterID=@FinterID ");
 
            cmd.Parameters.AddWithValue("@FinterID", cOrder[1]);
            var con = new SqlConnection(frmLogin.KisCon);

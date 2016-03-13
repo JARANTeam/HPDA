@@ -78,7 +78,7 @@
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.dGridMain);
             this.Name = "RmProduceSelect";
-            this.Text = "选择生产订单";
+            this.Text = "选择班次制令单";
             this.Load += new System.EventHandler(this.SFSelect_Load);
             this.ResumeLayout(false);
 

@@ -39,6 +39,7 @@
             this.txtBarCode = new System.Windows.Forms.TextBox();
             this.btnComplete = new System.Windows.Forms.Button();
             this.mBc2 = new Symbol.Barcode2.Design.Barcode2();
+            this.lblStockPlaceID = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -72,7 +73,7 @@
             this.label1.Location = new System.Drawing.Point(20, 7);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(82, 20);
-            this.label1.Text = "生产单号：";
+            this.label1.Text = "制令单号：";
             // 
             // dGridMain
             // 
@@ -133,6 +134,12 @@
             // 
             this.mBc2.OnScan += new Symbol.Barcode2.Design.Barcode2.OnScanEventHandler(this.mBc2_OnScan);
             // 
+            // lblStockPlaceID
+            // 
+            this.lblStockPlaceID.Location = new System.Drawing.Point(3, 239);
+            this.lblStockPlaceID.Name = "lblStockPlaceID";
+            this.lblStockPlaceID.Size = new System.Drawing.Size(198, 20);
+            // 
             // RmProduce
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -140,6 +147,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(318, 268);
+            this.Controls.Add(this.lblStockPlaceID);
             this.Controls.Add(this.btnComplete);
             this.Controls.Add(this.txtBarCode);
             this.Controls.Add(this.lblSum);
@@ -169,5 +177,6 @@
         private System.Windows.Forms.TextBox txtBarCode;
         private System.Windows.Forms.Button btnComplete;
         private Symbol.Barcode2.Design.Barcode2 mBc2;
+        private System.Windows.Forms.Label lblStockPlaceID;
     }
 }

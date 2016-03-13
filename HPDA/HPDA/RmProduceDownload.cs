@@ -36,11 +36,11 @@ namespace HPDA
             dgAutoID.HeaderText = "序号";
             dgts.GridColumnStyles.Add(dgAutoID);
 
-            DataGridColumnStyle dgccOrderNumber = new DataGridTextBoxColumn();
-            dgccOrderNumber.Width = 120;
-            dgccOrderNumber.MappingName = "cOrderNumber";
-            dgccOrderNumber.HeaderText = "生产订单号";
-            dgts.GridColumnStyles.Add(dgccOrderNumber);
+            DataGridColumnStyle dgccCode = new DataGridTextBoxColumn();
+            dgccCode.Width = 120;
+            dgccCode.MappingName = "cCode";
+            dgccCode.HeaderText = "班次单号";
+            dgts.GridColumnStyles.Add(dgccCode);
 
 
             DataGridColumnStyle dgccInvCode = new DataGridTextBoxColumn();
@@ -101,8 +101,8 @@ namespace HPDA
                 MessageBox.Show(@"请先保存上一个生产订单!", @"Warning");
                 return true;
             }
-            var bCmd = new SQLiteCommand("select * from RmProduce where cOrderNumber=@cOrderNumber");
-            bCmd.Parameters.AddWithValue("@cOrderNumber", txtBarCode.Text.ToUpper());
+            var bCmd = new SQLiteCommand("select * from RmProduce where cCode=@cCode");
+            bCmd.Parameters.AddWithValue("@cCode", txtBarCode.Text.ToUpper());
             if (PDAFunction.ExistSqlite(frmLogin.SqliteCon, bCmd))
             {
                 MessageBox.Show(@"该生产订单已经下载过!", @"Warning");
@@ -121,13 +121,18 @@ namespace HPDA
         {
             txtBarCode.Text = DecodeText;
             if (BoolCanOkDownLoad()) return;
-            //通过WebService获取系统数据
-            //var js = new EasOrderService.EasOrder();
-            //js.Url = frmLogin.EasUri;
+
+
+
+            var cmd = new SqlCommand(@"select * from View_ShiftBomDetail where cSerialNumber=@cSerialNumber");
+
+            cmd.Parameters.AddWithValue("@cSerialNumber", txtBarCode.Text);
+            var con = new SqlConnection(frmLogin.WmsCon);
             DataTable dtTemp = new DataTable("dtTemp");
+
             try
             {
-                //dtTemp = js.GetProduceDetail(DecodeText);
+                dtTemp = PDAFunction.GetSqlTable(con, cmd);
             }
             catch (Exception ex)
             {
@@ -150,7 +155,7 @@ namespace HPDA
 
             if (dtTemp.Rows.Count < 1)
             {
-                MessageBox.Show(@"无此生产订单!", @"Warning");
+                MessageBox.Show(@"无此班次制令单!", @"Warning");
                 return;
             }
 
@@ -159,13 +164,14 @@ namespace HPDA
             //进行循环判断是否属于当前库区 
             for (var i = 0; i < dtTemp.Rows.Count; i++)
             {
-                var dr=rds.RmPo.NewRmPoRow();
-                dr.cOrderNumber=DecodeText;
+                var dr=rds.RmProduce.NewRmProduceRow();
+                dr.cCode=DecodeText;
                 dr.cInvCode = dtTemp.Rows[i]["cInvCode"].ToString();
                 dr.cInvName = dtTemp.Rows[i]["cInvName"].ToString();
                 dr.iQuantity = dtTemp.Rows[i]["iQuantity"].ToString();
                 dr.cMemo = dtTemp.Rows[i]["cMemo"].ToString();
-                dr.FEntryID = dtTemp.Rows[i]["cMemo"].ToString();
+                dr.FItemID = dtTemp.Rows[i]["cFItemID"].ToString();
+                dr.AutoID = dtTemp.Rows[i]["AutoID"].ToString();
                 rds.RmProduce.Rows.Add(dr);
             }
         }
@@ -183,21 +189,23 @@ namespace HPDA
             {
                 var cmd = new SQLiteCommand
                 {
-                    CommandText = "insert into RmProduce(cOrderNumber,cInvCode,cInvName,cUnit,iQuantity,iScanQuantity,cMemo) values(@cOrderNumber,@cInvCode,@cInvName,@cUnit,@iQuantity,0,@cMemo)"
+                    CommandText = "insert into RmProduce(cCode,cInvCode,cInvName,cUnit,iQuantity,iScanQuantity,cMemo,FItemID,AutoID) values(@cCode,@cInvCode,@cInvName,@cUnit,@iQuantity,0,@cMemo,@FItemID,@AutoID)"
                 };
-                cmd.Parameters.AddWithValue("@cOrderNumber", rds.RmProduce.Rows[i]["cOrderNumber"]);
+                cmd.Parameters.AddWithValue("@cCode", rds.RmProduce.Rows[i]["cCode"]);
                 cmd.Parameters.AddWithValue("@cInvCode", rds.RmProduce.Rows[i]["cInvCode"]);
                 cmd.Parameters.AddWithValue("@cInvName", rds.RmProduce.Rows[i]["cInvName"]);
                 cmd.Parameters.AddWithValue("@cUnit", "1");
                 cmd.Parameters.AddWithValue("@iQuantity", rds.RmProduce.Rows[i]["iQuantity"]);
                 cmd.Parameters.AddWithValue("@cMemo", rds.RmProduce.Rows[i]["cMemo"]);
+                cmd.Parameters.AddWithValue("@FItemID", rds.RmProduce.Rows[i]["FItemID"]);
+                cmd.Parameters.AddWithValue("@AutoID", rds.RmProduce.Rows[i]["AutoID"]);
                 PDAFunction.ExecSqLite(cmd);
             }
             //写下载日志
             var logCmd = new SqlCommand("AddLogAction");
             logCmd.CommandType = CommandType.StoredProcedure;
-            logCmd.Parameters.AddWithValue("@cFunction", "生产订单下载");
-            logCmd.Parameters.AddWithValue("@cDescription", frmLogin.lUser + "下载生产订单：" + rds.RmProduce.Rows[0]["cOrderNumber"]);
+            logCmd.Parameters.AddWithValue("@cFunction", "班次制令单下载");
+            logCmd.Parameters.AddWithValue("@cDescription", frmLogin.lUser + "下载生产订单：" + rds.RmProduce.Rows[0]["cCode"]);
             var ucon = new SqlConnection(frmLogin.WmsCon);
             PDAFunction.ExecSqL(ucon, logCmd);
             MessageBox.Show(@"成功保存", @"Success");

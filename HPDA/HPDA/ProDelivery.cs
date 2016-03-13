@@ -249,7 +249,7 @@ namespace HPDA
 
             SaveOutWareHouse(cBarCode, _cInvCode, cInvName, iQuantity, cLotNo, FitemID);
 
-
+            lblStockPlaceID.Text = "";
 
 
         }
