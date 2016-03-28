@@ -95,6 +95,7 @@
             this.btnTransferSelect.Size = new System.Drawing.Size(104, 26);
             this.btnTransferSelect.TabIndex = 60;
             this.btnTransferSelect.Text = "执行调拨";
+            this.btnTransferSelect.Visible = false;
             this.btnTransferSelect.Click += new System.EventHandler(this.btnTransferSelect_Click);
             // 
             // btnTransferDownload
@@ -107,6 +108,7 @@
             this.btnTransferDownload.Size = new System.Drawing.Size(104, 26);
             this.btnTransferDownload.TabIndex = 59;
             this.btnTransferDownload.Text = "下载调拨单";
+            this.btnTransferDownload.Visible = false;
             this.btnTransferDownload.Click += new System.EventHandler(this.btnTransferDownload_Click);
             // 
             // btnCheckSelect
