@@ -91,6 +91,7 @@
             this.txtPwd.PasswordChar = '*';
             this.txtPwd.Size = new System.Drawing.Size(157, 26);
             this.txtPwd.TabIndex = 10;
+            this.txtPwd.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPwd_KeyDown);
             // 
             // txtName
             // 

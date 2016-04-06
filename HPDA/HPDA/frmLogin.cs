@@ -59,15 +59,22 @@ namespace HPDA
         private void btnLogin_Click_1(object sender, EventArgs e)
         {
 
-            
 
+
+            LoginOk();
+
+            
+        }
+
+        private void LoginOk()
+        {
             if (string.IsNullOrEmpty(txtName.Text))
             {
                 MessageBox.Show("用户名必填");
                 return;
             }
 
-            
+
             WmsCon = PDAFunction.GetWmsConstring();
             KisCon = PDAFunction.GetKisConstring();
             lUser = txtName.Text;
@@ -110,7 +117,7 @@ namespace HPDA
             if (dr.Read()) //直接登陆
             {
                 lUser = dr["uName"].ToString(); //把登陆名和登陆服务器保存到静态变量中
-               
+
 
                 dr.Close();
                 Hide();
@@ -124,8 +131,6 @@ namespace HPDA
             {
                 MessageBox.Show(@"用户名或密码错误，请联系管理员！", @"Warning");
             }
-
-            
         }
 
         private void biK3Setting_Click(object sender, EventArgs e)
@@ -134,6 +139,13 @@ namespace HPDA
             {
                 fs.ShowDialog();
             }
+        }
+
+        private void txtPwd_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter)
+                return;
+            LoginOk();
         }
 
     }
